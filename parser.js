@@ -6,8 +6,6 @@ const minPrice = args[1];
 //priceblock_ourprice
 //https://www.amazon.com/BestMassage-Office-Desk-Gaming-Chair/dp/B01ICHJIM8
 
-checkPrice();
-
 async function checkPrice() {
   const priceString = await nightmare
     .goto(url)
