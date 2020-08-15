@@ -10,16 +10,13 @@ app.use(cors());
 app.use(express.json());
 
 // routes
+const trackRouter = require("./routes/track");
+
 app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-app.post("/track", (req, res) => {
-  const url = req.body.url;
-  const price = req.body.price;
-  console.log(req.body);
-  res.json("successfully get the url");
-});
+app.use("/track", trackRouter);
 // port
 app.listen(port, () => {
   console.log(`Server is running on port ${port}...`);

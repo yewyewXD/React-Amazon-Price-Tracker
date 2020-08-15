@@ -14,7 +14,7 @@ export default function TrackBar() {
       // Fetch info to backend
       axios.post("http://localhost:5000/track", {
         url: url,
-        price: 500,
+        price: 10,
       });
 
       urlElRef.current.value = "";
