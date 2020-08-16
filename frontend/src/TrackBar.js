@@ -6,6 +6,7 @@ export default function TrackBar() {
   const emailElRef = useRef();
 
   function handlePostURL(e) {
+    // https://www.amazon.com/Wyze-Indoor-Wireless-Detection-Assistant/dp/B076H3SRXG/ref=sr_1_1?dchild=1&fst=as%3Aoff&pf_rd_i=16225009011&pf_rd_m=ATVPDKIKX0DER&pf_rd_p=82d03e2f-30e3-48bf-a811-d3d2a6628949&pf_rd_r=02C1QKMR01ZJ56B065Q2&pf_rd_s=merchandised-search-4&pf_rd_t=101&qid=1486423355&refinements=p_n_shipping_option-bin%3A3242350011&rnid=493964&s=electronics&sr=1-1
     e.preventDefault();
 
     // Validation
@@ -29,11 +30,14 @@ export default function TrackBar() {
             trimmedUrl.indexOf("https://") === -1
               ? "https://" + trimmedUrl
               : trimmedUrl,
-          minPrice: 10,
+          minPrice: 100,
           email,
         })
         .then((res) => {
           console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
 
       urlElRef.current.value = "";
