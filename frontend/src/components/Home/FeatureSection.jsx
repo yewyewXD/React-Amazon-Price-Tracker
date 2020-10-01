@@ -23,13 +23,16 @@ export default function FeatureSection() {
     },
   ];
   return (
-    <section className="feature my-5 py-5">
+    <section className="feature my-lg-5 py-5 text-center">
       <div className="container">
         <div className="row">
           {featureCols.map((featureCol, index) => (
-            <div className="column col-md-4 all-center-column" key={index}>
+            <div
+              className="column col-lg-4 all-center-column mt-lg-0 my-sm-5 my-4 "
+              key={index}
+            >
               <img src={featureCol.image} alt={featureCol.title} />
-              <div className="title">{featureCol.title}</div>
+              <div className="title bold mb-3 mt-4 ">{featureCol.title}</div>
               <div className="subtitle">{featureCol.subtitle}</div>
             </div>
           ))}

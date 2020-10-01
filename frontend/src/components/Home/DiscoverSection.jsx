@@ -3,7 +3,7 @@ import { heroBg } from "../../images/homeImages";
 
 export default function DiscoverSection() {
   return (
-    <section className="discover my-5 py-5 bg-primary text-white">
+    <section className="discover py-5 bg-primary text-white">
       <div
         className="discover-background w-100 h-100 all-center"
         style={{ background: `url(${heroBg})` }}
@@ -11,7 +11,7 @@ export default function DiscoverSection() {
         <div className="container all-center">
           <div className="row">
             <div className="col-md-6"></div>
-            <div className="col-md-6">
+            <div className="col-md-6 my-auto">
               <div className="subtitle bold text-white-50">Subtitle</div>
               <div className="title bold my-3">Title</div>
               <div className="description">

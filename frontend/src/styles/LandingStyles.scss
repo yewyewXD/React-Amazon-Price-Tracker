@@ -5,9 +5,65 @@
     background: $themeColor;
     height: 90vh;
     .hero-background {
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+    }
+
+    .caption {
+      .title {
+        font-size: 3rem;
+      }
+    }
+
+    .vector {
+      width: 50em;
     }
   }
+}
+
+@media (max-width: 1199.98px) {
+  .home-page {
+    .hero {
+      height: 80vh;
+      .vector {
+        width: 40em;
+      }
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  .home-page {
+    .hero {
+      height: 70vh;
+    }
+  }
+
+  .discover {
+    .discover-background {
+      background: none !important;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .home-page {
+    .hero {
+      height: 60vh;
+      .caption {
+        .title {
+          font-size: 2.5rem;
+          line-height: 3rem;
+          margin-bottom: 1rem;
+        }
+      }
+      .vector {
+        width: 30rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
 }

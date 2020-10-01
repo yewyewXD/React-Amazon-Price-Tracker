@@ -3,25 +3,35 @@ import { heroBg, heroVector } from "../../images/homeImages";
 
 export default function HeroSection() {
   return (
-    <section className="hero">
+    <section className="hero text-center">
       <div
-        className="hero-background h-100 w-100 all-center-column justify-content-between"
+        className="hero-background h-100 w-100 all-center"
         style={{ background: `url(${heroBg})` }}
       >
-        <div className="caption all-center-column mt-5">
-          <div className="title bold">The power of technology</div>
-          <div className="subtitle">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum,
-            repellendus.
+        <div className="container h-100 all-center-column justify-content-sm-around">
+          <div className="caption all-center-column">
+            <div className="title bold">
+              Welcome to <span className="dark">TrackerBase</span>
+            </div>
+            <div className="subtitle">
+              We help you track any Amazon product and maintain the records in
+              one place.
+            </div>
+
+            <div className="buttons mt-4 all-center">
+              <button className="btn btn-secondary bg-lg mx-2">Login</button>
+              <button className="btn btn-primary bg-lg mx-2">
+                Sign up Free
+              </button>
+            </div>
           </div>
 
-          <div className="buttons mt-5 all-center">
-            <button className="btn btn-primary bg-lg mx-2">Sign up Free</button>
-            <button className="btn btn-secondary bg-lg mx-2">Login</button>
-          </div>
+          <img
+            src={heroVector}
+            alt="vector"
+            className="vector d-sm-block d-none"
+          />
         </div>
-
-        <img src={heroVector} alt="vector" />
       </div>
     </section>
   );

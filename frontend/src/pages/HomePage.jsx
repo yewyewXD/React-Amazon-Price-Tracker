@@ -1,4 +1,5 @@
 import React from "react";
+import AppFooter from "../components/AppFooter";
 import AppHeader from "../components/AppHeader";
 import DiscoverSection from "../components/Home/DiscoverSection";
 import FeatureSection from "../components/Home/FeatureSection";
@@ -13,6 +14,7 @@ export default function HomePage() {
         <FeatureSection />
         <DiscoverSection />
       </main>
+      <AppFooter />
     </>
   );
 }
