@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { UserProvider, UserContext } from "./context/user/UserState";
 
 // styles
 import "bootstrap/dist/css/bootstrap.css";
@@ -11,13 +12,19 @@ import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 
 function App() {
+  useEffect(() => {
+    const { checkLoggedIn } = useContext(UserContext);
+    checkLoggedIn();
+  }, []);
   return (
     <BrowserRouter>
-      <Switch>
-        <Redirect from="/home" to="/" exact />
-        <Route path="/" exact component={HomePage} />
-        <Route path="/dashboard" component={DashboardPage} />
-      </Switch>
+      <UserProvider>
+        <Switch>
+          <Redirect from="/home" to="/" exact />
+          <Route path="/" exact component={HomePage} />
+          <Route path="/dashboard" component={DashboardPage} />
+        </Switch>
+      </UserProvider>
     </BrowserRouter>
   );
 }
