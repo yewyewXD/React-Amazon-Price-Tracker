@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { heroBg, heroVector } from "../../images/homeImages";
 import PopupBtn from "../Popup/PopupBtn";
+import { UserContext } from "../../context/user/UserState";
 
 export default function HeroSection() {
+  const { token } = useContext(UserContext);
+
   return (
     <section className="hero text-center">
       <div
@@ -20,17 +23,27 @@ export default function HeroSection() {
             </div>
 
             <div className="buttons mt-4 all-center">
-              <PopupBtn type="login">
-                <button className="btn bold btn-secondary btn-md mx-2">
-                  Login
-                </button>
-              </PopupBtn>
+              {!token && (
+                <>
+                  <PopupBtn type="login">
+                    <button className="btn bold btn-secondary btn-md mx-2">
+                      Login
+                    </button>
+                  </PopupBtn>
 
-              <PopupBtn type="signUp">
+                  <PopupBtn type="signUp">
+                    <button className="btn bold btn-primary btn-md mx-2">
+                      Sign up Free
+                    </button>
+                  </PopupBtn>
+                </>
+              )}
+
+              {token && (
                 <button className="btn bold btn-primary btn-md mx-2">
-                  Sign up Free
+                  View Dashboard
                 </button>
-              </PopupBtn>
+              )}
             </div>
           </div>
 
