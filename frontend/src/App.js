@@ -1,6 +1,11 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
+// styles
+import "bootstrap/dist/css/bootstrap.css";
+import "./styles/global.scss";
+import "./styles/LandingStyles.scss";
+
 // pages
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";

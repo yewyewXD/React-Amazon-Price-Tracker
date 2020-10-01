@@ -3,11 +3,11 @@
 .home-page {
   .hero {
     background: $themeColor;
-    height: 100vh;
-  }
-  .hero-background {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    height: 90vh;
+    .hero-background {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 }
