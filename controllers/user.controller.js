@@ -6,8 +6,9 @@ const jwt = require("jsonwebtoken");
 // @route POST /user/register
 // @access public
 exports.registerUser = async (req, res, next) => {
-  const { email, password, confirmPassword } = req.body;
   try {
+    const { email, password, confirmPassword } = req.body;
+
     // Validation
     if (!email || !password || !confirmPassword) {
       return res.status(400).json({
@@ -48,7 +49,7 @@ exports.registerUser = async (req, res, next) => {
       data: { email },
     });
   } catch (err) {
-    return res.status(500).json({ error: err });
+    return res.status(500).json({ error: err.message });
   }
 };
 
@@ -56,8 +57,9 @@ exports.registerUser = async (req, res, next) => {
 // @route POST /user/login
 // @access public
 exports.loginUser = async (req, res, next) => {
-  const { email, password } = req.body;
   try {
+    const { email, password } = req.body;
+
     // Validation
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
@@ -94,11 +96,22 @@ exports.loginUser = async (req, res, next) => {
       },
     });
   } catch (err) {
-    return res.status(500).json({ error: err });
+    return res.status(500).json({ error: err.message });
   }
 };
 
 // @desc Delete user
 // @route POST /user/delete
 // @access private
-exports.deleteUser = async (req, res, next) => {};
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.user);
+
+    return res.status(201).json({
+      success: true,
+      deleted: deletedUser,
+    });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
