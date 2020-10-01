@@ -14,6 +14,9 @@
       .title {
         font-size: 3rem;
       }
+      .subtitle {
+        font-size: 1.1rem;
+      }
     }
 
     .vector {
@@ -57,9 +60,18 @@
           line-height: 3rem;
           margin-bottom: 1rem;
         }
+        .subtitle {
+          font-size: 1rem;
+        }
       }
       .vector {
         width: 30rem;
+      }
+    }
+
+    .feature {
+      h1.title {
+        font-size: 1.9rem;
       }
     }
   }

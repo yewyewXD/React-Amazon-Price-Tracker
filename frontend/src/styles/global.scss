@@ -31,7 +31,25 @@ body {
 .dark {
   color: $darkThemeColor !important;
 }
-
+.btn {
+  border-radius: 20px;
+  transition: 0.15s;
+}
+.btn-md {
+  padding: 8px 24px !important;
+}
+.btn-secondary {
+  border: solid 2px $darkThemeColor !important;
+  color: $darkThemeColor !important;
+  background: transparent !important;
+  &:hover {
+    background: $darkThemeColor !important;
+    color: white !important;
+  }
+}
+.header * {
+  white-space: nowrap;
+}
 .footer {
   background: $themeColor;
 }

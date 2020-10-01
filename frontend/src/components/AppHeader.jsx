@@ -10,18 +10,14 @@ export default function AppHeader() {
             TrackerBase
           </Link>
 
-          <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li className="nav-item active">
-              <Link className="nav-link dark mx-2" to="/">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link dark mx-2" to="/">
-                Sign Up Free
-              </Link>
-            </li>
-          </ul>
+          <div className="ml-auto all-center">
+            <Link className="nav-link dark mx-sm-2 p-0" to="/">
+              Login
+            </Link>
+            <Link className="nav-link dark mx-sm-2 ml-sm-0 ml-3 p-0" to="/">
+              Sign Up
+            </Link>
+          </div>
         </div>
       </nav>
     </header>

@@ -23,8 +23,9 @@ export default function FeatureSection() {
     },
   ];
   return (
-    <section className="feature my-lg-5 py-5 text-center">
+    <section className="feature my-lg-5 py-3 text-center">
       <div className="container">
+        <h1 className="title m-0 mb-lg-5 my-lg-0 my-4">3 Easy Steps to Use</h1>
         <div className="row">
           {featureCols.map((featureCol, index) => (
             <div

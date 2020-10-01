@@ -19,8 +19,10 @@ export default function HeroSection() {
             </div>
 
             <div className="buttons mt-4 all-center">
-              <button className="btn btn-secondary bg-lg mx-2">Login</button>
-              <button className="btn btn-primary bg-lg mx-2">
+              <button className="btn bold btn-secondary btn-md mx-2">
+                Login
+              </button>
+              <button className="btn bold btn-primary btn-md mx-2">
                 Sign up Free
               </button>
             </div>
