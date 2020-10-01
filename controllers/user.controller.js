@@ -115,3 +115,20 @@ exports.deleteUser = async (req, res, next) => {
     return res.status(500).json({ error: err.message });
   }
 };
+
+exports.validateToken = async (req, res, next) => {
+  try {
+    const token = req.header("user-auth-token");
+    if (!token) return res.json(false);
+
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    if (!verified) return res.json(false);
+
+    const user = await User.findById(verified.userId);
+    if (!user) return res.json(false);
+
+    return res.json(true);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
