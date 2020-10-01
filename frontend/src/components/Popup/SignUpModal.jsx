@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 import { UserContext } from "../../context/user/UserState";
 
 export default function SignUpModal({ handleClose }) {
-  const { registerUser } = useContext(UserContext);
+  const { registerUser, token } = useContext(UserContext);
   const emailElRef = useRef();
   const pwElRef = useRef();
   const confirmPwElRef = useRef();
@@ -16,7 +16,9 @@ export default function SignUpModal({ handleClose }) {
       : "";
     registerUser(email, pw, confirmPw);
 
-    handleClose();
+    if (token) {
+      handleClose();
+    }
   }
 
   return (

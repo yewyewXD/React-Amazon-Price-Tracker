@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 import { UserContext } from "../../context/user/UserState";
 
 export default function LoginModal({ handleClose }) {
-  const { loginUser } = useContext(UserContext);
+  const { loginUser, token } = useContext(UserContext);
 
   const emailElRef = useRef();
   const pwElRef = useRef();
@@ -13,7 +13,9 @@ export default function LoginModal({ handleClose }) {
     const pw = pwElRef.current ? pwElRef.current.value : "";
     loginUser(email, pw);
 
-    handleClose();
+    if (token) {
+      handleClose();
+    }
   }
 
   return (
