@@ -4,7 +4,7 @@ import PopupBtn from "../Popup/PopupBtn";
 import { UserContext } from "../../context/user/UserState";
 
 export default function AppHeader() {
-  const { token } = useContext(UserContext);
+  const { token, logoutUser } = useContext(UserContext);
 
   return (
     <header className="header">
@@ -30,7 +30,11 @@ export default function AppHeader() {
 
             {token && (
               <>
-                <span className="dark mx-sm-2 mx-md-3 p-0" role="button">
+                <span
+                  className="dark mx-sm-2 mx-md-3 p-0"
+                  role="button"
+                  onClick={logoutUser}
+                >
                   Logout
                 </span>
                 <button className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0">

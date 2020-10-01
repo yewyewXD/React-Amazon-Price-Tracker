@@ -23,6 +23,7 @@ export const UserProvider = ({ children }) => {
       const { token, user } = res.data.data;
 
       // console.log(res);
+      localStorage.setItem("auth-token", token);
 
       dispatch({
         type: "LOGIN_USER",
@@ -78,6 +79,15 @@ export const UserProvider = ({ children }) => {
     checkLoggedIn();
   }, []);
 
+  function logoutUser() {
+    localStorage.removeItem("auth-token");
+
+    dispatch({
+      type: "LOGOUT_USER",
+      payload: null,
+    });
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -85,6 +95,7 @@ export const UserProvider = ({ children }) => {
         user: state.user,
         loginUser,
         registerUser,
+        logoutUser,
       }}
     >
       {children}
