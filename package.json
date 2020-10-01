@@ -9,7 +9,7 @@
     "client-start": "cd client && npm start",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run client-install && npm run build",
-    "dev": "concurrently \"nodemon server\" \"cd frontend && npm start\""
+    "dev": "concurrently \"nodemon server\" \"npm start --prefix frontend\""
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "nightmare": "^3.0.2",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",

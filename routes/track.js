@@ -22,31 +22,6 @@ router.route("/").post(async (req, res) => {
   // Check: hit price requirement
   if (priceNumber < minPrice) {
     console.log("cheap");
-
-    // // MailChimp
-    // const mcData = {
-    //   members: [
-    //     {
-    //       email_address: email,
-    //       status: "pending", // use "subscribed" if no verification needed
-    //     },
-    //   ],
-    // };
-    // const mcDataPost = JSON.stringify(mcData);
-
-    // fetch("https://us17.api.mailchimp.com/3.0/lists/b4dcb74039", {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `auth ${process.env.MAILCHIMP_API_KEY}`,
-    //   },
-    //   body: mcDataPost,
-    // })
-    //   .then((res) => {
-    //     console.log("it is working");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   } else {
     console.log("expensive");
   }
