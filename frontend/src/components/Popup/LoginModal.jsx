@@ -1,8 +1,10 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../../context/user/UserState";
+import FlashMessage from "react-flash-message";
 
 export default function LoginModal({ handleClose }) {
   const { loginUser, token } = useContext(UserContext);
+  const [hasError, setHasError] = useState(false);
 
   const emailElRef = useRef();
   const pwElRef = useRef();
@@ -11,10 +13,17 @@ export default function LoginModal({ handleClose }) {
     e.preventDefault();
     const email = emailElRef.current ? emailElRef.current.value : "";
     const pw = pwElRef.current ? pwElRef.current.value : "";
+
+    // Validation
     loginUser(email, pw);
 
     if (token) {
       handleClose();
+    } else {
+      setHasError(true);
+      setTimeout(() => {
+        setHasError(false);
+      }, 3000);
     }
   }
 
@@ -34,7 +43,7 @@ export default function LoginModal({ handleClose }) {
           />
         </div>
 
-        <div className="form-group">
+        <div className={`form-group ${hasError && "mb-1"}`}>
           <label htmlFor="password" className="bold d-block">
             Password
           </label>
@@ -47,7 +56,13 @@ export default function LoginModal({ handleClose }) {
           />
         </div>
 
-        <button className="btn btn-primary btn-md mt-4">Login</button>
+        {hasError && (
+          <FlashMessage>
+            <small className="text-danger">User credential is not valid!</small>
+          </FlashMessage>
+        )}
+
+        <button className="btn btn-primary btn-md mt-3">Login</button>
       </form>
     </>
   );

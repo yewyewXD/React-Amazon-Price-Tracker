@@ -1,8 +1,11 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../../context/user/UserState";
+import FlashMessage from "react-flash-message";
 
 export default function SignUpModal({ handleClose }) {
   const { registerUser, token } = useContext(UserContext);
+  const [hasError, setHasError] = useState(false);
+
   const emailElRef = useRef();
   const pwElRef = useRef();
   const confirmPwElRef = useRef();
@@ -18,7 +21,16 @@ export default function SignUpModal({ handleClose }) {
 
     if (token) {
       handleClose();
+    } else {
+      setHasError(true);
+      setTimeout(() => {
+        setHasError(false);
+      }, 3000);
     }
+  }
+
+  function handleRevealPw() {
+    document.getElementById("confirmPw").type = "text";
   }
 
   return (
@@ -50,7 +62,7 @@ export default function SignUpModal({ handleClose }) {
           />
         </div>
 
-        <div className="form-group">
+        <div className={`form-group ${hasError && "mb-1"}`}>
           <label htmlFor="password" className="bold d-block">
             Confirm Password
           </label>
@@ -59,13 +71,23 @@ export default function SignUpModal({ handleClose }) {
             className="form-control"
             minLength="5"
             required
+            id="confirmPw"
             ref={confirmPwElRef}
           />
         </div>
 
-        <button type="submit" className="btn btn-primary btn-md mt-4">
+        {hasError && (
+          <FlashMessage>
+            <small className="text-danger">
+              Check passwords or use a different email
+            </small>
+          </FlashMessage>
+        )}
+
+        <button type="submit" className="btn btn-primary btn-md mt-3">
           Sign Up
         </button>
+        {/* <button onClick={handleRevealPw}>reveal</button> */}
       </form>
     </>
   );
