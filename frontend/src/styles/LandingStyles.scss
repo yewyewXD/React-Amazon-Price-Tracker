@@ -77,5 +77,15 @@
   }
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 350px) {
+  .home-page {
+    .hero {
+      .buttons {
+        flex-direction: column-reverse !important;
+        button {
+          margin: 0.5em 0;
+        }
+      }
+    }
+  }
 }

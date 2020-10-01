@@ -53,8 +53,11 @@ body {
 }
 
 // header
-.header * {
-  white-space: nowrap;
+.header {
+  .buttons {
+    white-space: nowrap;
+    margin-left: auto;
+  }
 }
 
 // footer
@@ -74,6 +77,21 @@ body {
     width: 60%;
     input {
       width: 80%;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .header {
+    .container {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .buttons,
+    .navbar-brand {
+      margin: 0.1em 0;
     }
   }
 }

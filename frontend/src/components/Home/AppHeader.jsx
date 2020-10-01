@@ -14,7 +14,7 @@ export default function AppHeader() {
             TrackerBase
           </Link>
 
-          <div className="ml-auto all-center">
+          <div className="buttons all-center">
             {!token && (
               <>
                 <span className="dark mx-sm-2 mx-md-3 p-0">
