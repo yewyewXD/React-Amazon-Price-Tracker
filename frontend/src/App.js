@@ -1,6 +1,6 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { UserProvider, UserContext } from "./context/user/UserState";
+import { UserProvider } from "./context/user/UserState";
 
 // styles
 import "bootstrap/dist/css/bootstrap.css";
@@ -12,10 +12,6 @@ import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 
 function App() {
-  useEffect(() => {
-    const { checkLoggedIn } = useContext(UserContext);
-    checkLoggedIn();
-  }, []);
   return (
     <BrowserRouter>
       <UserProvider>

@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // @desc Register user
-// @route POST /user/register
+// @route POST /api/user/register
 // @access public
 exports.registerUser = async (req, res, next) => {
   try {
@@ -54,7 +54,7 @@ exports.registerUser = async (req, res, next) => {
 };
 
 // @desc Login user
-// @route POST /user/login
+// @route POST /api/user/login
 // @access public
 exports.loginUser = async (req, res, next) => {
   try {
@@ -101,7 +101,7 @@ exports.loginUser = async (req, res, next) => {
 };
 
 // @desc Delete user
-// @route POST /user/delete
+// @route POST /api/user/delete
 // @access private
 exports.deleteUser = async (req, res, next) => {
   try {
@@ -116,6 +116,9 @@ exports.deleteUser = async (req, res, next) => {
   }
 };
 
+// @desc Validate token
+// @route POST /api/user/tokenIsValid
+// @access public
 exports.validateToken = async (req, res, next) => {
   try {
     const token = req.header("user-auth-token");
@@ -131,4 +134,15 @@ exports.validateToken = async (req, res, next) => {
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
+};
+
+// @desc Get user with validated token
+// @route GET /api/user/
+// @access private
+exports.getUser = async (req, res, next) => {
+  const existingUser = await User.findById(req.user);
+  res.json({
+    id: existingUser.id,
+    email: existingUser.email,
+  });
 };

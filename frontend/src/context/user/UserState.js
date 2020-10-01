@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 import UserReducer from "./UserReducer";
 import axios from "axios";
 
@@ -14,14 +14,15 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   //Actions
-
   async function loginUser(email, password) {
     try {
       const res = await axios.post("http://localhost:5000/api/user/login", {
         email,
         password,
       });
-      const { token, user } = res.data;
+      const { token, user } = res.data.data;
+
+      // console.log(res);
 
       dispatch({
         type: "LOGIN_USER",
@@ -29,22 +30,52 @@ export const UserProvider = ({ children }) => {
       });
     } catch (err) {
       console.log(err);
-      dispatch({
-        type: "SERVER_ERROR",
-        payload: "Server Error",
-      });
     }
   }
 
   async function checkLoggedIn() {
-    const token = localStorage.getItem("auth-token");
-    const tokenRes = await axios.post(
-      "http://localhost:5000/api/user/tokenIsValid",
-      null,
-      { headers: { "user-auth-token": token } }
-    );
-    console.log(tokenRes.data);
+    try {
+      let token = localStorage.getItem("auth-token");
+
+      // if token hasn't been set
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+      const tokenRes = await axios.post(
+        "http://localhost:5000/api/user/tokenIsValid",
+        null,
+        { headers: { "user-auth-token": token } }
+      );
+
+      // get and login user data
+      if (tokenRes.data) {
+        const userRes = await axios.get("http://localhost:5000/api/user/", {
+          headers: { "user-auth-token": token },
+        });
+
+        dispatch({
+          type: "LOGIN_USER",
+          payload: { token, user: userRes.data },
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+  async function registerUser(email, password, confirmPassword) {
+    const res = await axios.post("http://localhost:5000/api/user/register", {
+      email,
+      password,
+      confirmPassword,
+    });
+    console.log(res.data.data);
+  }
+
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
 
   return (
     <UserContext.Provider
@@ -52,7 +83,7 @@ export const UserProvider = ({ children }) => {
         token: state.token,
         user: state.user,
         loginUser,
-        checkLoggedIn,
+        registerUser,
       }}
     >
       {children}
