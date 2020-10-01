@@ -2,12 +2,27 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import PopupBtn from "../Popup/PopupBtn";
 import { UserContext } from "../../context/user/UserState";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 export default function AppHeader() {
-  const { token, logoutUser } = useContext(UserContext);
+  const { token, user, logoutUser } = useContext(UserContext);
 
+  if (token) {
+    NotificationManager.success(`Welcome back, ${user.email}!`, null, 3000);
+  }
   return (
     <header className="header">
+      <NotificationContainer />
+      {/* {token && (
+        <FlashMessage duration={4000}>
+          <div className="flash-message w-100 text-center bg-light text-success m-0 py-2">
+            {`Welcome back, ${user.email} !`}
+          </div>
+        </FlashMessage>
+      )} */}
       <nav className="navbar navbar-expand-sm navbar-light bg-light py-4">
         <div className="container">
           <Link className="navbar-brand dark bold" to="/">

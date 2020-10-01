@@ -58,6 +58,10 @@ body {
     white-space: nowrap;
     margin-left: auto;
   }
+  .notification-container {
+    width: 290px;
+    margin-top: 70px;
+  }
 }
 
 // footer
@@ -83,6 +87,9 @@ body {
 
 @media (max-width: 350px) {
   .header {
+    .notification-container {
+      width: 290px;
+    }
     .container {
       display: flex !important;
       justify-content: center;
