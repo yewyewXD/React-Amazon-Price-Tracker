@@ -71,6 +71,7 @@ export const UserProvider = ({ children }) => {
       confirmPassword,
     });
     console.log(res.data.data);
+    loginUser(email, password);
   }
 
   useEffect(() => {

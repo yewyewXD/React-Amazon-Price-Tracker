@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from "react";
 import { UserContext } from "../../context/user/UserState";
 
-export default function LoginModal() {
+export default function LoginModal({ handleClose }) {
   const { loginUser } = useContext(UserContext);
 
   const emailElRef = useRef();
@@ -12,6 +12,8 @@ export default function LoginModal() {
     const email = emailElRef.current ? emailElRef.current.value : "";
     const pw = pwElRef.current ? pwElRef.current.value : "";
     loginUser(email, pw);
+
+    handleClose();
   }
 
   return (
