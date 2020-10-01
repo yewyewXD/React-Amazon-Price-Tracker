@@ -1,41 +1,45 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
 @import "./variables.scss";
 
+// sizing, positioning, typography
 body {
   margin: 0;
   padding: 0;
   font-family: "Nunito", sans-serif;
   overflow-x: hidden;
 }
-
 .bold {
   font-weight: 700;
 }
-
 .all-center {
   display: flex !important;
   justify-content: center;
   align-items: center;
 }
-
 .all-center-column {
   display: flex !important;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-
 .light {
   color: $themeColor !important;
 }
 .dark {
   color: $darkThemeColor !important;
 }
+
+// button
 .btn {
-  border-radius: 20px;
+  box-shadow: none !important;
   transition: 0.15s;
 }
+.btn-sm {
+  border-radius: 15px !important;
+  padding: 5px 15px !important;
+}
 .btn-md {
+  border-radius: 20px;
   padding: 8px 24px !important;
 }
 .btn-secondary {
@@ -47,9 +51,29 @@ body {
     color: white !important;
   }
 }
+
+// header
 .header * {
   white-space: nowrap;
 }
+
+// footer
 .footer {
   background: $themeColor;
+}
+
+//modal
+.popup-modal {
+  background: $themeColor;
+  .form-image {
+    width: 40%;
+    border-right: solid 1px $themeColor;
+  }
+
+  .form {
+    width: 60%;
+    input {
+      width: 80%;
+    }
+  }
 }

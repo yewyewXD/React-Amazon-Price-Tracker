@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PopupBtn from "../Popup/PopupBtn";
 
 export default function AppHeader() {
   return (
@@ -11,12 +12,12 @@ export default function AppHeader() {
           </Link>
 
           <div className="ml-auto all-center">
-            <Link className="nav-link dark mx-sm-2 p-0" to="/">
-              Login
-            </Link>
-            <Link className="nav-link dark mx-sm-2 ml-sm-0 ml-3 p-0" to="/">
-              Sign Up
-            </Link>
+            <span className="dark mx-sm-2 mx-md-3 p-0">
+              <PopupBtn type="login">Login</PopupBtn>
+            </span>
+            <span className="dark mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0">
+              <PopupBtn type="signUp">Sign Up</PopupBtn>
+            </span>
           </div>
         </div>
       </nav>

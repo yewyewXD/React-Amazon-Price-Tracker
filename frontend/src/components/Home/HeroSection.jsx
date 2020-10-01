@@ -1,5 +1,6 @@
 import React from "react";
 import { heroBg, heroVector } from "../../images/homeImages";
+import PopupBtn from "../Popup/PopupBtn";
 
 export default function HeroSection() {
   return (
@@ -19,12 +20,17 @@ export default function HeroSection() {
             </div>
 
             <div className="buttons mt-4 all-center">
-              <button className="btn bold btn-secondary btn-md mx-2">
-                Login
-              </button>
-              <button className="btn bold btn-primary btn-md mx-2">
-                Sign up Free
-              </button>
+              <PopupBtn type="login">
+                <button className="btn bold btn-secondary btn-md mx-2">
+                  Login
+                </button>
+              </PopupBtn>
+
+              <PopupBtn type="signUp">
+                <button className="btn bold btn-primary btn-md mx-2">
+                  Sign up Free
+                </button>
+              </PopupBtn>
             </div>
           </div>
 

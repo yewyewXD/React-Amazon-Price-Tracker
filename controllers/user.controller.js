@@ -8,15 +8,13 @@ const jwt = require("jsonwebtoken");
 exports.registerUser = async (req, res, next) => {
   const { email, password, confirmPassword } = req.body;
   try {
-    // check if all field is entered
+    // Validation
     if (!email || !password || !confirmPassword) {
       return res.status(400).json({
         success: false,
         error: "Please enter all field",
       });
     }
-
-    // check if email already exists
     const emailExist = await User.findOne({ email });
     if (emailExist) {
       return res.status(400).json({
@@ -24,15 +22,12 @@ exports.registerUser = async (req, res, next) => {
         error: "This email has been used",
       });
     }
-
     if (password.length < 5) {
       return res.status(400).json({
         success: false,
         error: "Password needs to be at least 5 characters long",
       });
     }
-
-    // check if both passwords match
     if (password !== confirmPassword) {
       return res.status(400).json({
         success: false,
@@ -53,7 +48,7 @@ exports.registerUser = async (req, res, next) => {
       data: { email },
     });
   } catch (err) {
-    return res.status(500).json(err);
+    return res.status(500).json({ error: err });
   }
 };
 
@@ -63,39 +58,47 @@ exports.registerUser = async (req, res, next) => {
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    // check if user exists
-    const existingEmail = await User.findOne({ email: user });
-    if (!existingEmail) {
+    // Validation
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
       return res.status(400).json({
         success: false,
         error: "User does not exist",
       });
     }
-
-    // use email: check password
-    if (existingEmail) {
-      const verified = await bcrypt.compare(password, existingEmail.password);
-      if (!verified) {
-        return res.status(400).json({
-          success: false,
-          error: "Password is incorrect",
-        });
-      }
-      return res.status(201).json({
-        success: true,
-        data: { userId: existingEmail.id, username: existingEmail.username },
+    const verified = await bcrypt.compare(password, existingUser.password);
+    if (!verified) {
+      return res.status(400).json({
+        success: false,
+        error: "Password is incorrect",
       });
     }
 
     // authenticate user
-    // const jwtToken = jwt.sign(
-    //   { userId: existingUser.id, email: existingUser.email },
-    //   "privatekey",
-    //   {
-    //     expiresIn: "2h",
-    //   }
-    // );
+    const jwtToken = jwt.sign(
+      { userId: existingUser.id, email: existingUser.email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "2h",
+      }
+    );
+
+    return res.status(201).json({
+      success: true,
+      data: {
+        token: jwtToken,
+        user: {
+          id: existingUser.id,
+          email: existingUser.email,
+        },
+      },
+    });
   } catch (err) {
-    return res.status(500).json(err);
+    return res.status(500).json({ error: err });
   }
 };
+
+// @desc Delete user
+// @route POST /user/delete
+// @access private
+exports.deleteUser = async (req, res, next) => {};
