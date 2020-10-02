@@ -120,7 +120,7 @@ export const UserProvider = ({ children }) => {
     const editedTrack = tracks.filter((track) => track._id === id);
     editedTrack[0].name = name;
     editedTrack[0].expectedPrice = expectedPrice;
-    const newTracks = [...otherTracks, ...editedTrack];
+    const newTracks = [...editedTrack, ...otherTracks];
     console.log(newTracks);
 
     dispatch({

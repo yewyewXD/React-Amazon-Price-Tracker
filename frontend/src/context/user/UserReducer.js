@@ -21,7 +21,7 @@ export default (state, action) => {
         ...state,
         user: {
           ...state.user,
-          createdTracks: [...state.user.createdTracks, action.payload],
+          createdTracks: [action.payload, ...state.user.createdTracks],
         },
       };
 

@@ -58,7 +58,7 @@ exports.postTrack = async (req, res, next) => {
     };
 
     const track = await Track.create(newTrack);
-    user.createdTracks.push(track._id);
+    user.createdTracks.unshift(track._id);
     user.save();
 
     return res.status(201).json({
