@@ -1,6 +1,6 @@
 const Track = require("../models/Track");
 const User = require("../models/User");
-const { cloudinary } = require("../utils/cloudinary");
+// const { cloudinary } = require("../utils/cloudinary");
 const nightmare = require("nightmare")();
 
 // @desc Get all tracks
@@ -28,7 +28,7 @@ exports.getTracks = async (req, res, next) => {
 // @access private
 exports.postTrack = async (req, res, next) => {
   try {
-    const { userId, trackUrl, image, name, expectedPrice } = req.body;
+    const { userId, trackUrl, name, expectedPrice } = req.body;
 
     // check user
     const user = await User.findById(userId);
@@ -39,24 +39,32 @@ exports.postTrack = async (req, res, next) => {
       });
     }
 
-    // use nightmare to crawl Amazon product
+    // use nightmare to crawl Amazon product price
     const actualPriceStr = await nightmare
       .goto(trackUrl)
       .wait("#priceblock_ourprice")
       .evaluate(() => document.getElementById("priceblock_ourprice").innerText)
       .end();
+    const actualPrice = +actualPriceStr.substring(1);
 
-    // upload track image to cloud database
-    const { url: cloudinaryUrl } = await cloudinary.uploader.upload(image, {
-      upload_preset: "trackerBase",
-    });
+    // use nightmare to crawl Amazon product image
+    const imageUrl = await nightmare
+      .goto(trackUrl)
+      .wait("#landingImage")
+      .evaluate(() => document.getElementById("landingImage").src)
+      .end();
+
+    // // upload track image to cloud database
+    // const { url: cloudinaryUrl } = await cloudinary.uploader.upload(image, {
+    //   upload_preset: "trackerBase",
+    // });
 
     // create track
     const newTrack = {
-      image: cloudinaryUrl,
+      image: imageUrl,
       name,
       expectedPrice,
-      actualPrice: +actualPriceStr,
+      actualPrice,
       creator: user._id,
     };
 
