@@ -15,6 +15,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 5,
   },
+  createdTracks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Tracks",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Users", userSchema);
