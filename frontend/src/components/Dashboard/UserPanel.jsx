@@ -33,24 +33,6 @@ export default function UserPanel() {
         </div>
 
         {/* track */}
-        <div className="track card mt-1 border-0 rounded">
-          <div className="card-body">
-            <div className="row px-1">
-              <div className="checkbox all-center">
-                <input type="checkbox" />
-              </div>
-              <div className="col-1 p-0 text-center">image</div>
-              <div className="col-6 p-0">name</div>
-              <div className="col-1 p-0">Expected</div>
-              <div className="col-1 p-0">Actual</div>
-              <div className="col-1 p-0">Compare</div>
-              <div className="col-1 p-0 text-danger text-center" role="button">
-                <small>Edit</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {user &&
           user.createdTracks.map((track) => (
             <div className="track card mt-1 border-0 rounded" key={track._id}>
@@ -67,18 +49,26 @@ export default function UserPanel() {
                       style={{ height: "30px", width: "30px" }}
                     />
                   </div>
-                  <div className="col-6 p-0">{track.name}</div>
-                  <div className="col-1 p-0">{track.expectedPrice}</div>
-                  <div className="col-1 p-0">{track.actualPrice}</div>
-                  <div className="col-1 p-0">
+                  <div className="col-6 p-0 d-flex align-items-center">
+                    {track.name}
+                  </div>
+                  <div className="col-1 p-0 d-flex align-items-center">
+                    {track.expectedPrice}
+                  </div>
+                  <div className="col-1 p-0 d-flex align-items-center">
+                    {track.actualPrice}
+                  </div>
+                  <div className="col-1 p-0 d-flex align-items-center">
                     {track.expectedPrice > track.actualPrice ? (
-                      <span className="text-success">Cheap</span>
+                      <span className="text-success m-0">Cheap</span>
                     ) : (
-                      <span className="text-danger">Expensive</span>
+                      <span className="text-danger m-0">Expensive</span>
                     )}
                   </div>
-                  <div className="col-1 p-0 text-center" role="button">
-                    <small>Edit</small>
+                  <div className="col-1 p-0 all-center" role="button">
+                    <PopupBtn type="editTrack" track={track}>
+                      <small className="m-0 text-danger">Edit</small>
+                    </PopupBtn>
                   </div>
                 </div>
               </div>

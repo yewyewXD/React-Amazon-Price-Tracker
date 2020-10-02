@@ -7,6 +7,7 @@ export default (state, action) => {
         user: action.payload.user,
         errMsg: null,
       };
+
     case "LOGOUT_USER":
       return {
         ...state,
@@ -14,11 +15,7 @@ export default (state, action) => {
         user: action.payload,
         errMsg: null,
       };
-    case "LOG_ERROR_MESSAGE":
-      return {
-        ...state,
-        errMsg: action.payload,
-      };
+
     case "ADD_TRACK":
       return {
         ...state,
@@ -26,6 +23,12 @@ export default (state, action) => {
           ...state.user,
           createdTracks: [...state.user.createdTracks, action.payload],
         },
+      };
+
+    case "LOG_ERROR_MESSAGE":
+      return {
+        ...state,
+        errMsg: action.payload,
       };
     default:
       return state;

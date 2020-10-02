@@ -45,38 +45,6 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  async function checkLoggedIn() {
-    try {
-      let token = localStorage.getItem("auth-token");
-
-      // if token hasn't been set
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-      }
-
-      const tokenRes = await axios.post(
-        "http://localhost:5000/api/user/tokenIsValid",
-        null,
-        { headers: { "user-auth-token": token } }
-      );
-
-      // get and login user data
-      if (tokenRes.data) {
-        const userRes = await axios.get("http://localhost:5000/api/user/", {
-          headers: { "user-auth-token": token },
-        });
-
-        dispatch({
-          type: "LOGIN_USER",
-          payload: { token, user: userRes.data },
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   async function registerUser(displayName, email, password, confirmPassword) {
     try {
       await axios.post("http://localhost:5000/api/user/register", {
@@ -134,9 +102,77 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  // function editTrack(id, name, expectedPrice) {
+  //   // const res = await axios.post(
+  //   //   "http://localhost:5000/api/dashboard/track",
+  //   //   {
+  //   //     userId,
+  //   //     trackUrl,
+  //   //     name,
+  //   //     expectedPrice,
+  //   //   },
+  //   //   { headers: { "user-auth-token": token } }
+  //   // );
+
+  //   // console.log(res.data);
+
+  //   // dispatch({
+  //   //   type: "EDIT_TRACK",
+  //   //   payload: res.data.data,
+  //   // });
+
+  //   const tracks = state.user.createdTracks;
+
+  //   const otherTracks = tracks.filter((track) => {
+  //     track._id !== id;
+  //   });
+
+  //   const editedTrack = tracks.filter((track) => {
+  //     track._id === id;
+  //   });
+
+  //   const newTracks = [...otherTracks, ...editedTrack];
+
+  //   console.log(newTracks);
+  // }
+
+  // auto login START--------------------------------------------------------------
+  async function checkLoggedIn() {
+    try {
+      let token = localStorage.getItem("auth-token");
+
+      // if token hasn't been set
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+
+      const tokenRes = await axios.post(
+        "http://localhost:5000/api/user/tokenIsValid",
+        null,
+        { headers: { "user-auth-token": token } }
+      );
+
+      // get and login user data
+      if (tokenRes.data) {
+        const userRes = await axios.get("http://localhost:5000/api/user/", {
+          headers: { "user-auth-token": token },
+        });
+
+        dispatch({
+          type: "LOGIN_USER",
+          payload: { token, user: userRes.data },
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     checkLoggedIn();
   }, []);
+  // auto login END--------------------------------------------------------------
 
   return (
     <UserContext.Provider
@@ -148,6 +184,7 @@ export const UserProvider = ({ children }) => {
         registerUser,
         logoutUser,
         addTrack,
+        // editTrack,
       }}
     >
       {children}

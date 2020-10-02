@@ -9,6 +9,7 @@ import { heroVector } from "../../images/homeImages";
 import SignUpModal from "./SignUpModal";
 import LoginModal from "./LoginModal";
 import AddTrackModal from "./AddTrackModal";
+import EditTrackModal from "./EditTrackModal";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PopupBtn({ children, type }) {
+export default function PopupBtn({ children, type, track }) {
   const classes = useStyles();
   const { token } = useContext(UserContext);
 
@@ -60,6 +61,9 @@ export default function PopupBtn({ children, type }) {
                 )}
                 {type === "addTrack" && token && (
                   <AddTrackModal handleClose={handleClose} />
+                )}
+                {type === "editTrack" && token && (
+                  <EditTrackModal handleClose={handleClose} track={track} />
                 )}
               </div>
             </div>
