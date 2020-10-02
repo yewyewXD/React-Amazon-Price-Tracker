@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { UserContext } from "../../context/user/UserState";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { heroVector } from "../../images/homeImages";
+
 import SignUpModal from "./SignUpModal";
 import LoginModal from "./LoginModal";
-import { UserContext } from "../../context/user/UserState";
+import AddTrack from "./AddTrack";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,6 +57,9 @@ export default function PopupBtn({ children, type }) {
                 )}
                 {type === "login" && !token && (
                   <LoginModal handleClose={handleClose} />
+                )}
+                {type === "addTrack" && token && (
+                  <AddTrack handleClose={handleClose} />
                 )}
               </div>
             </div>

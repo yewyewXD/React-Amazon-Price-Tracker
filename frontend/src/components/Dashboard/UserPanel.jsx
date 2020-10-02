@@ -1,4 +1,5 @@
 import React from "react";
+import PopupBtn from "../Popup/PopupBtn";
 
 export default function UserPanel() {
   return (
@@ -6,7 +7,10 @@ export default function UserPanel() {
       <div className="title m-5 bold">My Tracks</div>
 
       {/* add button */}
-      <button className="btn btn-primary btn-sm">+</button>
+
+      <PopupBtn type="addTrack">
+        <button className="btn btn-primary btn-sm">+</button>
+      </PopupBtn>
 
       <div className="tracks mt-5 px-5">
         {/* categories */}
