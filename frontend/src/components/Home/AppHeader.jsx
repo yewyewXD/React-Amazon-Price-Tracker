@@ -11,7 +11,11 @@ export default function AppHeader() {
   const { token, user, logoutUser } = useContext(UserContext);
 
   if (token) {
-    NotificationManager.success(`Welcome back, ${user.email}!`, null, 3000);
+    NotificationManager.success(
+      `Welcome back, ${user.displayName}!`,
+      null,
+      3000
+    );
   }
   return (
     <header className="header">
