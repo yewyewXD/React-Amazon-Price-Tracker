@@ -25,6 +25,15 @@ export default (state, action) => {
         },
       };
 
+    case "EDIT_TRACK":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          createdTracks: action.payload,
+        },
+      };
+
     case "LOG_ERROR_MESSAGE":
       return {
         ...state,
