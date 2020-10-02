@@ -19,22 +19,27 @@ export default function ControlPanel() {
     },
   ];
   return (
-    <div className="control-panel p-4 all-center-column justify-content-start">
+    <div className="control-panel all-center-column justify-content-start">
       <div className="brand text-white">
-        <Link className="logo bold text-white text-decoration-none" to="/">
+        <Link
+          className="logo bold text-white text-decoration-none d-md-block d-none"
+          to="/"
+        >
           TrackerBase
         </Link>
       </div>
 
-      <div className="control-bars w-100 pl-4 pt-4">
+      <div className="control-bars w-100 ml-xl-4 mt-4">
         {controlBars.map((controlBar, index) => (
           <div
-            className="control-bar bold mt-4 d-flex align-items-center"
+            className="control-bar text-white bold py-3 d-flex align-items-center justify-content-lg-start justify-content-center"
             role="button"
             key={index}
           >
             {controlBar.icon}
-            <span className="mb-0 ml-5">{controlBar.text}</span>
+            <span className="mb-0 ml-xl-5 ml-3 d-lg-inline d-none">
+              {controlBar.text}
+            </span>
           </div>
         ))}
       </div>

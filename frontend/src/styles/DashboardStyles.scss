@@ -23,16 +23,30 @@
   }
 }
 
-// authenticated page
+// authenticated dashboard page
 .dashboard-page {
   min-height: 100vh;
   .control-panel {
+    padding: 48px;
     width: 20%;
     height: 100vh;
     background: linear-gradient(to bottom, #5fb0e5, #007bff, #007bff);
 
+    .brand {
+      font-size: 2rem;
+    }
+
     .control-bars {
       .control-bar {
+        opacity: 0.5;
+        transition: 0.2s;
+        white-space: nowrap;
+        &:hover {
+          opacity: 1;
+        }
+        .icon {
+          font-size: 1.4rem;
+        }
       }
     }
   }
@@ -41,5 +55,25 @@
     background: $themeColor;
     width: 80%;
     height: 100vh;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .dashboard-page {
+    .control-panel {
+      padding: 48px 24px;
+
+      .brand {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .dashboard-page {
+    .control-panel {
+      padding: 48px 0;
+    }
   }
 }

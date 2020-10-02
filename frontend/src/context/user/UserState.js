@@ -102,31 +102,33 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  function editTrack(id, name, expectedPrice) {
-    // const res = await axios.post(
-    //   "http://localhost:5000/api/dashboard/track",
-    //   {
-    //     userId,
-    //     trackUrl,
-    //     name,
-    //     expectedPrice,
-    //   },
-    //   { headers: { "user-auth-token": token } }
-    // );
-    // console.log(res.data);
+  async function editTrack(id, name, expectedPrice) {
+    try {
+      const tracks = state.user.createdTracks;
+      const otherTracks = tracks.filter((track) => track._id !== id);
+      const editedTrack = tracks.filter((track) => track._id === id);
+      editedTrack[0].name = name;
+      editedTrack[0].expectedPrice = expectedPrice;
+      const newTracks = [...editedTrack, ...otherTracks];
 
-    const tracks = state.user.createdTracks;
-    const otherTracks = tracks.filter((track) => track._id !== id);
-    const editedTrack = tracks.filter((track) => track._id === id);
-    editedTrack[0].name = name;
-    editedTrack[0].expectedPrice = expectedPrice;
-    const newTracks = [...editedTrack, ...otherTracks];
-    console.log(newTracks);
+      const res = await axios.post(
+        `http://localhost:5000/api/dashboard/track/${id}`,
+        {
+          name,
+          expectedPrice,
+        },
+        { headers: { "user-auth-token": state.token } }
+      );
 
-    dispatch({
-      type: "EDIT_TRACK",
-      payload: newTracks,
-    });
+      // console.log(res.data);
+
+      dispatch({
+        type: "EDIT_TRACK",
+        payload: newTracks,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // auto login START--------------------------------------------------------------
