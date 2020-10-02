@@ -39,7 +39,7 @@ exports.postTrack = async (req, res, next) => {
       });
     }
 
-    // use nightmare to crawl Amazon product price
+    // crawl Amazon product
     const crawledProduct = await nightmare
       .goto(trackUrl)
       .wait("#priceblock_ourprice")
@@ -68,22 +68,17 @@ exports.postTrack = async (req, res, next) => {
       creator: user._id,
     };
 
+    const track = await Track.create(newTrack);
+    user.createdTracks.push(track._id);
+    user.save();
+
     return res.status(201).json({
       success: true,
-      data: newTrack,
+      data: {
+        user: user.displayName,
+        track,
+      },
     });
-
-    // const track = await Track.create(newTrack);
-    // user.createdTracks.push(track._id);
-    // user.save();
-
-    // return res.status(201).json({
-    //   success: true,
-    //   data: {
-    //     user: user.displayName,
-    //     track,
-    //   },
-    // });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
