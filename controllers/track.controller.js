@@ -70,8 +70,36 @@ exports.postTrack = async (req, res, next) => {
   }
 };
 
-// @desc Delete track
+// @desc Edit track
 // @route POST /api/dashboard/track/:id
+// @access private
+exports.editTrack = async (req, res, next) => {
+  try {
+    const { name, expectedPrice } = req.body;
+    const track = await Track.findById(req.params.id);
+
+    if (!track) {
+      return res.status(401).json({
+        success: false,
+        error: "No track found",
+      });
+    }
+
+    track.name = name;
+    track.expectedPrice = expectedPrice;
+    await track.save();
+
+    return res.status(201).json({
+      success: true,
+      edited: track,
+    });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+// @desc Delete track
+// @route DELETE /api/dashboard/track/:id
 // @access private
 exports.deleteTrack = async (req, res, next) => {
   try {
