@@ -91,6 +91,7 @@ exports.loginUser = async (req, res, next) => {
       data: {
         token: jwtToken,
         user: {
+          userId: existingUser.id,
           displayName: existingUser.displayName,
           email: existingUser.email,
         },
@@ -144,6 +145,7 @@ exports.getUser = async (req, res, next) => {
   try {
     const existingUser = await User.findById(req.user);
     res.json({
+      userId: existingUser.id,
       displayName: existingUser.displayName,
       email: existingUser.email,
     });

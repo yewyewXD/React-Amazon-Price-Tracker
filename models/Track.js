@@ -8,14 +8,13 @@ const trackSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
   },
   expectedPrice: {
     type: Number,
     required: true,
   },
   actualPrice: {
-    type: String,
+    type: Number,
     required: true,
   },
   creator: {
