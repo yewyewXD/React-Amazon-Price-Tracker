@@ -1,7 +1,6 @@
-import React, { createContext, useReducer, useEffect, useContext } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 import UserReducer from "./UserReducer";
 import axios from "axios";
-import { TrackContext } from "../dashboard/TrackState";
 
 // Initial state
 const initialState = {
@@ -13,7 +12,6 @@ const initialState = {
 export const UserContext = createContext(initialState);
 
 export const UserProvider = ({ children }) => {
-  const { getAllTracks } = useContext(TrackContext);
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   //Actions
@@ -73,8 +71,6 @@ export const UserProvider = ({ children }) => {
           type: "LOGIN_USER",
           payload: { token, user: userRes.data },
         });
-
-        getAllTracks(userRes.data.userId, token);
       }
     } catch (err) {
       console.log(err);
@@ -114,6 +110,30 @@ export const UserProvider = ({ children }) => {
     });
   }
 
+  async function addTrack(userId, trackUrl, name, expectedPrice, token) {
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/dashboard/track",
+        {
+          userId,
+          trackUrl,
+          name,
+          expectedPrice,
+        },
+        { headers: { "user-auth-token": token } }
+      );
+
+      // console.log(res.data);
+
+      dispatch({
+        type: "ADD_TRACK",
+        payload: res.data.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     checkLoggedIn();
   }, []);
@@ -127,6 +147,7 @@ export const UserProvider = ({ children }) => {
         loginUser,
         registerUser,
         logoutUser,
+        addTrack,
       }}
     >
       {children}

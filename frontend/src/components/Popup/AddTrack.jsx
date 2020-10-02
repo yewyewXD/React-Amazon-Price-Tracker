@@ -1,10 +1,8 @@
 import React, { useContext, useRef } from "react";
 import { UserContext } from "../../context/user/UserState";
-import { TrackContext } from "../../context/dashboard/TrackState";
 
 export default function AddTrack({ handleClose }) {
-  const { user, token, errMsg } = useContext(UserContext);
-  const { trackProduct } = useContext(TrackContext);
+  const { user, token, errMsg, trackProduct } = useContext(UserContext);
 
   const urlElRef = useRef();
   const nameElRef = useRef();

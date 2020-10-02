@@ -62,14 +62,14 @@ exports.loginUser = async (req, res, next) => {
     const { email, password } = req.body;
 
     // Validation
-    const existingUser = await User.findOne({ email });
-    if (!existingUser) {
+    const user = await User.findOne({ email }).populate("createdTracks");
+    if (!user) {
       return res.status(401).json({
         success: false,
         error: "User does not exist",
       });
     }
-    const verified = await bcrypt.compare(password, existingUser.password);
+    const verified = await bcrypt.compare(password, user.password);
     if (!verified) {
       return res.status(401).json({
         success: false,
@@ -79,7 +79,7 @@ exports.loginUser = async (req, res, next) => {
 
     // authenticate user
     const jwtToken = jwt.sign(
-      { userId: existingUser.id, email: existingUser.email },
+      { userId: user.id, email: user.email },
       process.env.JWT_SECRET,
       {
         expiresIn: "2h",
@@ -91,9 +91,10 @@ exports.loginUser = async (req, res, next) => {
       data: {
         token: jwtToken,
         user: {
-          userId: existingUser.id,
-          displayName: existingUser.displayName,
-          email: existingUser.email,
+          userId: user.id,
+          displayName: user.displayName,
+          email: user.email,
+          createdTracks: user.createdTracks,
         },
       },
     });
@@ -143,11 +144,12 @@ exports.validateToken = async (req, res, next) => {
 // @access private
 exports.getUser = async (req, res, next) => {
   try {
-    const existingUser = await User.findById(req.user);
+    const user = await User.findById(req.user).populate("createdTracks");
     res.json({
-      userId: existingUser.id,
-      displayName: existingUser.displayName,
-      email: existingUser.email,
+      userId: user.id,
+      displayName: user.displayName,
+      email: user.email,
+      createdTracks: user.createdTracks,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });

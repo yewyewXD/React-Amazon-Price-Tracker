@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import PopupBtn from "../Popup/PopupBtn";
-import { TrackContext } from "../../context/dashboard/TrackState";
+import { UserContext } from "../../context/user/UserState";
 
 export default function UserPanel() {
-  const { tracks } = useContext(TrackContext);
+  const { user } = useContext(UserContext);
 
-  if (tracks.length) {
-    console.log(tracks);
-  } else {
-    console.log("no track yet");
+  if (user) {
+    console.log(user.createdTracks);
   }
 
   return (
@@ -57,9 +55,9 @@ export default function UserPanel() {
           </div>
         </div>
 
-        {tracks.length > 0 &&
-          tracks.map((track) => (
-            <div className="track card mt-1 border-0 rounded" key={track.id}>
+        {user &&
+          user.createdTracks.map((track) => (
+            <div className="track card mt-1 border-0 rounded" key={track._id}>
               <div className="card-body">
                 <div className="row px-1">
                   <div className="checkbox all-center">

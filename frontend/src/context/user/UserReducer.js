@@ -19,6 +19,14 @@ export default (state, action) => {
         ...state,
         errMsg: action.payload,
       };
+    case "ADD_TRACK":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          createdTracks: [...state.user.createdTracks, action.payload],
+        },
+      };
     default:
       return state;
   }

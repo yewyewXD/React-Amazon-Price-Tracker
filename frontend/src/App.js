@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { UserProvider } from "./context/user/UserState";
-import { TrackProvider } from "./context/dashboard/TrackState";
 
 // styles
 import "bootstrap/dist/css/bootstrap.css";
@@ -17,15 +16,13 @@ import DashboardPage from "./pages/DashboardPage";
 function App() {
   return (
     <BrowserRouter>
-      <TrackProvider>
-        <UserProvider>
-          <Switch>
-            <Redirect from="/home" to="/" exact />
-            <Route path="/" exact component={HomePage} />
-            <Route path="/dashboard" component={DashboardPage} />
-          </Switch>
-        </UserProvider>
-      </TrackProvider>
+      <UserProvider>
+        <Switch>
+          <Redirect from="/home" to="/" exact />
+          <Route path="/" exact component={HomePage} />
+          <Route path="/dashboard" component={DashboardPage} />
+        </Switch>
+      </UserProvider>
     </BrowserRouter>
   );
 }
