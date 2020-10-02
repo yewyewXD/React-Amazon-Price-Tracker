@@ -3,7 +3,7 @@ import { UserContext } from "../../context/user/UserState";
 import FlashMessage from "react-flash-message";
 
 export default function LoginModal({ handleClose }) {
-  const { loginUser, token } = useContext(UserContext);
+  const { loginUser, token, errMsg } = useContext(UserContext);
 
   const emailElRef = useRef();
   const pwElRef = useRef();
@@ -50,9 +50,10 @@ export default function LoginModal({ handleClose }) {
           />
         </div>
 
-          <FlashMessage duration={5000}>
-            <small className="text-danger">User credential is not valid!</small>
-          </FlashMessage>
+        {/* Error message */}
+        {errMsg && (
+          <small className="text-danger d-block mt-1">{errMsg.error}</small>
+        )}
 
         <button className="btn btn-primary btn-md mt-3">Login</button>
       </form>

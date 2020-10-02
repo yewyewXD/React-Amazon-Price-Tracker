@@ -1,11 +1,9 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef } from "react";
 import { UserContext } from "../../context/user/UserState";
 import FlashMessage from "react-flash-message";
 
 export default function SignUpModal({ handleClose }) {
-  let ErrorMessage = "";
-
-  const { registerUser, token } = useContext(UserContext);
+  const { registerUser, token, errMsg } = useContext(UserContext);
 
   const emailElRef = useRef();
   const pwElRef = useRef();
@@ -22,13 +20,10 @@ export default function SignUpModal({ handleClose }) {
 
     if (token) {
       handleClose();
-    } else {
-      ErrorMessage = <small className="text-danger">Not valid</small>;
     }
   }
   function handleRevealPw() {
     document.getElementById("confirmPw").type = "text";
-    console.log(ErrorMessage);
   }
 
   return (
@@ -75,7 +70,9 @@ export default function SignUpModal({ handleClose }) {
         </div>
 
         {/* Error message */}
-        <small className="text-danger">{ErrorMessage}</small>
+        {errMsg && (
+          <small className="text-danger d-block mt-1">{errMsg.error}</small>
+        )}
 
         <button type="submit" className="btn btn-primary btn-md mt-3">
           Sign Up

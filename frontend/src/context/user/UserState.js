@@ -36,6 +36,12 @@ export const UserProvider = ({ children }) => {
         type: "LOG_ERROR_MESSAGE",
         payload: err.response.data,
       });
+      setTimeout(() => {
+        dispatch({
+          type: "LOG_ERROR_MESSAGE",
+          payload: null,
+        });
+      }, 3000);
     }
   }
 
@@ -70,6 +76,12 @@ export const UserProvider = ({ children }) => {
         type: "LOG_ERROR_MESSAGE",
         payload: err.response.data,
       });
+      setTimeout(() => {
+        dispatch({
+          type: "LOG_ERROR_MESSAGE",
+          payload: null,
+        });
+      }, 3000);
     }
   }
 
@@ -87,6 +99,12 @@ export const UserProvider = ({ children }) => {
         type: "LOG_ERROR_MESSAGE",
         payload: err.response.data,
       });
+      setTimeout(() => {
+        dispatch({
+          type: "LOG_ERROR_MESSAGE",
+          payload: null,
+        });
+      }, 3000);
     }
   }
 
