@@ -7,10 +7,10 @@ const jwt = require("jsonwebtoken");
 // @access public
 exports.registerUser = async (req, res, next) => {
   try {
-    const { email, password, confirmPassword } = req.body;
+    const { displayName, email, password, confirmPassword } = req.body;
 
     // Validation
-    if (!email || !password || !confirmPassword) {
+    if (!displayName || !email || !password || !confirmPassword) {
       return res.status(401).json({
         success: false,
         error: "Please enter all field",
@@ -39,6 +39,7 @@ exports.registerUser = async (req, res, next) => {
     // encrypt and create user
     const hashedPassword = await bcrypt.hash(password, 12);
     const userInfo = {
+      displayName,
       email,
       password: hashedPassword,
     };
@@ -46,7 +47,7 @@ exports.registerUser = async (req, res, next) => {
 
     return res.status(201).json({
       success: true,
-      data: { email },
+      data: { displayName, email }, // not used in client side
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
@@ -90,7 +91,7 @@ exports.loginUser = async (req, res, next) => {
       data: {
         token: jwtToken,
         user: {
-          id: existingUser.id,
+          displayName: existingUser.displayName,
           email: existingUser.email,
         },
       },
@@ -140,9 +141,13 @@ exports.validateToken = async (req, res, next) => {
 // @route GET /api/user/
 // @access private
 exports.getUser = async (req, res, next) => {
-  const existingUser = await User.findById(req.user);
-  res.json({
-    id: existingUser.id,
-    email: existingUser.email,
-  });
+  try {
+    const existingUser = await User.findById(req.user);
+    res.json({
+      displayName: existingUser.displayName,
+      email: existingUser.email,
+    });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
 };

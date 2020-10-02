@@ -85,14 +85,15 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  async function registerUser(email, password, confirmPassword) {
+  async function registerUser(displayName, email, password, confirmPassword) {
     try {
-      const res = await axios.post("http://localhost:5000/api/user/register", {
+      await axios.post("http://localhost:5000/api/user/register", {
+        displayName,
         email,
         password,
         confirmPassword,
       });
-      console.log(res.data.data);
+      // console.log(res.data.data);
       loginUser(email, password);
     } catch (err) {
       dispatch({

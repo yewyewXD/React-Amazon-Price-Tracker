@@ -10,6 +10,7 @@ export default function SignUpModal({ handleClose }) {
   const emailElRef = useRef();
   const pwElRef = useRef();
   const confirmPwElRef = useRef();
+  const displayNameElRef = useRef();
 
   function handleRegisterUser(e) {
     e.preventDefault();
@@ -18,7 +19,10 @@ export default function SignUpModal({ handleClose }) {
     const confirmPw = confirmPwElRef.current
       ? confirmPwElRef.current.value
       : "";
-    registerUser(email, pw, confirmPw);
+    const displayName = displayNameElRef.current
+      ? displayNameElRef.current.value
+      : "";
+    registerUser(displayName, email, pw, confirmPw);
 
     if (token) {
       handleClose();
@@ -37,6 +41,18 @@ export default function SignUpModal({ handleClose }) {
     <>
       <h2 className="bold mb-4">Sign Up</h2>
       <form className="form" onSubmit={handleRegisterUser}>
+        <div className="form-group">
+          <label htmlFor="displayName" className="bold d-block">
+            Display Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            required
+            ref={displayNameElRef}
+          />
+        </div>
+
         <div className="form-group">
           <label htmlFor="email" className="bold d-block">
             Email
@@ -73,7 +89,7 @@ export default function SignUpModal({ handleClose }) {
         </span>
 
         <div className="form-group mb-1">
-          <label htmlFor="password" className="bold d-block">
+          <label htmlFor="confirmPassword" className="bold d-block">
             Confirm Password
           </label>
           <input
