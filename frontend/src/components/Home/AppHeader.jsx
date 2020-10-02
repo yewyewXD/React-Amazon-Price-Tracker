@@ -56,9 +56,12 @@ export default function AppHeader() {
                 >
                   Logout
                 </span>
-                <button className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0">
+                <Link
+                  className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0"
+                  to="/dashboard"
+                >
                   Dashboard
-                </button>
+                </Link>
               </>
             )}
           </div>

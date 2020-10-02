@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { heroBg, heroVector } from "../../images/homeImages";
 import PopupBtn from "../Popup/PopupBtn";
 import { UserContext } from "../../context/user/UserState";
+import { Link } from "react-router-dom";
 
 export default function HeroSection() {
   const { token } = useContext(UserContext);
@@ -40,9 +41,12 @@ export default function HeroSection() {
               )}
 
               {token && (
-                <button className="btn bold btn-primary btn-md mx-2">
+                <Link
+                  className="btn bold btn-primary btn-md mx-2"
+                  to="/dashboard"
+                >
                   View Dashboard
-                </button>
+                </Link>
               )}
             </div>
           </div>
