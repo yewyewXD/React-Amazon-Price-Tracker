@@ -5,10 +5,6 @@ import { UserContext } from "../../context/user/UserState";
 export default function UserPanel() {
   const { user } = useContext(UserContext);
 
-  if (user) {
-    console.log(user.createdTracks);
-  }
-
   return (
     <div className="user-panel py-4">
       <div className="title m-5 bold">My Tracks</div>

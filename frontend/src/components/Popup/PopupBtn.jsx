@@ -8,7 +8,7 @@ import { heroVector } from "../../images/homeImages";
 
 import SignUpModal from "./SignUpModal";
 import LoginModal from "./LoginModal";
-import AddTrack from "./AddTrack";
+import AddTrackModal from "./AddTrackModal";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -59,7 +59,7 @@ export default function PopupBtn({ children, type }) {
                   <LoginModal handleClose={handleClose} />
                 )}
                 {type === "addTrack" && token && (
-                  <AddTrack handleClose={handleClose} />
+                  <AddTrackModal handleClose={handleClose} />
                 )}
               </div>
             </div>
