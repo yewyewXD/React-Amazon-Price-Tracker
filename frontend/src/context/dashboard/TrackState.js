@@ -26,7 +26,7 @@ export const TrackProvider = ({ children }) => {
         { headers: { "user-auth-token": token } }
       );
 
-      console.log(res.data);
+      // console.log(res.data);
 
       dispatch({
         type: "TRACK_PRODUCT",
