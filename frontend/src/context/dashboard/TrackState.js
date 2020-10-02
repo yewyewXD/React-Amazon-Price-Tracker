@@ -27,8 +27,9 @@ export const TrackProvider = ({ children }) => {
         { headers: { "user-auth-token": token } }
       );
 
-      console.log(res);
+      console.log(res.data);
     } catch (err) {
+      console.log(err);
       console.log(err.response.data);
     }
   }

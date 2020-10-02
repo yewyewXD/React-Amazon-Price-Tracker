@@ -69,7 +69,7 @@ export default function AddTrack({ handleClose }) {
             Expected Price
           </label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             placeholder="Enter the ideal price for this product"
             required

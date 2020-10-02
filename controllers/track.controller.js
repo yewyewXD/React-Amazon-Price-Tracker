@@ -28,36 +28,31 @@ exports.getTracks = async (req, res, next) => {
 // @access private
 exports.postTrack = async (req, res, next) => {
   try {
-    // const { userId, trackUrl, name, expectedPrice } = req.body;
-
-    return res.status(201).json({
-      success: true,
-      data: "test data",
-    });
+    const { userId, trackUrl, name, expectedPrice } = req.body;
 
     // // check user
-    // const user = await User.findById(userId);
-    // if (!user) {
-    //   return res.status(401).json({
-    //     success: false,
-    //     error: "User does not exist",
-    //   });
-    // }
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: "User does not exist",
+      });
+    }
 
-    // // use nightmare to crawl Amazon product price
-    // const actualPriceStr = await nightmare
-    //   .goto(trackUrl)
-    //   .wait("#priceblock_ourprice")
-    //   .evaluate(() => document.getElementById("priceblock_ourprice").innerText)
-    //   .end();
-    // const actualPrice = +actualPriceStr.substring(1);
-
-    // // use nightmare to crawl Amazon product image
-    // const imageUrl = await nightmare
-    //   .goto(trackUrl)
-    //   .wait("#landingImage")
-    //   .evaluate(() => document.getElementById("landingImage").src)
-    //   .end();
+    // use nightmare to crawl Amazon product price
+    const crawledProduct = await nightmare
+      .goto(trackUrl)
+      .wait("#priceblock_ourprice")
+      .evaluate(() => {
+        const price = document.getElementById("priceblock_ourprice").innerText;
+        const image = document.getElementById("landingImage").src;
+        const actualPrice = +price.substring(1);
+        return {
+          actualPrice,
+          image,
+        };
+      })
+      .end();
 
     // // // upload track image to cloud database
     // // const { url: cloudinaryUrl } = await cloudinary.uploader.upload(image, {
@@ -65,13 +60,18 @@ exports.postTrack = async (req, res, next) => {
     // // });
 
     // // create track
-    // const newTrack = {
-    //   image: imageUrl,
-    //   name,
-    //   expectedPrice,
-    //   actualPrice,
-    //   creator: user._id,
-    // };
+    const newTrack = {
+      image: crawledProduct.image,
+      name,
+      expectedPrice,
+      actualPrice: crawledProduct.actualPrice,
+      creator: user._id,
+    };
+
+    return res.status(201).json({
+      success: true,
+      data: newTrack,
+    });
 
     // const track = await Track.create(newTrack);
     // user.createdTracks.push(track._id);
