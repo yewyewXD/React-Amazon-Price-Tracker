@@ -1,9 +1,11 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../../context/user/UserState";
-import FlashMessage from "react-flash-message";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 export default function SignUpModal({ handleClose }) {
   const { registerUser, token, errMsg } = useContext(UserContext);
+  const [isShowingPw, setIsShowingPw] = useState(false);
+  const [isShowingConfirmPw, setIsShowingConfirmPw] = useState(false);
 
   const emailElRef = useRef();
   const pwElRef = useRef();
@@ -22,8 +24,13 @@ export default function SignUpModal({ handleClose }) {
       handleClose();
     }
   }
-  function handleRevealPw() {
-    document.getElementById("confirmPw").type = "text";
+
+  function togglePwRevealer() {
+    setIsShowingPw(!isShowingPw);
+  }
+
+  function toggleConfirmPwRevealer() {
+    setIsShowingConfirmPw(!isShowingConfirmPw);
   }
 
   return (
@@ -47,7 +54,7 @@ export default function SignUpModal({ handleClose }) {
             Password
           </label>
           <input
-            type="password"
+            type={isShowingPw ? "text" : "password"}
             className="form-control"
             minLength="5"
             required
@@ -55,12 +62,22 @@ export default function SignUpModal({ handleClose }) {
           />
         </div>
 
-        <div className={`form-group mb-1`}>
+        {/* Password Revealer */}
+        <span
+          className="pw-revealer"
+          onClick={togglePwRevealer}
+          style={{ marginTop: "-53px" }}
+        >
+          {!isShowingPw && <AiFillEye />}
+          {isShowingPw && <AiFillEyeInvisible />}
+        </span>
+
+        <div className="form-group mb-1">
           <label htmlFor="password" className="bold d-block">
             Confirm Password
           </label>
           <input
-            type="password"
+            type={isShowingConfirmPw ? "text" : "password"}
             className="form-control"
             minLength="5"
             required
@@ -68,6 +85,16 @@ export default function SignUpModal({ handleClose }) {
             ref={confirmPwElRef}
           />
         </div>
+
+        {/*ConfirmPassword Revealer */}
+        <span
+          className="pw-revealer"
+          onClick={toggleConfirmPwRevealer}
+          style={{ marginTop: "-41px" }}
+        >
+          {!isShowingConfirmPw && <AiFillEye />}
+          {isShowingConfirmPw && <AiFillEyeInvisible />}
+        </span>
 
         {/* Error message */}
         {errMsg && (
@@ -77,7 +104,6 @@ export default function SignUpModal({ handleClose }) {
         <button type="submit" className="btn btn-primary btn-md mt-3">
           Sign Up
         </button>
-        <button onClick={handleRevealPw}>reveal</button>
       </form>
     </>
   );

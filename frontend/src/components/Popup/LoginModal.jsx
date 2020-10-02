@@ -1,9 +1,10 @@
 import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../../context/user/UserState";
-import FlashMessage from "react-flash-message";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 export default function LoginModal({ handleClose }) {
   const { loginUser, token, errMsg } = useContext(UserContext);
+  const [isShowingPw, setIsShowingPw] = useState(false);
 
   const emailElRef = useRef();
   const pwElRef = useRef();
@@ -19,6 +20,10 @@ export default function LoginModal({ handleClose }) {
     if (token) {
       handleClose();
     }
+  }
+
+  function togglePwRevealer() {
+    setIsShowingPw(!isShowingPw);
   }
 
   return (
@@ -37,17 +42,27 @@ export default function LoginModal({ handleClose }) {
           />
         </div>
 
-        <div className={`form-group mb-1`}>
+        <div className="form-group mb-1">
           <label htmlFor="password" className="bold d-block">
             Password
           </label>
           <input
-            type="password"
+            type={isShowingPw ? "text" : "password"}
             className="form-control"
             minLength="5"
             required
             ref={pwElRef}
           />
+
+          {/* Password Revealer */}
+          <span
+            className="pw-revealer"
+            onClick={togglePwRevealer}
+            style={{ marginTop: "-37px" }}
+          >
+            {!isShowingPw && <AiFillEye />}
+            {isShowingPw && <AiFillEyeInvisible />}
+          </span>
         </div>
 
         {/* Error message */}
