@@ -3,35 +3,6 @@ const User = require("../models/User");
 // const { cloudinary } = require("../utils/cloudinary");
 const nightmare = require("nightmare")();
 
-// @desc Get all tracks
-// @route POST /api/dashboard/tracks
-// @access private
-exports.getAllTracks = async (req, res, next) => {
-  try {
-    const { userId } = req.body;
-
-    // check user
-    const user = await User.findById(userId).populate("createdTracks");
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        error: "User does not exist",
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      length: user.createdTracks.length,
-      data: user.createdTracks,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      error: "Server Error",
-    });
-  }
-};
-
 // @desc Add track
 // @route POST /api/dashboard/track
 // @access private
@@ -51,15 +22,24 @@ exports.postTrack = async (req, res, next) => {
     // crawl Amazon product
     const crawledProduct = await nightmare
       .goto(trackUrl)
-      .wait("#priceblock_ourprice")
+      .wait("#landingImage")
       .evaluate(() => {
-        const price = document.getElementById("priceblock_ourprice").innerText;
         const image = document.getElementById("landingImage").src;
-        const actualPrice = +price.substring(1);
-        return {
-          actualPrice,
-          image,
-        };
+        const price = document.getElementById("priceblock_ourprice");
+        const salePrice = document.getElementById("priceblock_saleprice");
+        if (!price) {
+          const actualPrice = +salePrice.innerText.substring(1);
+          return {
+            actualPrice,
+            image,
+          };
+        } else {
+          const actualPrice = +price.innerText.substring(1);
+          return {
+            actualPrice,
+            image,
+          };
+        }
       })
       .end();
 

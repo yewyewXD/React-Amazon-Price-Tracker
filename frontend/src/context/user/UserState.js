@@ -123,7 +123,7 @@ export const UserProvider = ({ children }) => {
         { headers: { "user-auth-token": token } }
       );
 
-      // console.log(res.data);
+      console.log(res.data);
 
       dispatch({
         type: "ADD_TRACK",

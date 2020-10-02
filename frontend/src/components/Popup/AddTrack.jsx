@@ -2,13 +2,13 @@ import React, { useContext, useRef } from "react";
 import { UserContext } from "../../context/user/UserState";
 
 export default function AddTrack({ handleClose }) {
-  const { user, token, errMsg, trackProduct } = useContext(UserContext);
+  const { user, token, errMsg, addTrack } = useContext(UserContext);
 
   const urlElRef = useRef();
   const nameElRef = useRef();
   const expectedPriceElRef = useRef();
 
-  function handleTrackProduct(e) {
+  function handleAddTrack(e) {
     e.preventDefault();
     const url = urlElRef.current.value;
     const name = nameElRef.current.value;
@@ -16,7 +16,7 @@ export default function AddTrack({ handleClose }) {
 
     // Check if URL is trimmed
     if (url.indexOf("/ref=") === -1) {
-      trackProduct(user.userId, url, name, +expectedPrice, token);
+      addTrack(user.userId, url, name, +expectedPrice, token);
     } else {
       const trimmedUrl = url.substr(0, url.indexOf("/ref="));
       const finalUrl =
@@ -24,7 +24,7 @@ export default function AddTrack({ handleClose }) {
           ? `https://"${trimmedUrl}`
           : trimmedUrl;
 
-      trackProduct(user.userId, finalUrl, name, +expectedPrice, token);
+      addTrack(user.userId, finalUrl, name, +expectedPrice, token);
     }
 
     if (token) {
@@ -35,7 +35,7 @@ export default function AddTrack({ handleClose }) {
   return (
     <>
       <h2 className="bold mb-4">Track a new product</h2>
-      <form className="form" onSubmit={handleTrackProduct}>
+      <form className="form" onSubmit={handleAddTrack}>
         <div className="form-group">
           <label htmlFor="productUrl" className="bold d-block">
             Product URL
