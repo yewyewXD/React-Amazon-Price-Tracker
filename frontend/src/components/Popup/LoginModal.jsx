@@ -4,7 +4,6 @@ import FlashMessage from "react-flash-message";
 
 export default function LoginModal({ handleClose }) {
   const { loginUser, token } = useContext(UserContext);
-  const [hasError, setHasError] = useState(false);
 
   const emailElRef = useRef();
   const pwElRef = useRef();
@@ -19,11 +18,6 @@ export default function LoginModal({ handleClose }) {
 
     if (token) {
       handleClose();
-    } else {
-      setHasError(true);
-      setTimeout(() => {
-        setHasError(false);
-      }, 3000);
     }
   }
 
@@ -43,7 +37,7 @@ export default function LoginModal({ handleClose }) {
           />
         </div>
 
-        <div className={`form-group ${hasError && "mb-1"}`}>
+        <div className={`form-group mb-1`}>
           <label htmlFor="password" className="bold d-block">
             Password
           </label>
@@ -56,11 +50,9 @@ export default function LoginModal({ handleClose }) {
           />
         </div>
 
-        {hasError && (
-          <FlashMessage>
+          <FlashMessage duration={5000}>
             <small className="text-danger">User credential is not valid!</small>
           </FlashMessage>
-        )}
 
         <button className="btn btn-primary btn-md mt-3">Login</button>
       </form>

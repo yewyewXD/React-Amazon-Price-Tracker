@@ -6,6 +6,7 @@ import axios from "axios";
 const initialState = {
   token: null,
   user: null,
+  errMsg: null,
 };
 
 export const UserContext = createContext(initialState);
@@ -20,6 +21,7 @@ export const UserProvider = ({ children }) => {
         email,
         password,
       });
+
       const { token, user } = res.data.data;
 
       // console.log(res);
@@ -30,7 +32,10 @@ export const UserProvider = ({ children }) => {
         payload: { token, user },
       });
     } catch (err) {
-      console.log(err);
+      dispatch({
+        type: "LOG_ERROR_MESSAGE",
+        payload: err.response.data,
+      });
     }
   }
 
@@ -61,18 +66,28 @@ export const UserProvider = ({ children }) => {
         });
       }
     } catch (err) {
-      console.log(err);
+      dispatch({
+        type: "LOG_ERROR_MESSAGE",
+        payload: err.response.data,
+      });
     }
   }
 
   async function registerUser(email, password, confirmPassword) {
-    const res = await axios.post("http://localhost:5000/api/user/register", {
-      email,
-      password,
-      confirmPassword,
-    });
-    console.log(res.data.data);
-    loginUser(email, password);
+    try {
+      const res = await axios.post("http://localhost:5000/api/user/register", {
+        email,
+        password,
+        confirmPassword,
+      });
+      console.log(res.data.data);
+      loginUser(email, password);
+    } catch (err) {
+      dispatch({
+        type: "LOG_ERROR_MESSAGE",
+        payload: err.response.data,
+      });
+    }
   }
 
   useEffect(() => {
@@ -93,6 +108,7 @@ export const UserProvider = ({ children }) => {
       value={{
         token: state.token,
         user: state.user,
+        errMsg: state.errMsg,
         loginUser,
         registerUser,
         logoutUser,
