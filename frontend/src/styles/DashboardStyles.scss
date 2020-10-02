@@ -1,0 +1,45 @@
+@import "./variables.scss";
+
+// locked-page
+.dashboard-locked-page {
+  .dashboard-locked {
+    background: $themeColor;
+    height: 90vh;
+
+    .dashboard-locked-background {
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+    }
+
+    .caption {
+      .title {
+        font-size: 3rem;
+      }
+      .subtitle {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+// authenticated page
+.dashboard-page {
+  min-height: 100vh;
+  .control-panel {
+    width: 20%;
+    height: 100vh;
+    background: linear-gradient(to bottom, #5fb0e5, #007bff, #007bff);
+
+    .control-bars {
+      .control-bar {
+      }
+    }
+  }
+
+  .user-panel {
+    background: $themeColor;
+    width: 80%;
+    height: 100vh;
+  }
+}

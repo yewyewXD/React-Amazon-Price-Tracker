@@ -6,6 +6,7 @@ import { UserProvider } from "./context/user/UserState";
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles/global.scss";
 import "./styles/LandingStyles.scss";
+import "./styles/DashboardStyles.scss";
 import "react-notifications/lib/notifications.css";
 
 // pages
