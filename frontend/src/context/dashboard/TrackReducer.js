@@ -6,6 +6,12 @@ export default (state, action) => {
         tracks: [...state.tracks, action.payload],
       };
 
+    case "GET_ALL_TRACKS":
+      return {
+        ...state,
+        tracks: action.payload,
+      };
+
     default:
       return state;
   }

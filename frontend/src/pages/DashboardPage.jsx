@@ -4,18 +4,20 @@ import ControlPanel from "../components/Dashboard/ControlPanel";
 import UserPanel from "../components/Dashboard/UserPanel";
 import PopupBtn from "../components/Popup/PopupBtn";
 import { UserContext } from "../context/user/UserState";
+import { TrackContext } from "../context/dashboard/TrackState";
 import { heroBg } from "../images/homeImages";
 
 export default function DashboardPage() {
-  const { token } = useContext(UserContext);
+  const { user, token } = useContext(UserContext);
+  const { getAllTracks } = useContext(TrackContext);
 
   if (token) {
     return (
       <>
         <AppHeader isDashboard />
+
         <main className="dashboard-page all-center">
           <ControlPanel />
-
           <UserPanel />
         </main>
       </>

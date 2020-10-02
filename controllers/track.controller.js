@@ -4,16 +4,25 @@ const User = require("../models/User");
 const nightmare = require("nightmare")();
 
 // @desc Get all tracks
-// @route GET /api/dashboard/tracks
+// @route POST /api/dashboard/tracks
 // @access private
-exports.getTracks = async (req, res, next) => {
+exports.getAllTracks = async (req, res, next) => {
   try {
-    const tracks = await Track.find().populate("creator");
+    const { userId } = req.body;
+
+    // check user
+    const user = await User.findById(userId).populate("createdTracks");
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: "User does not exist",
+      });
+    }
 
     return res.status(200).json({
       success: true,
-      length: tracks.length,
-      data: tracks,
+      length: user.createdTracks.length,
+      data: user.createdTracks,
     });
   } catch (err) {
     return res.status(500).json({
@@ -30,7 +39,7 @@ exports.postTrack = async (req, res, next) => {
   try {
     const { userId, trackUrl, name, expectedPrice } = req.body;
 
-    // // check user
+    // check user
     const user = await User.findById(userId);
     if (!user) {
       return res.status(401).json({

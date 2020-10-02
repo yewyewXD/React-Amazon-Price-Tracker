@@ -1,6 +1,7 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer, useEffect, useContext } from "react";
 import UserReducer from "./UserReducer";
 import axios from "axios";
+import { TrackContext } from "../dashboard/TrackState";
 
 // Initial state
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
 export const UserContext = createContext(initialState);
 
 export const UserProvider = ({ children }) => {
+  const { getAllTracks } = useContext(TrackContext);
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   //Actions
@@ -71,18 +73,11 @@ export const UserProvider = ({ children }) => {
           type: "LOGIN_USER",
           payload: { token, user: userRes.data },
         });
+
+        getAllTracks(userRes.data.userId, token);
       }
     } catch (err) {
-      dispatch({
-        type: "LOG_ERROR_MESSAGE",
-        payload: err.response.data,
-      });
-      setTimeout(() => {
-        dispatch({
-          type: "LOG_ERROR_MESSAGE",
-          payload: null,
-        });
-      }, 3000);
+      console.log(err);
     }
   }
 
@@ -110,10 +105,6 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    checkLoggedIn();
-  }, []);
-
   function logoutUser() {
     localStorage.removeItem("auth-token");
 
@@ -122,6 +113,10 @@ export const UserProvider = ({ children }) => {
       payload: null,
     });
   }
+
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
 
   return (
     <UserContext.Provider

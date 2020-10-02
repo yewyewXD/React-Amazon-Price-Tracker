@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer } from "react";
 import TrackReducer from "./TrackReducer";
 import axios from "axios";
 
@@ -37,12 +37,34 @@ export const TrackProvider = ({ children }) => {
     }
   }
 
+  async function getAllTracks(userId, token) {
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/dashboard/tracks",
+        {
+          userId,
+        },
+        { headers: { "user-auth-token": token } }
+      );
+
+      // console.log(res.data);
+
+      dispatch({
+        type: "GET_ALL_TRACKS",
+        payload: res.data.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <TrackContext.Provider
       value={{
         tracks: state.tracks,
         trackErrMsg: state.trackErrMsg,
         trackProduct,
+        getAllTracks,
       }}
     >
       {children}

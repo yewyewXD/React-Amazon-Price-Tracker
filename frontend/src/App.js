@@ -17,15 +17,15 @@ import DashboardPage from "./pages/DashboardPage";
 function App() {
   return (
     <BrowserRouter>
-      <UserProvider>
-        <TrackProvider>
+      <TrackProvider>
+        <UserProvider>
           <Switch>
             <Redirect from="/home" to="/" exact />
             <Route path="/" exact component={HomePage} />
             <Route path="/dashboard" component={DashboardPage} />
           </Switch>
-        </TrackProvider>
-      </UserProvider>
+        </UserProvider>
+      </TrackProvider>
     </BrowserRouter>
   );
 }
