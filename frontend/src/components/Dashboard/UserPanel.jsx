@@ -14,8 +14,8 @@ export default function UserPanel() {
 
       <div className="tracks mt-5 px-5">
         {/* categories */}
-        <div class="categories card mt-1 bg-transparent border-0">
-          <div class="card-body">
+        <div className="categories card mt-1 bg-transparent border-0">
+          <div className="card-body">
             <div className="row text-capitalize px-1">
               <div>
                 <input type="checkbox" />
@@ -31,8 +31,8 @@ export default function UserPanel() {
         </div>
 
         {/* track */}
-        <div class="track card mt-1 border-0 rounded">
-          <div class="card-body">
+        <div className="track card mt-1 border-0 rounded">
+          <div className="card-body">
             <div className="row px-1">
               <div className="checkbox all-center">
                 <input type="checkbox" />

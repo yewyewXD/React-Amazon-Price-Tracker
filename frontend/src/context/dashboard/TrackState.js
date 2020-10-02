@@ -14,7 +14,24 @@ export const TrackProvider = ({ children }) => {
   const [state, dispatch] = useReducer(TrackReducer, initialState);
 
   //Actions
-  async function trackProduct(userId, trackUrl, name, expectedPrice) {}
+  async function trackProduct(userId, trackUrl, name, expectedPrice, token) {
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/dashboard/track",
+        {
+          userId,
+          trackUrl,
+          name,
+          expectedPrice,
+        },
+        { headers: { "user-auth-token": token } }
+      );
+
+      console.log(res);
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  }
 
   return (
     <TrackContext.Provider

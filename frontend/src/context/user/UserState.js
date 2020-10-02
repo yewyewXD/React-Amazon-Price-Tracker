@@ -54,6 +54,7 @@ export const UserProvider = ({ children }) => {
         localStorage.setItem("auth-token", "");
         token = "";
       }
+
       const tokenRes = await axios.post(
         "http://localhost:5000/api/user/tokenIsValid",
         null,

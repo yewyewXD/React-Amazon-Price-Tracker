@@ -1,8 +1,10 @@
 import React, { useContext, useRef } from "react";
 import { UserContext } from "../../context/user/UserState";
+import { TrackContext } from "../../context/dashboard/TrackState";
 
 export default function AddTrack({ handleClose }) {
-  const { token, errMsg } = useContext(UserContext);
+  const { user, token, errMsg } = useContext(UserContext);
+  const { trackProduct } = useContext(TrackContext);
 
   const urlElRef = useRef();
   const nameElRef = useRef();
@@ -14,12 +16,18 @@ export default function AddTrack({ handleClose }) {
     const name = nameElRef.current.value;
     const expectedPrice = expectedPriceElRef.current.value;
 
-    // Trim URL
-    const trimmedUrl = url.substr(0, url.indexOf("/ref="));
-    const urlFinalCheck =
-      trimmedUrl.indexOf("https://") === -1
-        ? "https://" + trimmedUrl
-        : trimmedUrl;
+    // Check if URL is trimmed
+    if (url.indexOf("/ref=") === -1) {
+      trackProduct(user.userId, url, name, +expectedPrice, token);
+    } else {
+      const trimmedUrl = url.substr(0, url.indexOf("/ref="));
+      const finalUrl =
+        trimmedUrl.indexOf("https://") === -1
+          ? `https://"${trimmedUrl}`
+          : trimmedUrl;
+
+      trackProduct(user.userId, finalUrl, name, +expectedPrice, token);
+    }
 
     if (token) {
       handleClose();

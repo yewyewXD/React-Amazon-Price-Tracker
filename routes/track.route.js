@@ -5,9 +5,10 @@ const {
   postTrack,
   deleteTrack,
 } = require("../controllers/track.controller");
+const auth = require("../middleware/auth");
 
-router.route("/track").post(postTrack);
-router.route("/tracks").get(getTracks);
-router.route("/track/:id").delete(deleteTrack);
+router.get("/tracks", auth, getTracks);
+router.post("/track", auth, postTrack);
+router.delete("/track/:id", auth, deleteTrack);
 
 module.exports = router;
