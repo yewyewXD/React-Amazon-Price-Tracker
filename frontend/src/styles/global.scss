@@ -12,12 +12,12 @@ body {
   font-weight: 700;
 }
 .all-center {
-  display: flex !important;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 .all-center-column {
-  display: flex !important;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -72,20 +72,41 @@ body {
 //modal
 .popup-modal {
   background: $themeColor;
-  .form-image {
+  .form-container-image {
     width: 40%;
     border-right: solid 1px $themeColor;
   }
 
-  .form {
+  .form-container {
+    padding: 48px;
     width: 60%;
-    input {
-      width: 80%;
+  }
+}
+
+// password revealer
+.pw-revealer {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 991.98px) {
+  // modal
+  .popup-modal {
+    background: white;
+    .form-container-image {
+      display: none;
+    }
+    .form-container {
+      width: 100%;
     }
   }
 }
 
 @media (max-width: 350px) {
+  // header
   .header {
     .notification-container {
       width: 290px;
@@ -99,6 +120,13 @@ body {
     .buttons,
     .navbar-brand {
       margin: 0.1em 0;
+    }
+  }
+
+  // modal
+  .popup-modal {
+    .form-container {
+      padding: 24px;
     }
   }
 }

@@ -29,7 +29,7 @@ export default function SignUpModal({ handleClose }) {
   return (
     <>
       <h2 className="bold mb-4">Sign Up</h2>
-      <form onSubmit={handleRegisterUser}>
+      <form className="form" onSubmit={handleRegisterUser}>
         <div className="form-group">
           <label htmlFor="email" className="bold d-block">
             Email

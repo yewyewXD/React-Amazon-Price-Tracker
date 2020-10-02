@@ -45,11 +45,11 @@ export default function PopupBtn({ children, type }) {
       >
         <Fade in={open}>
           <div className={`${classes.paper} container bg-white p-0 all-center`}>
-            <div className="popup-modal all-center">
-              <div className="form-image d-md-block d-none all-center">
+            <div className="popup-modal w-100 all-center">
+              <div className="form-container-image all-center">
                 <img src={heroVector} alt="" className="w-100" />
               </div>
-              <div className="form px-5 py-5 bg-white">
+              <div className="form-container bg-white">
                 {type === "signUp" && !token && (
                   <SignUpModal handleClose={handleClose} />
                 )}

@@ -24,7 +24,7 @@ export default function LoginModal({ handleClose }) {
   return (
     <>
       <h2 className="bold mb-4">Log In</h2>
-      <form onSubmit={handleLoginUser}>
+      <form className="form" onSubmit={handleLoginUser}>
         <div className="form-group">
           <label htmlFor="email" className="bold d-block">
             Email
