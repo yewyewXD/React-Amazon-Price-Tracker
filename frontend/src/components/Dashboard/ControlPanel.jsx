@@ -1,6 +1,7 @@
 import React from "react";
 import { FaRegUser } from "react-icons/fa";
 import { RiFileList2Line, RiDashboardLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 export default function ControlPanel() {
   const controlBars = [
@@ -20,7 +21,9 @@ export default function ControlPanel() {
   return (
     <div className="control-panel p-4 all-center-column justify-content-start">
       <div className="brand text-white">
-        <div className="logo bold">TrackerBase</div>
+        <Link className="logo bold text-white text-decoration-none" to="/">
+          TrackerBase
+        </Link>
       </div>
 
       <div className="control-bars w-100 pl-4 pt-4">

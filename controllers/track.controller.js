@@ -63,13 +63,7 @@ exports.postTrack = async (req, res, next) => {
 
     return res.status(201).json({
       success: true,
-      data: {
-        id: track.id,
-        image: newTrack.image,
-        name,
-        expectedPrice,
-        actualPrice: newTrack.actualPrice,
-      },
+      data: track,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
