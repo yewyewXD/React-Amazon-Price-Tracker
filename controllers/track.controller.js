@@ -75,8 +75,11 @@ exports.postTrack = async (req, res, next) => {
     return res.status(201).json({
       success: true,
       data: {
-        user: user.displayName,
-        track,
+        id: track.id,
+        image: newTrack.image,
+        name,
+        expectedPrice,
+        actualPrice: newTrack.actualPrice,
       },
     });
   } catch (err) {

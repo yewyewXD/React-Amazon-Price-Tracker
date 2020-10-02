@@ -4,8 +4,7 @@ import axios from "axios";
 
 // Initial state
 const initialState = {
-  track: null,
-  trackErrMsg: null,
+  tracks: [],
 };
 
 export const TrackContext = createContext(initialState);
@@ -28,16 +27,20 @@ export const TrackProvider = ({ children }) => {
       );
 
       console.log(res.data);
+
+      dispatch({
+        type: "TRACK_PRODUCT",
+        payload: res.data.data,
+      });
     } catch (err) {
       console.log(err);
-      console.log(err.response.data);
     }
   }
 
   return (
     <TrackContext.Provider
       value={{
-        track: state.track,
+        tracks: state.tracks,
         trackErrMsg: state.trackErrMsg,
         trackProduct,
       }}
