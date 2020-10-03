@@ -104,20 +104,22 @@ exports.editTrack = async (req, res, next) => {
 exports.deleteTracks = async (req, res, next) => {
   try {
     const { trackIds } = req.body;
-    // const track = await Track.findById(req.params.id);
+    const tracks = await Track.find({ _id: { $in: trackIds } });
 
-    // if (!track) {
-    //   return res.status(401).json({
-    //     success: false,
-    //     error: "No track found",
-    //   });
-    // }
+    if (!tracks) {
+      return res.status(401).json({
+        success: false,
+        error: "No track found",
+      });
+    }
 
-    // await track.remove();
+    const deletedTracks = await Track.deleteMany({
+      _id: { $in: trackIds },
+    });
 
     return res.status(201).json({
       success: true,
-      deleted: trackIds,
+      deleted: tracks,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
