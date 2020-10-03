@@ -10,6 +10,7 @@ import SignUpModal from "./SignUpModal";
 import LoginModal from "./LoginModal";
 import AddTrackModal from "./AddTrackModal";
 import EditTrackModal from "./EditTrackModal";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PopupBtn({ children, type, track }) {
+export default function PopupBtn({ children, type, track, trackIds }) {
   const classes = useStyles();
   const { token } = useContext(UserContext);
 
@@ -48,22 +49,39 @@ export default function PopupBtn({ children, type, track }) {
       >
         <Fade in={open}>
           <div className={`${classes.paper} container bg-white p-0 all-center`}>
-            <div className="popup-modal w-100 all-center">
-              <div className="form-container-image all-center">
-                <img src={heroVector} alt="" className="w-100" />
-              </div>
+            <div
+              className={`popup-modal w-100 all-center ${
+                type === "deleteTrack" && "bg-white"
+              }`}
+            >
+              {type !== "deleteTrack" && (
+                <div className="form-container-image all-center">
+                  <img src={heroVector} alt="" className="w-100" />
+                </div>
+              )}
+
               <div className="form-container bg-white">
                 {type === "signUp" && !token && (
                   <SignUpModal handleClose={handleClose} />
                 )}
+
                 {type === "login" && !token && (
                   <LoginModal handleClose={handleClose} />
                 )}
+
                 {type === "addTrack" && token && (
                   <AddTrackModal handleClose={handleClose} />
                 )}
+
                 {type === "editTrack" && token && (
                   <EditTrackModal handleClose={handleClose} track={track} />
+                )}
+
+                {type === "deleteTrack" && token && (
+                  <DeleteConfirmModal
+                    handleClose={handleClose}
+                    trackIds={trackIds}
+                  />
                 )}
               </div>
             </div>

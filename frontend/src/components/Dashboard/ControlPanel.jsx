@@ -13,10 +13,10 @@ export default function ControlPanel() {
       text: "My Tracks",
       icon: <RiDashboardLine className="icon" />,
     },
-    {
-      text: "Tracks",
-      icon: <RiFileList2Line className="icon" />,
-    },
+    // {
+    //   text: "Tracks",
+    //   icon: <RiFileList2Line className="icon" />,
+    // },
   ];
   return (
     <div className="control-panel all-center-column flex-sm-column flex-row-reverse justify-content-start">

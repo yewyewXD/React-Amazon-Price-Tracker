@@ -58,6 +58,23 @@
 
     .tracks {
       padding: 0 48px;
+      .track {
+        user-select: none;
+        * {
+          pointer-events: none;
+        }
+        .edit-btn,
+        .check-btn {
+          pointer-events: initial;
+        }
+        border: none;
+        transition: 0.3s;
+        border: solid 1px white;
+        cursor: pointer;
+        &:hover {
+          border: solid 1px #007bff;
+        }
+      }
     }
   }
 }
