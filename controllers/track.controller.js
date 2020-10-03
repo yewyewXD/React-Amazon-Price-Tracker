@@ -99,24 +99,25 @@ exports.editTrack = async (req, res, next) => {
 };
 
 // @desc Delete track
-// @route DELETE /api/dashboard/track/:id
+// @route POST /api/dashboard/delete/tracks
 // @access private
-exports.deleteTrack = async (req, res, next) => {
+exports.deleteTracks = async (req, res, next) => {
   try {
-    const track = await Track.findById(req.params.id);
+    const { trackIds } = req.body;
+    // const track = await Track.findById(req.params.id);
 
-    if (!track) {
-      return res.status(401).json({
-        success: false,
-        error: "No track found",
-      });
-    }
+    // if (!track) {
+    //   return res.status(401).json({
+    //     success: false,
+    //     error: "No track found",
+    //   });
+    // }
 
-    await track.remove();
+    // await track.remove();
 
     return res.status(201).json({
       success: true,
-      deleted: track,
+      deleted: trackIds,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });

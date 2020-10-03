@@ -131,6 +131,20 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  async function deleteTracks(trackIds) {
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/api/dashboard/delete/tracks`,
+        { trackIds },
+        { headers: { "user-auth-token": state.token } }
+      );
+
+      console.log(res.data);
+    } catch (err) {
+      console.log(err.response);
+    }
+  }
+
   // auto login START--------------------------------------------------------------
   async function checkLoggedIn() {
     try {
@@ -180,6 +194,7 @@ export const UserProvider = ({ children }) => {
         logoutUser,
         addTrack,
         editTrack,
+        deleteTracks,
       }}
     >
       {children}
