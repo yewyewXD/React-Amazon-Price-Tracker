@@ -55,6 +55,10 @@
     background: $themeColor;
     width: 80%;
     height: 100vh;
+
+    .tracks {
+      padding: 0 48px;
+    }
   }
 }
 
@@ -69,11 +73,44 @@
     }
   }
 }
-
-@media (max-width: 350px) {
+@media (max-width: 767.98px) {
   .dashboard-page {
     .control-panel {
+      width: 15%;
       padding: 48px 0;
+
+      .brand {
+        display: none;
+      }
+    }
+
+    .user-panel {
+      width: 85%;
+
+      .tracks {
+        padding: 0 24px;
+      }
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .dashboard-page {
+    .control-panel {
+      background: #007bff;
+      height: 7vh;
+      padding: 0 0;
+      width: 100vw;
+      .control-bars {
+        .control-bar {
+          margin: 0 36px;
+        }
+      }
+    }
+
+    .user-panel {
+      height: 93vh;
+      width: 100vw;
     }
   }
 }

@@ -14,7 +14,7 @@ export default function DashboardPage() {
       <>
         <AppHeader isDashboard />
 
-        <main className="dashboard-page all-center">
+        <main className="dashboard-page all-center flex-sm-row flex-column-reverse">
           <ControlPanel />
           <UserPanel />
         </main>

@@ -19,7 +19,7 @@ export default function ControlPanel() {
     },
   ];
   return (
-    <div className="control-panel all-center-column justify-content-start">
+    <div className="control-panel all-center-column flex-sm-column flex-row-reverse justify-content-start">
       <div className="brand text-white">
         <Link
           className="logo bold text-white text-decoration-none d-md-block d-none"
@@ -29,7 +29,7 @@ export default function ControlPanel() {
         </Link>
       </div>
 
-      <div className="control-bars w-100 ml-xl-4 mt-4">
+      <div className="control-bars d-sm-block all-center-column flex-sm-column flex-row w-100 ml-xl-4 mt-sm-4">
         {controlBars.map((controlBar, index) => (
           <div
             className="control-bar text-white bold py-3 d-flex align-items-center justify-content-lg-start justify-content-center"
