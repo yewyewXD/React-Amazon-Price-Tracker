@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 export default function ControlPanel() {
   const controlBars = [
-    {
-      text: "Profile",
-      icon: <FaRegUser className="icon" />,
-    },
+    // {
+    //   text: "Profile",
+    //   icon: <FaRegUser className="icon" />,
+    // },
     {
       text: "My Tracks",
-      icon: <RiDashboardLine className="icon" />,
+      icon: <RiDashboardLine className="icon mx-2" />,
     },
     // {
     //   text: "Tracks",
@@ -20,28 +20,28 @@ export default function ControlPanel() {
   ];
   return (
     <div className="control-panel all-center-column flex-sm-column flex-row-reverse justify-content-start">
-      <div className="brand text-white">
-        <Link
-          className="logo bold text-white text-decoration-none d-md-block d-none"
-          to="/"
-        >
-          TrackerBase
-        </Link>
-      </div>
-
-      <div className="control-bars d-sm-block all-center-column flex-sm-column flex-row w-100 ml-xl-4 mt-sm-4">
+      <div className="control-bars d-sm-block all-center-column flex-sm-column flex-row w-100">
         {controlBars.map((controlBar, index) => (
           <div
-            className="control-bar text-white bold py-3 d-flex align-items-center justify-content-lg-start justify-content-center"
+            className="control-bar text-white bold py-3 all-center"
             role="button"
             key={index}
           >
             {controlBar.icon}
-            <span className="mb-0 ml-xl-5 ml-3 d-lg-inline d-none">
+            <span className="mb-0 mx-2 d-lg-inline d-none">
               {controlBar.text}
             </span>
           </div>
         ))}
+      </div>
+
+      {/* temporary */}
+      <div className="control-bar text-white bold py-3 all-center text-white-50">
+        More feature coming soon!
+      </div>
+
+      <div className="control-bar text-white bold py-3 all-center text-white-50">
+        Logout
       </div>
     </div>
   );

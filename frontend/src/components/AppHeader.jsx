@@ -20,7 +20,7 @@ export default function AppHeader({ isDashboard }) {
 
   return (
     <header className="header">
-      {!isDashboard && (
+      {true && (
         <>
           <NotificationContainer />
           <nav className="navbar navbar-expand-sm navbar-light bg-light py-4">
