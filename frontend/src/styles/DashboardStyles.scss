@@ -35,9 +35,11 @@
     .control-bars {
       .control-bar {
         opacity: 1; // temporary
-        padding-left: 48px;
-        padding-top: 28px;
+        background: rgba($color: blue, $alpha: 0.1);
+        padding: 22px 0;
+        padding-left: 44px;
         transition: 0.2s;
+        border-left: 5px solid white;
         white-space: nowrap;
         &:hover {
           opacity: 1;
@@ -121,6 +123,8 @@
       width: 100vw;
       .control-bars {
         .control-bar {
+          padding-top: 0;
+          align-items: center !important;
           margin: 0 36px;
         }
       }

@@ -70,14 +70,24 @@ export default function UserPanel() {
   }
 
   return (
-    <div className="user-panel py-4">
-      <div className="title my-5 mx-md-5 mx-4 bold">My Tracks</div>
+    <div className="user-panel">
+      <div className="title my-3 mx-md-5 mx-4 bold">My Tracks</div>
 
-      <div className="tracks mt-5">
+      <div className="tracks">
         {/* actions */}
-        <div className="actions">
+        <div className="actions my-4 all-center justify-content-start">
           <PopupBtn type="addTrack">
             <button className="btn btn-primary btn-sm">+</button>
+          </PopupBtn>
+
+          <PopupBtn type="deleteTrack" selectedTracks={selectedTracks}>
+            <button
+              className="btn btn-danger btn-sm mx-3"
+              id="deleteBtn"
+              style={{ display: "none" }}
+            >
+              <small className="m-0">Delete</small>
+            </button>
           </PopupBtn>
         </div>
 
@@ -101,15 +111,6 @@ export default function UserPanel() {
               <div className="col-lg-2 col-md-2 col-sm-3 col-4 p-0">
                 compare
               </div>
-              <PopupBtn type="deleteTrack" selectedTracks={selectedTracks}>
-                <button
-                  className="btn btn-danger btn-sm position-absolute "
-                  id="deleteBtn"
-                  style={{ right: 0, display: "none" }}
-                >
-                  <small className="m-0">Delete</small>
-                </button>
-              </PopupBtn>
             </div>
           </div>
         </div>
@@ -170,7 +171,9 @@ export default function UserPanel() {
                     role="button"
                   >
                     <PopupBtn type="editTrack" track={track}>
-                      <small className="m-0 edit-btn text-danger">Edit</small>
+                      <small className="m-0 edit-btn btn-sm btn btn-outline-secondary">
+                        Edit
+                      </small>
                     </PopupBtn>
                   </div>
                 </div>

@@ -53,12 +53,14 @@ export default function AppHeader({ isDashboard }) {
                   >
                     Logout
                   </span>
-                  <Link
-                    className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0"
-                    to="/dashboard"
-                  >
-                    Dashboard
-                  </Link>
+                  {!isDashboard && (
+                    <Link
+                      className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0"
+                      to="/dashboard"
+                    >
+                      Dashboard
+                    </Link>
+                  )}
                 </>
               )}
             </div>

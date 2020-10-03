@@ -23,7 +23,7 @@ export default function ControlPanel() {
       <div className="control-bars d-sm-block all-center-column flex-sm-column flex-row w-100">
         {controlBars.map((controlBar, index) => (
           <div
-            className="control-bar text-white bold all-center justify-content-start"
+            className="control-bar text-white bold all-center justify-content-sm-start"
             role="button"
             key={index}
           >
