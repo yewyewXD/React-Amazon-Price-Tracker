@@ -105,11 +105,11 @@ export const UserProvider = ({ children }) => {
   async function editTrack(id, name, expectedPrice) {
     try {
       const tracks = state.user.createdTracks;
-      const otherTracks = tracks.filter((track) => track._id !== id);
       const editedTrack = tracks.filter((track) => track._id === id);
       editedTrack[0].name = name;
       editedTrack[0].expectedPrice = expectedPrice;
-      const newTracks = [...editedTrack, ...otherTracks];
+      const prevTracks = tracks.filter((track) => track._id !== id);
+      const newTracks = [...editedTrack, ...prevTracks];
 
       const res = await axios.post(
         `http://localhost:5000/api/dashboard/track/${id}`,
@@ -131,15 +131,33 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  async function deleteTracks(trackIds) {
+  async function deleteTracks(tracks) {
     try {
+      const trackIds = tracks.map((track) => track._id);
+
+      // backend update
       const res = await axios.post(
         `http://localhost:5000/api/dashboard/delete/tracks`,
         { trackIds },
         { headers: { "user-auth-token": state.token } }
       );
-
       console.log(res.data);
+
+      // frontend update
+      const newTracks = state.user.createdTracks;
+      tracks.forEach((track) => {
+        const index = newTracks.indexOf(track);
+        if (index > -1) {
+          newTracks.splice(index, 1);
+        }
+      });
+
+      console.log(newTracks);
+
+      dispatch({
+        type: "EDIT_TRACK",
+        payload: newTracks,
+      });
     } catch (err) {
       console.log(err.response);
     }

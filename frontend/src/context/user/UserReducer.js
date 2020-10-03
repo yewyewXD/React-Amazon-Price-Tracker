@@ -39,6 +39,7 @@ export default (state, action) => {
         ...state,
         errMsg: action.payload,
       };
+
     default:
       return state;
   }

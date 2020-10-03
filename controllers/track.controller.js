@@ -27,16 +27,21 @@ exports.postTrack = async (req, res, next) => {
         const image = document.getElementById("landingImage").src;
         const price = document.getElementById("priceblock_ourprice");
         const salePrice = document.getElementById("priceblock_saleprice");
-        if (!price) {
+        if (price) {
+          const actualPrice = +price.innerText.substring(1);
+          return {
+            actualPrice,
+            image,
+          };
+        } else if (salePrice) {
           const actualPrice = +salePrice.innerText.substring(1);
           return {
             actualPrice,
             image,
           };
         } else {
-          const actualPrice = +price.innerText.substring(1);
           return {
-            actualPrice,
+            actualPrice: 0,
             image,
           };
         }
@@ -113,7 +118,7 @@ exports.deleteTracks = async (req, res, next) => {
       });
     }
 
-    const deletedTracks = await Track.deleteMany({
+    await Track.deleteMany({
       _id: { $in: trackIds },
     });
 

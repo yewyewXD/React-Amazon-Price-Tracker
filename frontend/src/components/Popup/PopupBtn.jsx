@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PopupBtn({ children, type, track, trackIds }) {
+export default function PopupBtn({ children, type, track, selectedTracks }) {
   const classes = useStyles();
   const { token } = useContext(UserContext);
 
@@ -80,7 +80,7 @@ export default function PopupBtn({ children, type, track, trackIds }) {
                 {type === "deleteTrack" && token && (
                   <DeleteConfirmModal
                     handleClose={handleClose}
-                    trackIds={trackIds}
+                    selectedTracks={selectedTracks}
                   />
                 )}
               </div>

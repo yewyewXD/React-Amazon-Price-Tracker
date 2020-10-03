@@ -6,26 +6,26 @@ export default function UserPanel() {
   const { user } = useContext(UserContext);
   const [selectedTracks, setSelectedTracks] = useState([]);
 
-  function handleSelectTrack(e, trackId) {
+  function handleSelectTrack(e, track) {
     if (e.target.querySelector("input[type='checkbox']")) {
       const checkOnCard = e.target.querySelector("input[type='checkbox']");
       checkOnCard.checked = !checkOnCard.checked;
-      updateSelectedTrack(checkOnCard, trackId);
+      updateSelectedTrack(checkOnCard, track);
     } else if (e.target.nodeName === "INPUT") {
       const checkOnCheckbox = e.target;
-      updateSelectedTrack(checkOnCheckbox, trackId);
+      updateSelectedTrack(checkOnCheckbox, track);
     }
   }
 
-  function updateSelectedTrack(checkbox, trackId) {
+  function updateSelectedTrack(checkbox, selectedTrack) {
     if (checkbox.checked) {
       // check
-      const newSelectedTracks = [...selectedTracks, trackId];
+      const newSelectedTracks = [...selectedTracks, selectedTrack];
       setSelectedTracks(newSelectedTracks);
     } else {
       // uncheck
       const newSelectedTracks = selectedTracks.filter(
-        (track) => track !== trackId
+        (track) => track !== selectedTrack
       );
       setSelectedTracks(newSelectedTracks);
     }
@@ -45,10 +45,12 @@ export default function UserPanel() {
   }
 
   // auto check checkAllBtn
-  if (selectedTracks.length === user.createdTracks.length) {
-    document.getElementById("checkAllBtn").checked = true;
-  } else if (document.getElementById("checkAllBtn")) {
-    document.getElementById("checkAllBtn").checked = false;
+  if (document.getElementById("checkAllBtn")) {
+    if (selectedTracks.length === user.createdTracks.length) {
+      document.getElementById("checkAllBtn").checked = true;
+    } else if (document.getElementById("checkAllBtn")) {
+      document.getElementById("checkAllBtn").checked = false;
+    }
   }
 
   return (
@@ -83,7 +85,7 @@ export default function UserPanel() {
               <div className="col-lg-2 col-md-2 col-sm-3 col-4 p-0">
                 compare
               </div>
-              <PopupBtn type="deleteTrack" trackIds={selectedTracks}>
+              <PopupBtn type="deleteTrack" selectedTracks={selectedTracks}>
                 <button
                   className="btn btn-danger btn-sm position-absolute"
                   style={{ right: 0 }}
@@ -102,7 +104,7 @@ export default function UserPanel() {
               className="track card mt-1 rounded"
               key={track._id}
               onClick={(e) => {
-                handleSelectTrack(e, track._id);
+                handleSelectTrack(e, track);
               }}
             >
               <div className="card-body">
@@ -111,7 +113,7 @@ export default function UserPanel() {
                     <input
                       type="checkbox"
                       className="check-btn"
-                      onChange={(e) => handleSelectTrack(e, track._id)}
+                      onChange={(e) => handleSelectTrack(e, track)}
                     />
                   </div>
                   <div className="col-sm-1 col-2 p-0 text-center">
