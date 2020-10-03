@@ -5,6 +5,7 @@ import { UserContext } from "../../context/user/UserState";
 export default function UserPanel() {
   const { user } = useContext(UserContext);
   const [selectedTracks, setSelectedTracks] = useState([]);
+  const createdTracks = user.createdTracks;
 
   function handleSelectTrack(e, track) {
     if (e.target.querySelector("input[type='checkbox']")) {
@@ -33,12 +34,12 @@ export default function UserPanel() {
 
   function handleSelectAllTracks(e) {
     const checkButtons = document.querySelectorAll(".check-btn");
-    if (e.target.checked) {
+    if (createdTracks.length > 0 && e.target.checked) {
       checkButtons.forEach((button) => {
         button.checked = true;
       });
       setSelectedTracks(user.createdTracks);
-    } else {
+    } else if (createdTracks.length > 0 && !e.target.checked) {
       checkButtons.forEach((button) => {
         button.checked = false;
       });
@@ -49,7 +50,10 @@ export default function UserPanel() {
   // auto check checkAllBtn
   if (document.getElementById("checkAllBtn")) {
     const checkAllBtn = document.getElementById("checkAllBtn");
-    if (selectedTracks.length === user.createdTracks.length) {
+    if (
+      createdTracks.length > 0 &&
+      selectedTracks.length === createdTracks.length
+    ) {
       checkAllBtn.checked = true;
     } else {
       checkAllBtn.checked = false;
@@ -85,7 +89,7 @@ export default function UserPanel() {
                 <input
                   type="checkbox"
                   id="checkAllBtn"
-                  onChange={handleSelectAllTracks}
+                  onClick={handleSelectAllTracks}
                 />
               </div>
               <div className="col-sm-1 col-2 p-0 text-center"></div>

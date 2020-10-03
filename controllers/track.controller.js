@@ -27,13 +27,13 @@ exports.postTrack = async (req, res, next) => {
         const image = document.getElementById("landingImage").src;
         const price = document.getElementById("priceblock_ourprice");
         const salePrice = document.getElementById("priceblock_saleprice");
-        if (price) {
+        if (price !== null || price !== undefined) {
           const actualPrice = +price.innerText.substring(1);
           return {
             actualPrice,
             image,
           };
-        } else if (salePrice) {
+        } else if (salePrice !== null || salePrice !== undefined) {
           const actualPrice = +salePrice.innerText.substring(1);
           return {
             actualPrice,
