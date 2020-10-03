@@ -25,16 +25,18 @@
 
 // authenticated dashboard page
 .dashboard-page {
-  min-height: 100vh;
+  // min-height: 100vh;
   .control-panel {
-    padding: 24px 48px;
-    width: 20%;
+    // padding: 0px 48px;
+    width: 15%;
     height: 100vh;
     background: linear-gradient(to bottom, #5fb0e5, #007bff, #007bff);
 
     .control-bars {
       .control-bar {
         opacity: 1; // temporary
+        padding-left: 48px;
+        padding-top: 28px;
         transition: 0.2s;
         white-space: nowrap;
         &:hover {
@@ -49,7 +51,7 @@
 
   .user-panel {
     background: $themeColor;
-    width: 80%;
+    width: 85%;
     height: 100vh;
 
     .title {
@@ -79,18 +81,24 @@
   }
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1500px) {
   .dashboard-page {
     .control-panel {
-      padding: 48px 24px;
+      .control-bars {
+        .control-bar {
+          padding-left: 0;
+          justify-content: center !important;
+        }
+      }
     }
   }
 }
+
 @media (max-width: 767.98px) {
   .dashboard-page {
     .control-panel {
       width: 15%;
-      padding: 48px 0;
+      // padding: 0;
     }
 
     .user-panel {
@@ -106,9 +114,10 @@
 @media (max-width: 575.98px) {
   .dashboard-page {
     .control-panel {
+      position: fixed;
+      bottom: 0;
       background: #007bff;
-      height: 7vh;
-      padding: 0 0;
+      height: 50px;
       width: 100vw;
       .control-bars {
         .control-bar {
@@ -118,7 +127,7 @@
     }
 
     .user-panel {
-      height: 93vh;
+      height: 100vh;
       width: 100vw;
     }
   }

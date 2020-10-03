@@ -11,7 +11,7 @@ export default function ControlPanel() {
     // },
     {
       text: "My Tracks",
-      icon: <RiDashboardLine className="icon mx-2" />,
+      icon: <RiDashboardLine className="icon" />,
     },
     // {
     //   text: "Tracks",
@@ -23,25 +23,16 @@ export default function ControlPanel() {
       <div className="control-bars d-sm-block all-center-column flex-sm-column flex-row w-100">
         {controlBars.map((controlBar, index) => (
           <div
-            className="control-bar text-white bold py-3 all-center"
+            className="control-bar text-white bold all-center justify-content-start"
             role="button"
             key={index}
           >
             {controlBar.icon}
-            <span className="mb-0 mx-2 d-lg-inline d-none">
+            <span className="mb-0 ml-3 d-lg-inline d-none">
               {controlBar.text}
             </span>
           </div>
         ))}
-      </div>
-
-      {/* temporary */}
-      <div className="control-bar text-white bold py-3 all-center text-white-50">
-        More feature coming soon!
-      </div>
-
-      <div className="control-bar text-white bold py-3 all-center text-white-50">
-        Logout
       </div>
     </div>
   );
