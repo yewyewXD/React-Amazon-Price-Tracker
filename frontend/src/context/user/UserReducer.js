@@ -25,7 +25,7 @@ export default (state, action) => {
         },
       };
 
-    case "EDIT_TRACK":
+    case "UPDATE_TRACKS":
       return {
         ...state,
         user: {

@@ -37,19 +37,31 @@ export default function UserPanel() {
       checkButtons.forEach((button) => {
         button.checked = true;
       });
+      setSelectedTracks(user.createdTracks);
     } else {
       checkButtons.forEach((button) => {
         button.checked = false;
       });
+      setSelectedTracks([]);
     }
   }
 
   // auto check checkAllBtn
   if (document.getElementById("checkAllBtn")) {
+    const checkAllBtn = document.getElementById("checkAllBtn");
     if (selectedTracks.length === user.createdTracks.length) {
-      document.getElementById("checkAllBtn").checked = true;
-    } else if (document.getElementById("checkAllBtn")) {
-      document.getElementById("checkAllBtn").checked = false;
+      checkAllBtn.checked = true;
+    } else {
+      checkAllBtn.checked = false;
+    }
+  }
+
+  if (document.getElementById("deleteBtn")) {
+    const deleteBtn = document.getElementById("deleteBtn");
+    if (selectedTracks.length > 0) {
+      deleteBtn.style.display = "inline-block";
+    } else {
+      deleteBtn.style.display = "none";
     }
   }
 
@@ -87,8 +99,9 @@ export default function UserPanel() {
               </div>
               <PopupBtn type="deleteTrack" selectedTracks={selectedTracks}>
                 <button
-                  className="btn btn-danger btn-sm position-absolute"
-                  style={{ right: 0 }}
+                  className="btn btn-danger btn-sm position-absolute "
+                  id="deleteBtn"
+                  style={{ right: 0, display: "none" }}
                 >
                   <small className="m-0">Delete</small>
                 </button>
@@ -134,11 +147,19 @@ export default function UserPanel() {
                     ${track.actualPrice}
                   </div>
                   <div className="col-lg-1 col-md-2 col-sm-3 col-4 p-0 d-flex align-items-center">
-                    {track.expectedPrice > track.actualPrice ? (
-                      <span className="text-success m-0">Cheap</span>
-                    ) : (
-                      <span className="text-danger m-0">Expensive</span>
+                    {track.actualPrice === 0 && (
+                      <span className="m-0">No Price</span>
                     )}
+
+                    {track.actualPrice !== 0 &&
+                      track.expectedPrice > track.actualPrice && (
+                        <span className="text-success m-0">Cheap</span>
+                      )}
+
+                    {track.actualPrice !== 0 &&
+                      track.expectedPrice < track.actualPrice && (
+                        <span className="text-danger m-0">Expensive</span>
+                      )}
                   </div>
                   <div
                     className="col-1 p-0 all-center justify-content-end"

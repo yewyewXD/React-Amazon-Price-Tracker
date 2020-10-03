@@ -123,7 +123,7 @@ export const UserProvider = ({ children }) => {
       // console.log(res.data);
 
       dispatch({
-        type: "EDIT_TRACK",
+        type: "UPDATE_TRACKS",
         payload: newTracks,
       });
     } catch (err) {
@@ -141,7 +141,7 @@ export const UserProvider = ({ children }) => {
         { trackIds },
         { headers: { "user-auth-token": state.token } }
       );
-      console.log(res.data);
+      // console.log(res.data);
 
       // frontend update
       const newTracks = state.user.createdTracks;
@@ -151,11 +151,10 @@ export const UserProvider = ({ children }) => {
           newTracks.splice(index, 1);
         }
       });
-
-      console.log(newTracks);
+      // console.log(newTracks);
 
       dispatch({
-        type: "EDIT_TRACK",
+        type: "UPDATE_TRACKS",
         payload: newTracks,
       });
     } catch (err) {
