@@ -48,7 +48,8 @@ export default function ViewTrackModal({ handleClose, track }) {
           <img
             src={track.image}
             alt={track.name}
-            style={{ height: "200px", width: "200px" }}
+            // style={{ height: "200px", width: "200px" }}
+            className="w-50"
           />
         </div>
 
