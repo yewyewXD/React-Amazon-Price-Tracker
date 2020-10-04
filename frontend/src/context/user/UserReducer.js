@@ -26,6 +26,7 @@ export default (state, action) => {
           createdTracks: [action.payload.track, ...state.user.createdTracks],
         },
         notification: action.payload.notification,
+        isTracking: false,
       };
 
     case "UPDATE_TRACKS":
@@ -41,12 +42,14 @@ export default (state, action) => {
       return {
         ...state,
         errMsg: action.payload,
+        isTracking: false,
       };
 
-    case "CLEAR_NOTIFICATION":
+    case "CLEAR_LOGS":
       return {
         ...state,
         notification: null,
+        isTracking: true,
       };
 
     default:

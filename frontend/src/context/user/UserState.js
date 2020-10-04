@@ -8,6 +8,7 @@ const initialState = {
   user: null,
   errMsg: null,
   notification: null,
+  isTracking: true,
 };
 
 export const UserContext = createContext(initialState);
@@ -40,7 +41,7 @@ export const UserProvider = ({ children }) => {
 
       setTimeout(() => {
         dispatch({
-          type: "CLEAR_NOTIFICATION",
+          type: "CLEAR_LOGS",
           payload: null,
         });
       }, 100);
@@ -97,7 +98,7 @@ export const UserProvider = ({ children }) => {
 
     setTimeout(() => {
       dispatch({
-        type: "CLEAR_NOTIFICATION",
+        type: "CLEAR_LOGS",
         payload: null,
       });
     }, 100);
@@ -116,8 +117,6 @@ export const UserProvider = ({ children }) => {
         { headers: { "user-auth-token": token } }
       );
 
-      console.log(res.data);
-
       const notification = {
         type: "success",
         message: `New product added!`,
@@ -128,7 +127,10 @@ export const UserProvider = ({ children }) => {
         payload: { track: res.data.data, notification },
       });
     } catch (err) {
-      console.log(err);
+      dispatch({
+        type: "LOG_ERROR_MESSAGE",
+        payload: "Invalid product, please contact host",
+      });
     }
   }
 
@@ -237,6 +239,7 @@ export const UserProvider = ({ children }) => {
         user: state.user,
         errMsg: state.errMsg,
         notification: state.notification,
+        isTracking: state.isTracking,
         loginUser,
         registerUser,
         logoutUser,

@@ -1,8 +1,8 @@
 import React, { useContext, useRef } from "react";
 import { UserContext } from "../../../context/user/UserState";
 
-export default function AddTrackModal({ handleClose }) {
-  const { user, token, errMsg, addTrack } = useContext(UserContext);
+export default function AddTrackModal({ handleClose, open }) {
+  const { user, token, addTrack, isTracking } = useContext(UserContext);
 
   const urlElRef = useRef();
   const nameElRef = useRef();
@@ -27,9 +27,15 @@ export default function AddTrackModal({ handleClose }) {
       addTrack(user.userId, finalUrl, name, +expectedPrice, token);
     }
 
-    if (token) {
+    // load spinner
+
+    if (!isTracking) {
       handleClose();
     }
+  }
+
+  if (!isTracking && open) {
+    handleClose();
   }
 
   return (
@@ -74,11 +80,6 @@ export default function AddTrackModal({ handleClose }) {
             ref={expectedPriceElRef}
           />
         </div>
-
-        {/* Error message */}
-        {errMsg && (
-          <small className="text-danger d-block mt-1">{errMsg.error}</small>
-        )}
 
         <button className="btn btn-primary btn-md mt-3">Track</button>
       </form>

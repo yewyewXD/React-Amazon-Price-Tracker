@@ -73,7 +73,7 @@ export default function PopupBtn({ children, type, track, selectedTracks }) {
                 )}
 
                 {type === "addTrack" && token && (
-                  <AddTrackModal handleClose={handleClose} />
+                  <AddTrackModal handleClose={handleClose} open={open} />
                 )}
 
                 {type === "editTrack" && token && (
