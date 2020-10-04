@@ -27,7 +27,7 @@ exports.postTrack = async (req, res, next) => {
     // image check
     const imageExist = await nightmare
       .goto(trackUrl)
-      .wait(3000)
+      .wait(3500)
       .exists("img#landingImage");
 
     if (imageExist) {
@@ -41,32 +41,9 @@ exports.postTrack = async (req, res, next) => {
 
     // price check 1
     if (!crawledProduct.actualPrice) {
-      const dealPriceExist = await nightmare
-        .goto(trackUrl)
-        .wait(3000)
-        .exists("span#priceblock_dealprice");
-
-      if (dealPriceExist) {
-        console.log("found deal price");
-        const dealPrice = await nightmare
-          .goto(trackUrl)
-          .wait("span#priceblock_dealprice")
-          .evaluate(
-            () =>
-              +document
-                .getElementById("priceblock_dealprice")
-                .innerText.substring(1)
-          )
-          .end();
-        crawledProduct.actualPrice = dealPrice;
-      }
-    }
-
-    // price check 2
-    if (!crawledProduct.actualPrice) {
       const ourPriceExist = await nightmare
         .goto(trackUrl)
-        .wait(3000)
+        .wait(3500)
         .exists("span#priceblock_ourprice");
 
       if (ourPriceExist) {
@@ -85,11 +62,11 @@ exports.postTrack = async (req, res, next) => {
       }
     }
 
-    // price check 3
+    // price check 2
     if (!crawledProduct.actualPrice) {
       const salePriceExist = await nightmare
         .goto(trackUrl)
-        .wait(3000)
+        .wait(3500)
         .exists("span#priceblock_saleprice");
 
       if (salePriceExist) {
@@ -106,6 +83,29 @@ exports.postTrack = async (req, res, next) => {
           .end();
 
         crawledProduct.actualPrice = salePrice;
+      }
+    }
+
+    // price check 3
+    if (!crawledProduct.actualPrice) {
+      const dealPriceExist = await nightmare
+        .goto(trackUrl)
+        .wait(3500)
+        .exists("span#priceblock_dealprice");
+
+      if (dealPriceExist) {
+        console.log("found deal price");
+        const dealPrice = await nightmare
+          .goto(trackUrl)
+          .wait("span#priceblock_dealprice")
+          .evaluate(
+            () =>
+              +document
+                .getElementById("priceblock_dealprice")
+                .innerText.substring(1)
+          )
+          .end();
+        crawledProduct.actualPrice = dealPrice;
       }
     }
 
