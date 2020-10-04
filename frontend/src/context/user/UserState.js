@@ -106,63 +106,42 @@ export const UserProvider = ({ children }) => {
 
   async function addTrack(userId, trackUrl, name, expectedPrice, token) {
     try {
-      // check name duplicate
-      const hasDuplicate =
-        state.user.createdTracks.filter(
-          (createdTrack) => createdTrack.name === name
-        ).length > 0;
-
-      if (hasDuplicate) {
-        dispatch({
-          type: "LOG_ERROR_MESSAGE",
-          payload: { message: "Name already exists!", notification: null },
-        });
-        setTimeout(() => {
-          dispatch({
-            type: "CLEAR_LOGS",
-            payload: null,
-          });
-        }, 100);
-
-        return;
-      }
-      console.log("testing");
-      // const res = await axios.post(
-      //   "http://localhost:5000/api/dashboard/track",
-      //   {
-      //     userId,
-      //     trackUrl,
-      //     name,
-      //     expectedPrice,
-      //   },
-      //   { headers: { "user-auth-token": token } }
-      // );
+      const res = await axios.post(
+        "http://localhost:5000/api/dashboard/track",
+        {
+          userId,
+          trackUrl,
+          name,
+          expectedPrice,
+        },
+        { headers: { "user-auth-token": token } }
+      );
 
       // console.log(res.data.data);
 
-      // let notification;
-      // if (res.data.data.actualPrice === 0) {
-      //   notification = {
-      //     type: "warning",
-      //     message: `Failed to track price, please report to host`,
-      //   };
-      // } else {
-      //   notification = {
-      //     type: "success",
-      //     message: `New product added!`,
-      //   };
-      // }
+      let notification;
+      if (res.data.data.actualPrice === 0) {
+        notification = {
+          type: "warning",
+          message: `Failed to track price, please report to host`,
+        };
+      } else {
+        notification = {
+          type: "success",
+          message: `New product added!`,
+        };
+      }
 
-      // dispatch({
-      //   type: "ADD_TRACK",
-      //   payload: { data: res.data.data, notification },
-      // });
-      // setTimeout(() => {
-      //   dispatch({
-      //     type: "CLEAR_LOGS",
-      //     payload: null,
-      //   });
-      // }, 100);
+      dispatch({
+        type: "ADD_TRACK",
+        payload: { data: res.data.data, notification },
+      });
+      setTimeout(() => {
+        dispatch({
+          type: "CLEAR_LOGS",
+          payload: null,
+        });
+      }, 100);
     } catch {
       console.log("crawling failed");
       const notification = {
@@ -324,6 +303,11 @@ export const UserProvider = ({ children }) => {
         dispatch({
           type: "LOGIN_USER",
           payload: { token, user: userRes.data, notification: null },
+        });
+      } else {
+        dispatch({
+          type: "LOGOUT_USER",
+          payload: { notification: null },
         });
       }
     } catch (err) {

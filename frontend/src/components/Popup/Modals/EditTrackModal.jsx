@@ -1,32 +1,40 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../../context/user/UserState";
+import FlashMessage from "react-flash-message";
 
 export default function EditTrackModal({ handleClose, track }) {
-  const { token, errMsg, editTrack } = useContext(UserContext);
+  const { user, token, editTrack } = useContext(UserContext);
   const [trackName, setTrackName] = useState(track.name);
   const [trackExpectedPrice, setTrackExpectedPrice] = useState(
     track.expectedPrice
   );
+  const [hasError, setHasError] = useState(false);
 
   function handleEditTrack(e) {
+    if (hasError) {
+      setHasError(false);
+    }
+
     e.preventDefault();
     const name = trackName;
     const expectedPrice = parseFloat(trackExpectedPrice).toFixed(2);
     const id = track._id;
 
     // validate
-
-    editTrack(id, name, expectedPrice);
-
-    if (token) {
+    const hasDuplicate =
+      user.createdTracks.filter((createdTrack) => createdTrack.name === name)
+        .length > 0;
+    if (hasDuplicate) {
+      setHasError(true);
+    } else {
+      editTrack(id, name, expectedPrice);
+      setHasError(false);
       handleClose();
     }
   }
 
   function handleCloseModal() {
-    if (token) {
-      handleClose();
-    }
+    handleClose();
   }
 
   const priceCompare = {
@@ -126,7 +134,13 @@ export default function EditTrackModal({ handleClose, track }) {
         </div>
 
         {/* Error message */}
-        {errMsg && <small className="text-danger d-block mt-1">{errMsg}</small>}
+        {hasError && (
+          <FlashMessage duration={5000}>
+            <small className="text-danger d-block mt-1">
+              Name already exists!
+            </small>
+          </FlashMessage>
+        )}
 
         <div className="buttons all-center justify-content-between mt-3">
           <button

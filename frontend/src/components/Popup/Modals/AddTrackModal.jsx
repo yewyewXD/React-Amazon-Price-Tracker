@@ -1,35 +1,50 @@
 import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../../../context/user/UserState";
 import Loader from "react-loader-spinner";
+import FlashMessage from "react-flash-message";
 
 export default function AddTrackModal({ handleClose, open }) {
   const { user, token, addTrack, isTracking } = useContext(UserContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const urlElRef = useRef();
   const nameElRef = useRef();
   const expectedPriceElRef = useRef();
 
   function handleAddTrack(e) {
+    if (hasError) {
+      setHasError(false);
+    }
+
     e.preventDefault();
     const url = urlElRef.current.value;
     const name = nameElRef.current.value;
     const expectedPrice = expectedPriceElRef.current.value;
 
-    // Check and submit
-    if (url.indexOf("/ref=") === -1) {
-      addTrack(user.userId, url, name, +expectedPrice, token);
+    // Validation
+    const hasDuplicate =
+      user.createdTracks.filter((createdTrack) => createdTrack.name === name)
+        .length > 0;
+    if (hasDuplicate) {
+      setHasError(true);
     } else {
-      const trimmedUrl = url.substr(0, url.indexOf("/ref="));
-      const finalUrl =
-        trimmedUrl.indexOf("https://") === -1
-          ? `https://"${trimmedUrl}`
-          : trimmedUrl;
+      setHasError(false);
+      // Check and submit
+      if (url.indexOf("/ref=") === -1) {
+        addTrack(user.userId, url, name, +expectedPrice, token);
+      } else {
+        const trimmedUrl = url.substr(0, url.indexOf("/ref="));
+        const finalUrl =
+          trimmedUrl.indexOf("https://") === -1
+            ? `https://"${trimmedUrl}`
+            : trimmedUrl;
 
-      addTrack(user.userId, finalUrl, name, +expectedPrice, token);
+        addTrack(user.userId, finalUrl, name, +expectedPrice, token);
+      }
+
+      setIsSubmitting(true);
     }
-
-    setIsSubmitting(true);
   }
 
   if (!isTracking && open) {
@@ -94,6 +109,15 @@ export default function AddTrackModal({ handleClose, open }) {
                 ref={expectedPriceElRef}
               />
             </div>
+
+            {/* Error message */}
+            {hasError && (
+              <FlashMessage duration={5000}>
+                <small className="text-danger d-block mt-1">
+                  Name already exists!
+                </small>
+              </FlashMessage>
+            )}
 
             <button className="btn btn-primary btn-md mt-3">Track</button>
           </form>
