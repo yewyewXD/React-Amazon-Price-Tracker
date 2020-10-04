@@ -12,9 +12,10 @@ export default (state, action) => {
     case "LOGOUT_USER":
       return {
         ...state,
-        token: action.payload,
-        user: action.payload,
+        token: null,
+        user: null,
         errMsg: null,
+        notification: action.payload.notification,
       };
 
     case "ADD_TRACK":

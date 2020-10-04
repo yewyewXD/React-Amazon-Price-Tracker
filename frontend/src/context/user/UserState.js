@@ -78,9 +78,14 @@ export const UserProvider = ({ children }) => {
   function logoutUser() {
     localStorage.removeItem("auth-token");
 
+    const notification = {
+      type: "success",
+      message: `Successfully logged out!`,
+    };
+
     dispatch({
       type: "LOGOUT_USER",
-      payload: null,
+      payload: { notification },
     });
   }
 
@@ -191,14 +196,9 @@ export const UserProvider = ({ children }) => {
           headers: { "user-auth-token": token },
         });
 
-        const notification = {
-          type: "success",
-          message: `Welcome back, ${userRes.data.displayName}!`,
-        };
-
         dispatch({
           type: "LOGIN_USER",
-          payload: { token, user: userRes.data, notification },
+          payload: { token, user: userRes.data },
         });
       }
     } catch (err) {
