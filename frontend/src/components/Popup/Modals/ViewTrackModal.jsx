@@ -33,7 +33,7 @@ export default function ViewTrackModal({ handleClose, track }) {
   function handleEditTrack(e) {
     e.preventDefault();
     const name = trackName;
-    const expectedPrice = trackExpectedPrice;
+    const expectedPrice = trackExpectedPrice.toFixed(2);
     const id = track._id;
 
     editTrack(id, name, expectedPrice);
