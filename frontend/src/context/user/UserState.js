@@ -224,13 +224,6 @@ export const UserProvider = ({ children }) => {
     try {
       const trackIds = tracks.map((track) => track._id);
 
-      // backend update
-      // await axios.post(
-      //   `http://localhost:5000/api/dashboard/delete/tracks`,
-      //   { trackIds },
-      //   { headers: { "user-auth-token": state.token } }
-      // );
-
       // frontend update
       const newTracks = state.user.createdTracks;
       tracks.forEach((track) => {
@@ -240,6 +233,13 @@ export const UserProvider = ({ children }) => {
         }
       });
       // console.log(newTracks);
+
+      // backend update
+      await axios.post(
+        `http://localhost:5000/api/dashboard/delete/tracks`,
+        { trackIds },
+        { headers: { "user-auth-token": state.token } }
+      );
 
       const notification = {
         type: "success",

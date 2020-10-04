@@ -111,11 +111,6 @@ exports.postTrack = async (req, res, next) => {
 
     console.log("crawling ends");
 
-    // // // upload track image to cloud database
-    // // const { url: cloudinaryUrl } = await cloudinary.uploader.upload(image, {
-    // //   upload_preset: "trackerBase",
-    // // });
-
     // // create track
     const newTrack = {
       image: crawledProduct.image,
