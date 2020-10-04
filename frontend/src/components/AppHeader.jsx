@@ -14,13 +14,13 @@ export default function AppHeader({ isDashboard }) {
     const type = notification.type;
     const message = notification.message;
     if (type === "info") {
-      NotificationManager.info(message, null, 3000);
+      NotificationManager.info(message, null, 4000);
     } else if (type === "success") {
       NotificationManager.success(message, null, 3000);
     } else if (type === "warning") {
-      NotificationManager.warning(message, null, 3000);
+      NotificationManager.warning(message, null, 5000);
     } else if (type === "error") {
-      NotificationManager.error(message, null, 3000);
+      NotificationManager.error(message, null, 5000);
     }
   }
 
