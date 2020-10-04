@@ -106,6 +106,7 @@ export const UserProvider = ({ children }) => {
 
   async function addTrack(userId, trackUrl, name, expectedPrice, token) {
     try {
+      console.log("tracking");
       const res = await axios.post(
         "http://localhost:5000/api/dashboard/track",
         {
@@ -116,6 +117,11 @@ export const UserProvider = ({ children }) => {
         },
         { headers: { "user-auth-token": token } }
       );
+      console.log("sent req");
+
+      if (res.data) {
+        console.log(res.data.data);
+      }
 
       const notification = {
         type: "success",
@@ -126,6 +132,12 @@ export const UserProvider = ({ children }) => {
         type: "ADD_TRACK",
         payload: { data: res.data.data, notification },
       });
+      setTimeout(() => {
+        dispatch({
+          type: "CLEAR_LOGS",
+          payload: null,
+        });
+      }, 100);
     } catch {
       const notification = {
         type: "error",

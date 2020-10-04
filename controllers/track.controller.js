@@ -27,21 +27,21 @@ exports.postTrack = async (req, res, next) => {
         const image = document.getElementById("landingImage").src;
         const price = document.getElementById("priceblock_ourprice");
         const salePrice = document.getElementById("priceblock_saleprice");
-        if (price !== null || price !== undefined) {
-          const actualPrice = +price.innerText.substring(1);
+        if (!price && !salePrice) {
           return {
-            actualPrice,
+            actualPrice: 0,
             image,
           };
-        } else if (salePrice !== null || salePrice !== undefined) {
+        } else if (!price) {
           const actualPrice = +salePrice.innerText.substring(1);
           return {
             actualPrice,
             image,
           };
         } else {
+          const actualPrice = +price.innerText.substring(1);
           return {
-            actualPrice: 0,
+            actualPrice,
             image,
           };
         }
