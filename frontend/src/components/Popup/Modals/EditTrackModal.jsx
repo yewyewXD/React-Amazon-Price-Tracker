@@ -3,7 +3,7 @@ import { UserContext } from "../../../context/user/UserState";
 import FlashMessage from "react-flash-message";
 
 export default function EditTrackModal({ handleClose, track }) {
-  const { user, token, editTrack } = useContext(UserContext);
+  const { user, editTrack } = useContext(UserContext);
   const [trackName, setTrackName] = useState(track.name);
   const [trackExpectedPrice, setTrackExpectedPrice] = useState(
     track.expectedPrice

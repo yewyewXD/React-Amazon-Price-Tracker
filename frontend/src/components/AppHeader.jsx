@@ -55,7 +55,6 @@ export default function AppHeader({ isDashboard }) {
                 <>
                   <button
                     className="btn btn-sm btn-outline-secondary mx-sm-2 mx-md-3 p-0"
-                    role="button"
                     onClick={logoutUser}
                   >
                     Logout
