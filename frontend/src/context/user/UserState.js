@@ -48,11 +48,11 @@ export const UserProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: "LOG_ERROR_MESSAGE",
-        payload: err.response.data,
+        payload: { message: err.response.data, notification: null },
       });
       setTimeout(() => {
         dispatch({
-          type: "LOG_ERROR_MESSAGE",
+          type: "CLEAR_LOGS",
           payload: null,
         });
       }, 3000);
@@ -72,11 +72,11 @@ export const UserProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: "LOG_ERROR_MESSAGE",
-        payload: err.response.data,
+        payload: { message: err.response.data, notification: null },
       });
       setTimeout(() => {
         dispatch({
-          type: "LOG_ERROR_MESSAGE",
+          type: "CLEAR_LOGS",
           payload: null,
         });
       }, 3000);
@@ -126,11 +126,23 @@ export const UserProvider = ({ children }) => {
         type: "ADD_TRACK",
         payload: { track: res.data.data, notification },
       });
-    } catch (err) {
+    } catch {
+      const notification = {
+        type: "error",
+        message: "Action failed, please contact host",
+      };
+
       dispatch({
         type: "LOG_ERROR_MESSAGE",
-        payload: "Invalid product, please contact host",
+        payload: { message: null, notification },
       });
+
+      setTimeout(() => {
+        dispatch({
+          type: "CLEAR_LOGS",
+          payload: null,
+        });
+      }, 100);
     }
   }
 
@@ -158,8 +170,23 @@ export const UserProvider = ({ children }) => {
         type: "UPDATE_TRACKS",
         payload: newTracks,
       });
-    } catch (err) {
-      console.log(err);
+    } catch {
+      const notification = {
+        type: "warning",
+        message: "Error detected, please contact host",
+      };
+
+      dispatch({
+        type: "LOG_ERROR_MESSAGE",
+        payload: { message: null, notification },
+      });
+
+      setTimeout(() => {
+        dispatch({
+          type: "CLEAR_LOGS",
+          payload: null,
+        });
+      }, 100);
     }
   }
 
@@ -189,8 +216,23 @@ export const UserProvider = ({ children }) => {
         type: "UPDATE_TRACKS",
         payload: newTracks,
       });
-    } catch (err) {
-      console.log(err.response);
+    } catch {
+      const notification = {
+        type: "warning",
+        message: "Error detected, please contact host",
+      };
+
+      dispatch({
+        type: "LOG_ERROR_MESSAGE",
+        payload: { message: null, notification },
+      });
+
+      setTimeout(() => {
+        dispatch({
+          type: "CLEAR_LOGS",
+          payload: null,
+        });
+      }, 100);
     }
   }
 
@@ -223,7 +265,7 @@ export const UserProvider = ({ children }) => {
         });
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
     }
   }
 

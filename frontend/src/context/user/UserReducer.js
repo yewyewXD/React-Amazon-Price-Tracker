@@ -41,13 +41,15 @@ export default (state, action) => {
     case "LOG_ERROR_MESSAGE":
       return {
         ...state,
-        errMsg: action.payload,
+        errMsg: action.payload.message,
+        notification: action.payload.notification,
         isTracking: false,
       };
 
     case "CLEAR_LOGS":
       return {
         ...state,
+        errMsg: null,
         notification: null,
         isTracking: true,
       };
