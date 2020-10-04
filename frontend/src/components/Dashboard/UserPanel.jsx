@@ -163,7 +163,7 @@ export default function UserPanel() {
 
                     {track.actualPrice !== 0 &&
                       track.expectedPrice < track.actualPrice && (
-                        <span className="text-danger m-0">Expensive</span>
+                        <span className="text-danger m-0">Costly</span>
                       )}
                   </div>
                   <div
@@ -171,8 +171,14 @@ export default function UserPanel() {
                     role="button"
                   >
                     <PopupBtn type="editTrack" track={track}>
-                      <small className="m-0 edit-btn btn-sm btn btn-outline-secondary">
+                      <small className="m-0 edit-btn btn-sm btn btn-outline-secondary d-md-inline-block d-none">
                         Edit
+                      </small>
+                    </PopupBtn>
+
+                    <PopupBtn type="viewTrack" track={track}>
+                      <small className="m-0 edit-btn btn-sm btn btn-outline-secondary d-md-none">
+                        View
                       </small>
                     </PopupBtn>
                   </div>

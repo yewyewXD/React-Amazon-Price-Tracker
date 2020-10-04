@@ -123,7 +123,8 @@
       width: 100vw;
       .control-bars {
         .control-bar {
-          padding-top: 0;
+          border-left: none;
+          padding: 0;
           align-items: center !important;
           margin: 0 36px;
         }

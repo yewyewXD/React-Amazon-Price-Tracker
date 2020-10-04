@@ -6,11 +6,12 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { heroVector } from "../../images/homeImages";
 
-import SignUpModal from "./SignUpModal";
-import LoginModal from "./LoginModal";
-import AddTrackModal from "./AddTrackModal";
-import EditTrackModal from "./EditTrackModal";
-import DeleteConfirmModal from "./DeleteConfirmModal";
+import SignUpModal from "./Modals/SignUpModal";
+import LoginModal from "./Modals/LoginModal";
+import AddTrackModal from "./Modals/AddTrackModal";
+import EditTrackModal from "./Modals/EditTrackModal";
+import DeleteConfirmModal from "./Modals/DeleteConfirmModal";
+import ViewTrackModal from "./Modals/ViewTrackModal";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -48,9 +49,11 @@ export default function PopupBtn({ children, type, track, selectedTracks }) {
         }}
       >
         <Fade in={open}>
-          <div className={`${classes.paper} container bg-white p-0 all-center`}>
+          <div
+            className={`${classes.paper} container bg-white p-0 all-center overflow-auto`}
+          >
             <div
-              className={`popup-modal w-100 all-center ${
+              className={`popup-modal overflow-auto w-100 all-center ${
                 type === "deleteTrack" && "bg-white"
               }`}
             >
@@ -82,6 +85,10 @@ export default function PopupBtn({ children, type, track, selectedTracks }) {
                     handleClose={handleClose}
                     selectedTracks={selectedTracks}
                   />
+                )}
+
+                {type === "viewTrack" && token && (
+                  <ViewTrackModal handleClose={handleClose} track={track} />
                 )}
               </div>
             </div>

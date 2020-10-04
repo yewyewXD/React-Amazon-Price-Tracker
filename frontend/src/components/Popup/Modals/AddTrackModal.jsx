@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-import { UserContext } from "../../context/user/UserState";
+import { UserContext } from "../../../context/user/UserState";
 
 export default function AddTrackModal({ handleClose }) {
   const { user, token, errMsg, addTrack } = useContext(UserContext);

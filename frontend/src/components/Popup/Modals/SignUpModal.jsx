@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { UserContext } from "../../context/user/UserState";
+import { UserContext } from "../../../context/user/UserState";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 export default function SignUpModal({ handleClose }) {

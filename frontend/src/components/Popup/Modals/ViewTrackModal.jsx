@@ -1,12 +1,25 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../context/user/UserState";
+import { UserContext } from "../../../context/user/UserState";
 
-export default function EditTrackModal({ handleClose, track }) {
+export default function ViewTrackModal({ handleClose, track }) {
   const { token, errMsg, editTrack } = useContext(UserContext);
   const [trackName, setTrackName] = useState(track.name);
   const [trackExpectedPrice, setTrackExpectedPrice] = useState(
     track.expectedPrice
   );
+
+  const priceCompare = {
+    value:
+      track.actualPrice > 0
+        ? track.expectedPrice > track.actualPrice
+          ? "Cheap"
+          : "Costly"
+        : "No Price",
+    style:
+      track.actualPrice > 0 && track.expectedPrice > track.actualPrice
+        ? "text-success"
+        : "text-danger",
+  };
 
   function handleEditTrack(e) {
     e.preventDefault();
@@ -31,6 +44,14 @@ export default function EditTrackModal({ handleClose, track }) {
     <>
       <h2 className="bold mb-4">Edit your tracked product</h2>
       <form className="form" onSubmit={handleEditTrack}>
+        <div className="product-image all-center">
+          <img
+            src={track.image}
+            alt={track.name}
+            style={{ height: "200px", width: "200px" }}
+          />
+        </div>
+
         <div className="form-group">
           <label htmlFor="name" className="bold d-block">
             Name
@@ -60,6 +81,32 @@ export default function EditTrackModal({ handleClose, track }) {
             onChange={(e) => {
               setTrackExpectedPrice(e.target.value);
             }}
+          />
+        </div>
+
+        <div className="form-group mb-1">
+          <label htmlFor="productUrl" className="bold d-block">
+            Actual Price
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            value={track.actualPrice}
+            readOnly
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+
+        <div className="form-group mb-1">
+          <label htmlFor="productUrl" className="bold d-block ">
+            Price Compare
+          </label>
+          <input
+            type="text"
+            className={`form-control ${priceCompare.style}`}
+            value={priceCompare.value}
+            readOnly
+            onClick={(e) => e.stopPropagation()}
           />
         </div>
 

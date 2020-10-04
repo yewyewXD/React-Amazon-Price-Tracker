@@ -105,6 +105,15 @@ body {
   }
 }
 
+@media (max-width: 767.98px) {
+  .popup-modal {
+    height: 60vh;
+    .form-container {
+      padding: 72px 48px;
+    }
+  }
+}
+
 @media (max-width: 350px) {
   // header
   .header {
@@ -126,7 +135,7 @@ body {
   // modal
   .popup-modal {
     .form-container {
-      padding: 24px;
+      padding: 48px 24px;
     }
   }
 }
