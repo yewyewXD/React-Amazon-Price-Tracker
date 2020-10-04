@@ -29,21 +29,21 @@ exports.postTrack = async (req, res, next) => {
         const image = document.getElementById("landingImage").src;
         const price = document.getElementById("priceblock_ourprice");
         const salePrice = document.getElementById("priceblock_saleprice");
-        if (!price && !salePrice) {
+        if (price !== null) {
+          const actualPrice = +price.innerText.substring(1);
           return {
-            actualPrice: 0,
+            actualPrice,
             image,
           };
-        } else if (!price) {
+        } else if (salePrice !== null) {
           const actualPrice = +salePrice.innerText.substring(1);
           return {
             actualPrice,
             image,
           };
         } else {
-          const actualPrice = +price.innerText.substring(1);
           return {
-            actualPrice,
+            actualPrice: 0,
             image,
           };
         }
@@ -74,6 +74,7 @@ exports.postTrack = async (req, res, next) => {
       data: track,
     });
   } catch (err) {
+    console.log("crawling failed");
     return res.status(500).json({ error: err.message });
   }
 };

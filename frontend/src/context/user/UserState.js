@@ -106,7 +106,6 @@ export const UserProvider = ({ children }) => {
 
   async function addTrack(userId, trackUrl, name, expectedPrice, token) {
     try {
-      console.log("tracking");
       const res = await axios.post(
         "http://localhost:5000/api/dashboard/track",
         {
@@ -224,12 +223,11 @@ export const UserProvider = ({ children }) => {
       const trackIds = tracks.map((track) => track._id);
 
       // backend update
-      await axios.post(
-        `http://localhost:5000/api/dashboard/delete/tracks`,
-        { trackIds },
-        { headers: { "user-auth-token": state.token } }
-      );
-      // console.log(res.data);
+      // await axios.post(
+      //   `http://localhost:5000/api/dashboard/delete/tracks`,
+      //   { trackIds },
+      //   { headers: { "user-auth-token": state.token } }
+      // );
 
       // frontend update
       const newTracks = state.user.createdTracks;
