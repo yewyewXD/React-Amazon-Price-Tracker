@@ -42,6 +42,12 @@ export default (state, action) => {
         errMsg: action.payload,
       };
 
+    case "CLEAR_NOTIFICATION":
+      return {
+        ...state,
+        notification: null,
+      };
+
     default:
       return state;
   }

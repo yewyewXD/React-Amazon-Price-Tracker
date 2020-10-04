@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
 
       const notification = {
         type: "success",
-        message: `Welcome back, ${state.user}!`,
+        message: `Welcome back, ${user.displayName}!`,
       };
 
       dispatch({
@@ -87,6 +87,13 @@ export const UserProvider = ({ children }) => {
       type: "LOGOUT_USER",
       payload: { notification },
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: "CLEAR_NOTIFICATION",
+        payload: null,
+      });
+    }, 1000);
   }
 
   async function addTrack(userId, trackUrl, name, expectedPrice, token) {
