@@ -158,7 +158,7 @@ export default function UserPanel() {
                       onChange={(e) => handleSelectTrack(e, track)}
                     />
                   </div>
-                  <div className="col-sm-1 col-2 p-0 text-center">
+                  <div className="col-sm-1 col-2 p-0 all-center">
                     <img
                       src={track.image}
                       alt=""

@@ -53,13 +53,13 @@ export default function AppHeader({ isDashboard }) {
               {/* logged in */}
               {token && (
                 <>
-                  <span
-                    className="dark mx-sm-2 mx-md-3 p-0"
+                  <button
+                    className="btn btn-sm btn-outline-secondary mx-sm-2 mx-md-3 p-0"
                     role="button"
                     onClick={logoutUser}
                   >
                     Logout
-                  </span>
+                  </button>
                   {!isDashboard && (
                     <Link
                       className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0"

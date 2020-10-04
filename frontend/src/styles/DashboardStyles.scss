@@ -134,13 +134,10 @@
     .user-panel {
       height: 100vh;
       width: 100vw;
-    }
-  }
-}
-
-@media (max-width: 350px) {
-  .dashboard-page {
-    .user-panel {
+      font-size: 0.9rem;
+      .title {
+        font-size: 2.5rem;
+      }
       .tracks {
         padding: 0 12px;
       }
