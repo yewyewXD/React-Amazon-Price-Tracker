@@ -37,6 +37,13 @@ export const UserProvider = ({ children }) => {
         type: "LOGIN_USER",
         payload: { token, user, notification },
       });
+
+      setTimeout(() => {
+        dispatch({
+          type: "CLEAR_NOTIFICATION",
+          payload: null,
+        });
+      }, 100);
     } catch (err) {
       dispatch({
         type: "LOG_ERROR_MESSAGE",
@@ -93,7 +100,7 @@ export const UserProvider = ({ children }) => {
         type: "CLEAR_NOTIFICATION",
         payload: null,
       });
-    }, 1000);
+    }, 100);
   }
 
   async function addTrack(userId, trackUrl, name, expectedPrice, token) {
