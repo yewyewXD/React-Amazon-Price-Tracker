@@ -10,13 +10,22 @@ export default function ViewTrackModal({ handleClose, track }) {
 
   const priceCompare = {
     value:
-      track.actualPrice > 0
-        ? track.expectedPrice > track.actualPrice
+      // ideal price
+      track.actualPrice === track.expectedPrice
+        ? "Ideal"
+        : track.actualPrice > 0
+        ? // price compare
+          track.expectedPrice > track.actualPrice
           ? "Cheap"
           : "Costly"
-        : "No Price",
+        : // if price is 0
+          "No Price",
     style:
-      track.actualPrice > 0 && track.expectedPrice > track.actualPrice
+      // ideal price
+      track.actualPrice === track.expectedPrice
+        ? "text-success"
+        : // price compare
+        track.actualPrice > 0 && track.expectedPrice > track.actualPrice
         ? "text-success"
         : "text-danger",
   };
@@ -75,6 +84,7 @@ export default function ViewTrackModal({ handleClose, track }) {
           </label>
           <input
             type="number"
+            step=".01"
             className="form-control"
             placeholder="Enter the ideal price for this product"
             required
@@ -91,6 +101,7 @@ export default function ViewTrackModal({ handleClose, track }) {
           </label>
           <input
             type="number"
+            step=".01"
             className="form-control"
             value={track.actualPrice}
             readOnly

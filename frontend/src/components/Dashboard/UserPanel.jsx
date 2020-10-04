@@ -189,6 +189,10 @@ export default function UserPanel() {
                       track.expectedPrice < track.actualPrice && (
                         <span className="text-danger m-0">Costly</span>
                       )}
+
+                    {track.actualPrice === track.expectedPrice && (
+                      <span className="m-0 text-success">Ideal</span>
+                    )}
                   </div>
                   <div
                     className="col-1 p-0 all-center justify-content-end"

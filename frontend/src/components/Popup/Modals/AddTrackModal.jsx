@@ -87,6 +87,7 @@ export default function AddTrackModal({ handleClose, open }) {
               </label>
               <input
                 type="number"
+                step=".01"
                 className="form-control"
                 placeholder="Enter an ideal price"
                 required
