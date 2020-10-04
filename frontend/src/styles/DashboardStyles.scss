@@ -137,3 +137,13 @@
     }
   }
 }
+
+@media (max-width: 350px) {
+  .dashboard-page {
+    .user-panel {
+      .tracks {
+        padding: 0 12px;
+      }
+    }
+  }
+}

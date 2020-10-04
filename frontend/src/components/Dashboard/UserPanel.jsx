@@ -178,7 +178,7 @@ export default function UserPanel() {
 
                     <PopupBtn type="viewTrack" track={track}>
                       <small className="m-0 edit-btn btn-sm btn btn-outline-secondary d-md-none">
-                        View
+                        Detail
                       </small>
                     </PopupBtn>
                   </div>

@@ -43,7 +43,7 @@ export default function AddTrackModal({ handleClose }) {
           <input
             type="text"
             className="form-control"
-            placeholder="Paste the link to the product"
+            placeholder="Paste the link of the Amazon product"
             required
             ref={urlElRef}
           />
