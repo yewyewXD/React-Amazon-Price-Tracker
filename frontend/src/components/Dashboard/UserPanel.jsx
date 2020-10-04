@@ -202,9 +202,6 @@ export default function UserPanel() {
                       <small className="m-0 edit-btn btn-sm btn btn-outline-secondary d-md-inline-block d-none">
                         Edit
                       </small>
-                    </PopupBtn>
-
-                    <PopupBtn type="viewTrack" track={track}>
                       <small className="m-0 edit-btn btn-sm btn btn-outline-secondary d-md-none">
                         Detail
                       </small>

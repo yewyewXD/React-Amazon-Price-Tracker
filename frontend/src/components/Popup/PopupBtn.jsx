@@ -11,7 +11,6 @@ import LoginModal from "./Modals/LoginModal";
 import AddTrackModal from "./Modals/AddTrackModal";
 import EditTrackModal from "./Modals/EditTrackModal";
 import DeleteConfirmModal from "./Modals/DeleteConfirmModal";
-import ViewTrackModal from "./Modals/ViewTrackModal";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -92,10 +91,6 @@ export default function PopupBtn({
                     selectedTracks={selectedTracks}
                     setSelectedTracks={setSelectedTracks}
                   />
-                )}
-
-                {type === "viewTrack" && token && (
-                  <ViewTrackModal handleClose={handleClose} track={track} />
                 )}
               </div>
             </div>
