@@ -20,7 +20,7 @@ export default function AppHeader({ isDashboard }) {
     } else if (type === "warning") {
       NotificationManager.warning(message, null, 5000);
     } else if (type === "error") {
-      NotificationManager.error(message, null, 5000);
+      NotificationManager.error(notification.title, message, 6000);
     }
   }
 

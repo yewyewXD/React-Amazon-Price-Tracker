@@ -31,6 +31,7 @@ exports.postTrack = async (req, res, next) => {
       .exists("img#landingImage");
 
     if (imageExist) {
+      console.log("found image");
       const image = await nightmare
         .goto(trackUrl)
         .wait("img#landingImage")
@@ -46,6 +47,7 @@ exports.postTrack = async (req, res, next) => {
         .exists("span#priceblock_dealprice");
 
       if (dealPriceExist) {
+        console.log("found deal price");
         const dealPrice = await nightmare
           .goto(trackUrl)
           .wait("span#priceblock_dealprice")
@@ -66,7 +68,9 @@ exports.postTrack = async (req, res, next) => {
         .goto(trackUrl)
         .wait(3000)
         .exists("span#priceblock_ourprice");
+
       if (ourPriceExist) {
+        console.log("found our price");
         const ourPrice = await nightmare
           .goto(trackUrl)
           .wait("span#priceblock_ourprice")
@@ -89,6 +93,7 @@ exports.postTrack = async (req, res, next) => {
         .exists("span#priceblock_saleprice");
 
       if (salePriceExist) {
+        console.log("found sale price");
         const salePrice = await nightmare
           .goto(trackUrl)
           .wait("span#priceblock_saleprice")

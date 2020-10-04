@@ -146,7 +146,8 @@ export const UserProvider = ({ children }) => {
       console.log("crawling failed");
       const notification = {
         type: "error",
-        message: "Action failed, please report to host",
+        message: "Traction Failed!",
+        title: "Please retry and contact host if it fails again.",
       };
 
       dispatch({
@@ -225,6 +226,7 @@ export const UserProvider = ({ children }) => {
       const trackIds = tracks.map((track) => track._id);
 
       // frontend update
+      let uniqueTracks = [];
       const newTracks = state.user.createdTracks;
       tracks.forEach((track) => {
         const index = newTracks.indexOf(track);
