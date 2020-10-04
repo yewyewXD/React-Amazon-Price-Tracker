@@ -4,7 +4,7 @@ import Loader from "react-loader-spinner";
 
 export default function AddTrackModal({ handleClose, open }) {
   const { user, token, addTrack, isTracking } = useContext(UserContext);
-  // const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const urlElRef = useRef();
   const nameElRef = useRef();
@@ -29,75 +29,75 @@ export default function AddTrackModal({ handleClose, open }) {
       addTrack(user.userId, finalUrl, name, +expectedPrice, token);
     }
 
-    // setIsSubmitting(true);
+    setIsSubmitting(true);
   }
 
   if (!isTracking && open) {
     handleClose();
-    // setIsSubmitting(false);
+    if (isSubmitting) {
+      setIsSubmitting(false);
+    }
   }
 
   return (
     <>
-      <h2 className="bold mb-4">Track a new product</h2>
-      {/* {isSubmitting && isTracking && (
+      {isSubmitting && (
         <div className="all-center-column">
-          <Loader
-            type="Puff"
-            color="#5fb0e5"
-            height={200}
-            width={200}
-            timeout={3000}
-          />
+          <Loader type="Puff" color="#5fb0e5" height={200} width={200} />
           <span className="mt-3 text-center">
             Please wait while we are tracking the product
           </span>
         </div>
-      )} */}
-      {/* {!isSubmitting && ( */}
-      <form className="form" onSubmit={handleAddTrack}>
-        <div className="form-group">
-          <label htmlFor="productUrl" className="bold d-block">
-            Product URL
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Paste the Amazon product link"
-            required
-            ref={urlElRef}
-          />
-        </div>
+      )}
 
-        <div className="form-group">
-          <label htmlFor="name" className="bold d-block">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Name this track"
-            required
-            ref={nameElRef}
-          />
-        </div>
+      {!isSubmitting && (
+        <>
+          <h2 className="bold mb-4">Track a new product</h2>
 
-        <div className="form-group mb-1">
-          <label htmlFor="productUrl" className="bold d-block">
-            Expected Price
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Enter an ideal price"
-            required
-            ref={expectedPriceElRef}
-          />
-        </div>
+          <form className="form" onSubmit={handleAddTrack}>
+            <div className="form-group">
+              <label htmlFor="productUrl" className="bold d-block">
+                Product URL
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Paste the Amazon product link"
+                required
+                ref={urlElRef}
+              />
+            </div>
 
-        <button className="btn btn-primary btn-md mt-3">Track</button>
-      </form>
-      {/* )} */}
+            <div className="form-group">
+              <label htmlFor="name" className="bold d-block">
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Name this track"
+                required
+                ref={nameElRef}
+              />
+            </div>
+
+            <div className="form-group mb-1">
+              <label htmlFor="productUrl" className="bold d-block">
+                Expected Price
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Enter an ideal price"
+                required
+                ref={expectedPriceElRef}
+              />
+            </div>
+
+            <button className="btn btn-primary btn-md mt-3">Track</button>
+          </form>
+        </>
+      )}
     </>
   );
 }

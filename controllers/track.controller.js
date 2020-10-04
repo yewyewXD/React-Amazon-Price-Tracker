@@ -19,6 +19,8 @@ exports.postTrack = async (req, res, next) => {
       });
     }
 
+    console.log("crawling starts");
+
     // crawl Amazon product
     const crawledProduct = await nightmare
       .goto(trackUrl)
@@ -48,6 +50,7 @@ exports.postTrack = async (req, res, next) => {
       })
       .end();
 
+    console.log("crawling ends");
     // // // upload track image to cloud database
     // // const { url: cloudinaryUrl } = await cloudinary.uploader.upload(image, {
     // //   upload_preset: "trackerBase",
