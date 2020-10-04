@@ -8,7 +8,7 @@ import {
 } from "react-notifications";
 
 export default function AppHeader({ isDashboard }) {
-  const { token, user, logoutUser, notification } = useContext(UserContext);
+  const { token, logoutUser, notification } = useContext(UserContext);
 
   if (notification) {
     const type = notification.type;

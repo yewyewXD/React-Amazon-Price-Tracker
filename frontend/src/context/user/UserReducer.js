@@ -23,8 +23,9 @@ export default (state, action) => {
         ...state,
         user: {
           ...state.user,
-          createdTracks: [action.payload, ...state.user.createdTracks],
+          createdTracks: [action.payload.track, ...state.user.createdTracks],
         },
+        notification: action.payload.notification,
       };
 
     case "UPDATE_TRACKS":

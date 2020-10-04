@@ -118,9 +118,14 @@ export const UserProvider = ({ children }) => {
 
       console.log(res.data);
 
+      const notification = {
+        type: "success",
+        message: `New product added!`,
+      };
+
       dispatch({
         type: "ADD_TRACK",
-        payload: res.data.data,
+        payload: { track: res.data.data, notification },
       });
     } catch (err) {
       console.log(err);
