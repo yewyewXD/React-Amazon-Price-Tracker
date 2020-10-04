@@ -119,14 +119,18 @@ export const UserProvider = ({ children }) => {
       );
       console.log("sent req");
 
-      if (res.data) {
-        console.log(res.data.data);
+      let notification;
+      if (res.data.data.actualPrice === 0) {
+        notification = {
+          type: "warning",
+          message: `Failed to track price, please contact host`,
+        };
+      } else {
+        notification = {
+          type: "success",
+          message: `New product added!`,
+        };
       }
-
-      const notification = {
-        type: "success",
-        message: `New product added!`,
-      };
 
       dispatch({
         type: "ADD_TRACK",
