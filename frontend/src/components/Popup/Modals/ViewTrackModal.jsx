@@ -123,9 +123,7 @@ export default function ViewTrackModal({ handleClose, track }) {
         </div>
 
         {/* Error message */}
-        {errMsg && (
-          <small className="text-danger d-block mt-1">{errMsg.error}</small>
-        )}
+        {errMsg && <small className="text-danger d-block mt-1">{errMsg}</small>}
 
         <div className="buttons all-center justify-content-between mt-3">
           <button

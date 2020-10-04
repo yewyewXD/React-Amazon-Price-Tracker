@@ -113,9 +113,7 @@ export default function SignUpModal({ handleClose }) {
         </span>
 
         {/* Error message */}
-        {errMsg && (
-          <small className="text-danger d-block mt-1">{errMsg.error}</small>
-        )}
+        {errMsg && <small className="text-danger d-block mt-1">{errMsg}</small>}
 
         <button type="submit" className="btn btn-primary btn-md mt-3">
           Sign Up

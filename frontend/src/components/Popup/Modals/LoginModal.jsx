@@ -66,9 +66,7 @@ export default function LoginModal({ handleClose }) {
         </div>
 
         {/* Error message */}
-        {errMsg && (
-          <small className="text-danger d-block mt-1">{errMsg.error}</small>
-        )}
+        {errMsg && <small className="text-danger d-block mt-1">{errMsg}</small>}
 
         <button className="btn btn-primary btn-md mt-3">Login</button>
       </form>
