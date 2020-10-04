@@ -24,6 +24,7 @@ exports.postTrack = async (req, res, next) => {
     // crawl Amazon product
     let crawledProduct = {};
 
+    // image check
     const imageExist = await nightmare
       .goto(trackUrl)
       .wait(3000)
@@ -37,114 +38,100 @@ exports.postTrack = async (req, res, next) => {
       crawledProduct.image = image;
     }
 
-    const dealPriceExist = await nightmare
-      .goto(trackUrl)
-      .wait(3000)
-      .exists("span#priceblock_dealprice");
-
-    if (dealPriceExist) {
-      const dealPrice = await nightmare
+    // price check 1
+    if (!crawledProduct.actualPrice) {
+      const dealPriceExist = await nightmare
         .goto(trackUrl)
-        .wait("span#priceblock_dealprice")
-        .evaluate(
-          () =>
-            +document
-              .getElementById("priceblock_dealprice")
-              .innerText.substring(1)
-        );
-      crawledProduct.actualPrice = dealPrice;
+        .wait(3000)
+        .exists("span#priceblock_dealprice");
+
+      if (dealPriceExist) {
+        const dealPrice = await nightmare
+          .goto(trackUrl)
+          .wait("span#priceblock_dealprice")
+          .evaluate(
+            () =>
+              +document
+                .getElementById("priceblock_dealprice")
+                .innerText.substring(1)
+          )
+          .end();
+        crawledProduct.actualPrice = dealPrice;
+      }
     }
 
-    const ourPriceExist = await nightmare
-      .goto(trackUrl)
-      .wait(3000)
-      .exists("span#priceblock_ourprice");
-
-    if (ourPriceExist) {
-      const ourPrice = await nightmare
+    // price check 2
+    if (!crawledProduct.actualPrice) {
+      const ourPriceExist = await nightmare
         .goto(trackUrl)
-        .wait("span#priceblock_ourprice")
-        .evaluate(
-          () =>
-            +document
-              .getElementById("priceblock_ourprice")
-              .innerText.substring(1)
-        );
-      crawledProduct.actualPrice = ourPrice;
+        .wait(3000)
+        .exists("span#priceblock_ourprice");
+      if (ourPriceExist) {
+        const ourPrice = await nightmare
+          .goto(trackUrl)
+          .wait("span#priceblock_ourprice")
+          .evaluate(
+            () =>
+              +document
+                .getElementById("priceblock_ourprice")
+                .innerText.substring(1)
+          )
+          .end();
+        crawledProduct.actualPrice = ourPrice;
+      }
     }
 
-    const salePriceExist = await nightmare
-      .goto(trackUrl)
-      .wait(3000)
-      .exists("span#priceblock_saleprice");
-
-    if (salePriceExist) {
-      const salePrice = await nightmare
+    // price check 3
+    if (!crawledProduct.actualPrice) {
+      const salePriceExist = await nightmare
         .goto(trackUrl)
-        .wait("span#priceblock_saleprice")
-        .evaluate(
-          () =>
-            +document
-              .getElementById("priceblock_saleprice")
-              .innerText.substring(1)
-        );
-      crawledProduct.actualPrice = salePrice;
+        .wait(3000)
+        .exists("span#priceblock_saleprice");
+
+      if (salePriceExist) {
+        const salePrice = await nightmare
+          .goto(trackUrl)
+          .wait("span#priceblock_saleprice")
+          .evaluate(
+            () =>
+              +document
+                .getElementById("priceblock_saleprice")
+                .innerText.substring(1)
+          )
+          .end();
+
+        crawledProduct.actualPrice = salePrice;
+      }
     }
 
+    // final price check
     if (!crawledProduct.actualPrice) {
       crawledProduct.actualPrice = 0;
     }
 
-    // .evaluate(() => {
-    //   const image = document.getElementById("landingImage").src;
-    //   const price = document.getElementById("priceblock_ourprice");
-    //   if (price) {
-    //     const actualPrice = +price.innerText.substring(1);
-    //     return {
-    //       actualPrice,
-    //       image,
-    //     };
-    //   } else {
-    //     return {
-    //       actualPrice: 0,
-    //       image,
-    //     };
-    //   }
-    // })
-    // .end();
-
-    // else if (document.getElementById("priceblock_saleprice") !== null) {
-    //   const actualPrice = +document
-    //     .getElementById("priceblock_saleprice")
-    //     .innerText.substring(1);
-    //   return {
-    //     actualPrice,
-    //     image,
-    //   };
-    // }
-
     console.log("crawling ends");
+
     // // // upload track image to cloud database
     // // const { url: cloudinaryUrl } = await cloudinary.uploader.upload(image, {
     // //   upload_preset: "trackerBase",
     // // });
 
     // // create track
-    // const newTrack = {
-    //   image: crawledProduct.image,
-    //   name,
-    //   expectedPrice,
-    //   actualPrice: crawledProduct.actualPrice,
-    //   creator: user._id,
-    // };
+    const newTrack = {
+      image: crawledProduct.image,
+      name,
+      expectedPrice,
+      actualPrice: crawledProduct.actualPrice,
+      creator: user._id,
+    };
 
-    // const track = await Track.create(newTrack);
-    // user.createdTracks.unshift(track._id);
-    // user.save();
+    const track = await Track.create(newTrack);
+    user.createdTracks.unshift(track._id);
+    user.save();
 
     return res.status(201).json({
       success: true,
-      data: crawledProduct,
+      data: track,
     });
   } catch (err) {
     console.log("crawling failed");
