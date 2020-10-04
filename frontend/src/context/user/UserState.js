@@ -221,20 +221,9 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  async function deleteTracks(tracks) {
+  async function deleteTracks(selectedTracks) {
     try {
-      const trackIds = tracks.map((track) => track._id);
-
-      // frontend update
-      let uniqueTracks = [];
-      const newTracks = state.user.createdTracks;
-      tracks.forEach((track) => {
-        const index = newTracks.indexOf(track);
-        if (index > -1) {
-          newTracks.splice(index, 1);
-        }
-      });
-      // console.log(newTracks);
+      const trackIds = selectedTracks.map((track) => track._id);
 
       // backend update
       await axios.post(
@@ -248,10 +237,26 @@ export const UserProvider = ({ children }) => {
         message: `Successfully deleted!`,
       };
 
-      dispatch({
-        type: "UPDATE_TRACKS",
-        payload: { data: newTracks, notification },
-      });
+      // frontend update
+      if (selectedTracks.length === state.user.createdTracks.length) {
+        dispatch({
+          type: "UPDATE_TRACKS",
+          payload: { data: [], notification },
+        });
+      } else {
+        const newTracks = state.user.createdTracks;
+        selectedTracks.forEach((track) => {
+          const index = newTracks.indexOf(track);
+          if (index > -1) {
+            newTracks.splice(index, 1);
+          }
+        });
+
+        dispatch({
+          type: "UPDATE_TRACKS",
+          payload: { data: newTracks, notification },
+        });
+      }
 
       setTimeout(() => {
         dispatch({
