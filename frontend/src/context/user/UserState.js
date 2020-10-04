@@ -7,6 +7,7 @@ const initialState = {
   token: null,
   user: null,
   errMsg: null,
+  notification: null,
 };
 
 export const UserContext = createContext(initialState);
@@ -27,9 +28,14 @@ export const UserProvider = ({ children }) => {
       // console.log(res);
       localStorage.setItem("auth-token", token);
 
+      const notification = {
+        type: "success",
+        message: `Welcome back, ${state.user}!`,
+      };
+
       dispatch({
         type: "LOGIN_USER",
-        payload: { token, user },
+        payload: { token, user, notification },
       });
     } catch (err) {
       dispatch({
@@ -185,9 +191,14 @@ export const UserProvider = ({ children }) => {
           headers: { "user-auth-token": token },
         });
 
+        const notification = {
+          type: "success",
+          message: `Welcome back, ${userRes.data.displayName}!`,
+        };
+
         dispatch({
           type: "LOGIN_USER",
-          payload: { token, user: userRes.data },
+          payload: { token, user: userRes.data, notification },
         });
       }
     } catch (err) {
@@ -206,6 +217,7 @@ export const UserProvider = ({ children }) => {
         token: state.token,
         user: state.user,
         errMsg: state.errMsg,
+        notification: state.notification,
         loginUser,
         registerUser,
         logoutUser,

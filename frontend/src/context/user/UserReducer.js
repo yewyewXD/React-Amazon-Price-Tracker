@@ -6,6 +6,7 @@ export default (state, action) => {
         token: action.payload.token,
         user: action.payload.user,
         errMsg: null,
+        notification: action.payload.notification,
       };
 
     case "LOGOUT_USER":

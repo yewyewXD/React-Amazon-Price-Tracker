@@ -8,20 +8,26 @@ import {
 } from "react-notifications";
 
 export default function AppHeader({ isDashboard }) {
-  const { token, user, logoutUser } = useContext(UserContext);
+  const { token, user, logoutUser, notification } = useContext(UserContext);
 
-  if (token) {
-    NotificationManager.success(
-      `Welcome back, ${user.displayName}!`,
-      null,
-      3000
-    );
+  if (notification) {
+    const type = notification.type;
+    const message = notification.message;
+    if (type === "info") {
+      NotificationManager.info(message, null, 3000);
+    } else if (type === "success") {
+      NotificationManager.success(message, null, 3000);
+    } else if (type === "warning") {
+      NotificationManager.warning(message, null, 3000);
+    } else if (type === "error") {
+      NotificationManager.error(message, null, 3000);
+    }
   }
 
   return (
     <header className="header">
       <>
-        {!isDashboard && <NotificationContainer />}
+        <NotificationContainer />
 
         <nav className="navbar navbar-expand-sm navbar-light bg-light py-4">
           <div className="container">
