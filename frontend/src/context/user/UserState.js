@@ -106,6 +106,7 @@ export const UserProvider = ({ children }) => {
 
   async function addTrack(userId, trackUrl, name, expectedPrice, token) {
     try {
+      console.log("frontend submitting");
       const res = await axios.post(
         "http://localhost:5000/api/dashboard/track",
         {
@@ -116,35 +117,37 @@ export const UserProvider = ({ children }) => {
         },
         { headers: { "user-auth-token": token } }
       );
-      console.log("sent req");
 
-      let notification;
-      if (res.data.data.actualPrice === 0) {
-        notification = {
-          type: "warning",
-          message: `Failed to track price, please contact host`,
-        };
-      } else {
-        notification = {
-          type: "success",
-          message: `New product added!`,
-        };
-      }
+      console.log(res.data.data);
 
-      dispatch({
-        type: "ADD_TRACK",
-        payload: { data: res.data.data, notification },
-      });
-      setTimeout(() => {
-        dispatch({
-          type: "CLEAR_LOGS",
-          payload: null,
-        });
-      }, 100);
+      // let notification;
+      // if (res.data.data.actualPrice === 0) {
+      //   notification = {
+      //     type: "warning",
+      //     message: `Failed to track price, please report to host`,
+      //   };
+      // } else {
+      //   notification = {
+      //     type: "success",
+      //     message: `New product added!`,
+      //   };
+      // }
+
+      // dispatch({
+      //   type: "ADD_TRACK",
+      //   payload: { data: res.data.data, notification },
+      // });
+      // setTimeout(() => {
+      //   dispatch({
+      //     type: "CLEAR_LOGS",
+      //     payload: null,
+      //   });
+      // }, 100);
     } catch {
+      console.log("crawling failed");
       const notification = {
         type: "error",
-        message: "Action failed, please contact host",
+        message: "Action failed, please report to host",
       };
 
       dispatch({
@@ -201,7 +204,7 @@ export const UserProvider = ({ children }) => {
     } catch {
       const notification = {
         type: "warning",
-        message: "Error detected, please contact host",
+        message: "Error detected, please report to host",
       };
 
       dispatch({
@@ -258,7 +261,7 @@ export const UserProvider = ({ children }) => {
     } catch {
       const notification = {
         type: "warning",
-        message: "Error detected, please contact host",
+        message: "Error detected, please report to host",
       };
 
       dispatch({

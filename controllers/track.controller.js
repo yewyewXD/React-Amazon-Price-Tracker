@@ -22,33 +22,106 @@ exports.postTrack = async (req, res, next) => {
     console.log("crawling starts");
 
     // crawl Amazon product
-    const crawledProduct = await nightmare
+    let crawledProduct = {};
+
+    const imageExist = await nightmare
       .goto(trackUrl)
-      .wait("#landingImage")
-      .evaluate(() => {
-        const image = document.getElementById("landingImage").src;
-        const price = document.getElementById("priceblock_ourprice");
-        const salePrice = document.getElementById("priceblock_saleprice");
-        if (price !== null) {
-          const actualPrice = +price.innerText.substring(1);
-          return {
-            actualPrice,
-            image,
-          };
-        } else if (salePrice !== null) {
-          const actualPrice = +salePrice.innerText.substring(1);
-          return {
-            actualPrice,
-            image,
-          };
-        } else {
-          return {
-            actualPrice: 0,
-            image,
-          };
-        }
-      })
-      .end();
+      .wait(3000)
+      .exists("img#landingImage");
+
+    if (imageExist) {
+      const image = await nightmare
+        .goto(trackUrl)
+        .wait("img#landingImage")
+        .evaluate(() => document.getElementById("landingImage").src);
+      crawledProduct.image = image;
+    }
+
+    const dealPriceExist = await nightmare
+      .goto(trackUrl)
+      .wait(3000)
+      .exists("span#priceblock_dealprice");
+
+    if (dealPriceExist) {
+      const dealPrice = await nightmare
+        .goto(trackUrl)
+        .wait("span#priceblock_dealprice")
+        .evaluate(
+          () =>
+            +document
+              .getElementById("priceblock_dealprice")
+              .innerText.substring(1)
+        );
+      crawledProduct.actualPrice = dealPrice;
+    }
+
+    const ourPriceExist = await nightmare
+      .goto(trackUrl)
+      .wait(3000)
+      .exists("span#priceblock_ourprice");
+
+    if (ourPriceExist) {
+      const ourPrice = await nightmare
+        .goto(trackUrl)
+        .wait("span#priceblock_ourprice")
+        .evaluate(
+          () =>
+            +document
+              .getElementById("priceblock_ourprice")
+              .innerText.substring(1)
+        );
+      crawledProduct.actualPrice = ourPrice;
+    }
+
+    const salePriceExist = await nightmare
+      .goto(trackUrl)
+      .wait(3000)
+      .exists("span#priceblock_saleprice");
+
+    if (salePriceExist) {
+      const salePrice = await nightmare
+        .goto(trackUrl)
+        .wait("span#priceblock_saleprice")
+        .evaluate(
+          () =>
+            +document
+              .getElementById("priceblock_saleprice")
+              .innerText.substring(1)
+        );
+      crawledProduct.actualPrice = salePrice;
+    }
+
+    if (!crawledProduct.actualPrice) {
+      crawledProduct.actualPrice = 0;
+    }
+
+    // .evaluate(() => {
+    //   const image = document.getElementById("landingImage").src;
+    //   const price = document.getElementById("priceblock_ourprice");
+    //   if (price) {
+    //     const actualPrice = +price.innerText.substring(1);
+    //     return {
+    //       actualPrice,
+    //       image,
+    //     };
+    //   } else {
+    //     return {
+    //       actualPrice: 0,
+    //       image,
+    //     };
+    //   }
+    // })
+    // .end();
+
+    // else if (document.getElementById("priceblock_saleprice") !== null) {
+    //   const actualPrice = +document
+    //     .getElementById("priceblock_saleprice")
+    //     .innerText.substring(1);
+    //   return {
+    //     actualPrice,
+    //     image,
+    //   };
+    // }
 
     console.log("crawling ends");
     // // // upload track image to cloud database
@@ -57,21 +130,21 @@ exports.postTrack = async (req, res, next) => {
     // // });
 
     // // create track
-    const newTrack = {
-      image: crawledProduct.image,
-      name,
-      expectedPrice,
-      actualPrice: crawledProduct.actualPrice,
-      creator: user._id,
-    };
+    // const newTrack = {
+    //   image: crawledProduct.image,
+    //   name,
+    //   expectedPrice,
+    //   actualPrice: crawledProduct.actualPrice,
+    //   creator: user._id,
+    // };
 
-    const track = await Track.create(newTrack);
-    user.createdTracks.unshift(track._id);
-    user.save();
+    // const track = await Track.create(newTrack);
+    // user.createdTracks.unshift(track._id);
+    // user.save();
 
     return res.status(201).json({
       success: true,
-      data: track,
+      data: crawledProduct,
     });
   } catch (err) {
     console.log("crawling failed");
