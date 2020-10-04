@@ -21,7 +21,8 @@ export default function AppHeader({ isDashboard }) {
   return (
     <header className="header">
       <>
-        <NotificationContainer />
+        {!isDashboard && <NotificationContainer />}
+
         <nav className="navbar navbar-expand-sm navbar-light bg-light py-4">
           <div className="container">
             <Link className="navbar-brand dark bold" to="/">
