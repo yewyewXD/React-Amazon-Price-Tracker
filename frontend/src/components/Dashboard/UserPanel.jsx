@@ -60,6 +60,7 @@ export default function UserPanel() {
     }
   }
 
+  // show delete button if checked
   if (document.getElementById("deleteBtn")) {
     const deleteBtn = document.getElementById("deleteBtn");
     if (selectedTracks.length > 0) {
@@ -68,6 +69,24 @@ export default function UserPanel() {
       deleteBtn.style.display = "none";
     }
   }
+
+  // if (document.getElementsByClassName("check-btn")) {
+  //   let isCheckedCount = 0;
+  //   const checkButtons = document.getElementsByClassName("check-btn");
+  //   for (let button of checkButtons) {
+  //     if (button.checked) {
+  //       isCheckedCount++;
+  //     }
+  //   }
+  //   if (document.getElementById("deleteBtn")) {
+  //     const deleteBtn = document.getElementById("deleteBtn");
+  //     if (isCheckedCount > 0) {
+  //       deleteBtn.style.display = "inline-block";
+  //     } else {
+  //       deleteBtn.style.display = "none";
+  //     }
+  //   }
+  // }
 
   return (
     <div className="user-panel">
@@ -80,7 +99,12 @@ export default function UserPanel() {
             <button className="btn btn-primary btn-sm">+</button>
           </PopupBtn>
 
-          <PopupBtn type="deleteTrack" selectedTracks={selectedTracks}>
+          <PopupBtn
+            type="deleteTrack"
+            selectedTracks={selectedTracks}
+            setSelectedTracks={setSelectedTracks}
+          >
+            {/* update selectedTracks */}
             <button
               className="btn btn-danger btn-sm mx-3"
               id="deleteBtn"

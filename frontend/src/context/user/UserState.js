@@ -124,7 +124,7 @@ export const UserProvider = ({ children }) => {
 
       dispatch({
         type: "ADD_TRACK",
-        payload: { track: res.data.data, notification },
+        payload: { data: res.data.data, notification },
       });
     } catch {
       const notification = {
@@ -150,6 +150,7 @@ export const UserProvider = ({ children }) => {
     try {
       const tracks = state.user.createdTracks;
       const editedTrack = tracks.filter((track) => track._id === id);
+      const editedTrackName = editedTrack[0].name;
       editedTrack[0].name = name;
       editedTrack[0].expectedPrice = expectedPrice;
       const prevTracks = tracks.filter((track) => track._id !== id);
@@ -166,10 +167,22 @@ export const UserProvider = ({ children }) => {
 
       // console.log(res.data);
 
+      const notification = {
+        type: "info",
+        message: `Product "${editedTrackName}" has been edited`,
+      };
+
       dispatch({
         type: "UPDATE_TRACKS",
-        payload: newTracks,
+        payload: { data: newTracks, notification },
       });
+
+      setTimeout(() => {
+        dispatch({
+          type: "CLEAR_LOGS",
+          payload: null,
+        });
+      }, 100);
     } catch {
       const notification = {
         type: "warning",
@@ -212,10 +225,22 @@ export const UserProvider = ({ children }) => {
       });
       // console.log(newTracks);
 
+      const notification = {
+        type: "success",
+        message: `Successfully deleted!`,
+      };
+
       dispatch({
         type: "UPDATE_TRACKS",
-        payload: newTracks,
+        payload: { data: newTracks, notification },
       });
+
+      setTimeout(() => {
+        dispatch({
+          type: "CLEAR_LOGS",
+          payload: null,
+        });
+      }, 100);
     } catch {
       const notification = {
         type: "warning",
@@ -261,7 +286,7 @@ export const UserProvider = ({ children }) => {
 
         dispatch({
           type: "LOGIN_USER",
-          payload: { token, user: userRes.data },
+          payload: { token, user: userRes.data, notification: null },
         });
       }
     } catch (err) {

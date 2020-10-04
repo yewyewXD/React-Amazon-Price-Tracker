@@ -21,7 +21,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PopupBtn({ children, type, track, selectedTracks }) {
+export default function PopupBtn({
+  children,
+  type,
+  track,
+  selectedTracks,
+  setSelectedTracks,
+}) {
   const classes = useStyles();
   const { token } = useContext(UserContext);
 
@@ -84,6 +90,7 @@ export default function PopupBtn({ children, type, track, selectedTracks }) {
                   <DeleteConfirmModal
                     handleClose={handleClose}
                     selectedTracks={selectedTracks}
+                    setSelectedTracks={setSelectedTracks}
                   />
                 )}
 

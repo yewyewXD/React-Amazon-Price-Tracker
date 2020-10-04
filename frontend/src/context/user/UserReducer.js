@@ -23,7 +23,7 @@ export default (state, action) => {
         ...state,
         user: {
           ...state.user,
-          createdTracks: [action.payload.track, ...state.user.createdTracks],
+          createdTracks: [action.payload.data, ...state.user.createdTracks],
         },
         notification: action.payload.notification,
         isTracking: false,
@@ -34,8 +34,9 @@ export default (state, action) => {
         ...state,
         user: {
           ...state.user,
-          createdTracks: action.payload,
+          createdTracks: action.payload.data,
         },
+        notification: action.payload.notification,
       };
 
     case "LOG_ERROR_MESSAGE":
