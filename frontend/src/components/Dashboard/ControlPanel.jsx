@@ -1,7 +1,6 @@
 import React from "react";
-import { FaRegUser } from "react-icons/fa";
-import { RiFileList2Line, RiDashboardLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+// import { FaRegUser } from "react-icons/fa";
+import { RiDashboardLine } from "react-icons/ri";
 
 export default function ControlPanel() {
   const controlBars = [
@@ -13,10 +12,6 @@ export default function ControlPanel() {
       text: "My Tracks",
       icon: <RiDashboardLine className="icon" />,
     },
-    // {
-    //   text: "Tracks",
-    //   icon: <RiFileList2Line className="icon" />,
-    // },
   ];
   return (
     <div className="control-panel all-center-column flex-sm-column flex-row-reverse justify-content-start">

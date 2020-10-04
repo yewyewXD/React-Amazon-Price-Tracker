@@ -111,7 +111,7 @@ export const UserProvider = ({ children }) => {
       const prevTracks = tracks.filter((track) => track._id !== id);
       const newTracks = [...editedTrack, ...prevTracks];
 
-      const res = await axios.post(
+      await axios.post(
         `http://localhost:5000/api/dashboard/track/${id}`,
         {
           name,
@@ -136,7 +136,7 @@ export const UserProvider = ({ children }) => {
       const trackIds = tracks.map((track) => track._id);
 
       // backend update
-      const res = await axios.post(
+      await axios.post(
         `http://localhost:5000/api/dashboard/delete/tracks`,
         { trackIds },
         { headers: { "user-auth-token": state.token } }

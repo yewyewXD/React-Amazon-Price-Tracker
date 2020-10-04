@@ -43,7 +43,7 @@ export default function AddTrackModal({ handleClose }) {
           <input
             type="text"
             className="form-control"
-            placeholder="Paste the link of the Amazon product"
+            placeholder="Paste the Amazon product link"
             required
             ref={urlElRef}
           />
@@ -69,7 +69,7 @@ export default function AddTrackModal({ handleClose }) {
           <input
             type="number"
             className="form-control"
-            placeholder="Enter the ideal price for this product"
+            placeholder="Enter an ideal price"
             required
             ref={expectedPriceElRef}
           />
