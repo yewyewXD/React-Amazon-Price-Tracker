@@ -8,10 +8,6 @@ export default function LoginModal({ handleClose }) {
   const [isShowingPw, setIsShowingPw] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    setIsSubmitting(false);
-  }, []);
-
   const emailElRef = useRef();
   const pwElRef = useRef();
 
