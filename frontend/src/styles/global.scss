@@ -42,15 +42,6 @@ body {
   border-radius: 20px;
   padding: 8px 24px !important;
 }
-.btn-secondary {
-  border: solid 2px $darkThemeColor !important;
-  color: $darkThemeColor !important;
-  background: transparent !important;
-  &:hover {
-    background: $darkThemeColor !important;
-    color: white !important;
-  }
-}
 
 // header
 .header {

@@ -27,7 +27,7 @@ export default function HeroSection() {
               {!token && (
                 <>
                   <PopupBtn type="login">
-                    <button className="btn bold btn-secondary btn-md mx-2">
+                    <button className="btn btn-outline-secondary btn-md mx-2">
                       Login
                     </button>
                   </PopupBtn>

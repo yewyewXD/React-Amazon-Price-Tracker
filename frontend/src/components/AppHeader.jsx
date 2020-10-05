@@ -39,7 +39,7 @@ export default function AppHeader({ isDashboard }) {
               {/* not logged in */}
               {!token && (
                 <>
-                  <span className="dark mx-sm-2 mx-md-3 p-0">
+                  <span className="text-secondary mx-sm-2 mx-md-3 p-0">
                     <PopupBtn type="login">Login</PopupBtn>
                   </span>
                   <PopupBtn type="signUp">

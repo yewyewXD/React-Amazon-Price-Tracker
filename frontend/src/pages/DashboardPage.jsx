@@ -40,7 +40,7 @@ export default function DashboardPage() {
 
                   <div className="buttons mt-4 all-center">
                     <PopupBtn type="login">
-                      <button className="btn bold btn-secondary btn-md mx-2">
+                      <button className="btn bold btn-outline-secondary btn-md mx-2">
                         Login
                       </button>
                     </PopupBtn>

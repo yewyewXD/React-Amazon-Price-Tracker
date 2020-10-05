@@ -25,7 +25,7 @@ export default function DeleteConfirmModal({
         <div className="buttons all-center mt-3">
           <button
             type="button"
-            className="btn btn-secondary btn-md mx-2"
+            className="btn btn-outline-secondary btn-md mx-2"
             onClick={handleCloseModal}
           >
             Cancel
