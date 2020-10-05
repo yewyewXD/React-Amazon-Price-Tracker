@@ -1,5 +1,5 @@
 import React from "react";
-import { heroBg } from "../../images/homeImages";
+import { heroBg, heroVector } from "../../images/homeImages";
 
 export default function DiscoverSection() {
   return (
@@ -10,8 +10,10 @@ export default function DiscoverSection() {
       >
         <div className="container all-center">
           <div className="row">
-            <div className="col-md-6"></div>
-            <div className="col-md-6 my-auto">
+            <div className="col-lg-6 d-lg-block d-none my-auto">
+              <img src={heroVector} className="w-100" alt="" />
+            </div>
+            <div className="col-lg-6 my-auto">
               <div className="subtitle bold text-white-50 text-uppercase">
                 our mission
               </div>

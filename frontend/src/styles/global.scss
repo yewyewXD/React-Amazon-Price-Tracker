@@ -98,14 +98,24 @@ body {
 
 @media (max-width: 767.98px) {
   .popup-modal {
-    height: 60vh;
+    height: 70vh;
     .form-container {
       padding: 24px 48px;
       .edit-track-title {
         color: white;
       }
       .track-detail-image {
+        width: 35%;
+      }
+    }
+  }
+}
+@media (max-width: 500px) {
+  .popup-modal {
+    .form-container {
+      .track-detail-image {
         width: 50%;
+        margin-bottom: 24px;
       }
     }
   }
@@ -134,8 +144,7 @@ body {
     .form-container {
       padding: 12px 24px;
       .track-detail-image {
-        width: 70%;
-        margin-bottom: 24px;
+        width: 60%;
       }
     }
   }

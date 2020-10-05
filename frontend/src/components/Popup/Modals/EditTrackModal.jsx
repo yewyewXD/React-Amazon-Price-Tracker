@@ -145,7 +145,7 @@ export default function EditTrackModal({ handleClose, track }) {
         <div className="buttons all-center justify-content-between mt-3">
           <button
             type="button"
-            className="btn btn-secondary btn-md"
+            className="btn btn-outline-secondary btn-md"
             onClick={handleCloseModal}
           >
             Cancel
