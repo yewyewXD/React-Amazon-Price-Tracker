@@ -12,17 +12,23 @@ export default function DiscoverSection() {
           <div className="row">
             <div className="col-md-6"></div>
             <div className="col-md-6 my-auto">
-              <div className="subtitle bold text-white-50">Subtitle</div>
-              <div className="title bold my-3">Title</div>
-              <div className="description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
-                quas unde necessitatibus voluptatibus saepe rerum minus
-                exercitationem praesentium voluptates, quos dolores temporibus
-                adipisci error dolorem qui quo repellat ullam voluptate,
-                recusandae culpa eum blanditiis? Soluta a, distinctio optio quae
-                nisi quaerat animi recusandae veritatis, laudantium officia,
-                eaque dignissimos sapiente vitae.
+              <div className="subtitle bold text-white-50 text-uppercase">
+                our mission
               </div>
+              <div className="title bold my-3">Say Goodbye to Bookmarks</div>
+              <p className="description">
+                Are you're tired of bookmarking Amazon product pages and
+                checking them out one by one, to see if their prices drop? Don't
+                worry, <span className="bold">TrackerBase</span> is here for the
+                rescue.
+              </p>
+
+              <p className="description">
+                We automate all the boring process and show the latest prices of
+                the Amazon products you tracked in one place. While waiting for
+                our system to finish the trace, you can just sit back and have a
+                cup of tea.
+              </p>
             </div>
           </div>
         </div>
