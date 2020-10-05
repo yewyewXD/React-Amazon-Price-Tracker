@@ -1,6 +1,5 @@
 const Track = require("../models/Track");
 const User = require("../models/User");
-// const { cloudinary } = require("../utils/cloudinary");
 const nightmare = require("nightmare")();
 
 // @desc Add track
@@ -10,7 +9,6 @@ exports.postTrack = async (req, res, next) => {
   try {
     const { userId, trackUrl, name, expectedPrice } = req.body;
 
-    // check user
     const user = await User.findById(userId);
     if (!user) {
       return res.status(401).json({
