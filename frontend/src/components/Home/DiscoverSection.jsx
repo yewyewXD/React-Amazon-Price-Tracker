@@ -3,7 +3,7 @@ import { heroBg } from "../../images/homeImages";
 
 export default function DiscoverSection() {
   return (
-    <section className="discover py-5 bg-primary text-white">
+    <section className="discover py-5 text-white">
       <div
         className="discover-background w-100 h-100 all-center"
         style={{ background: `url(${heroBg})` }}
