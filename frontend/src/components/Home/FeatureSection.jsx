@@ -41,7 +41,7 @@ export default function FeatureSection() {
                 <img
                   src={featureCol.image}
                   alt={featureCol.title}
-                  style={{ zIndex: 2 }}
+                  className="front-image"
                 />
               </div>
               <div className="title bold mb-3 mt-4 ">{featureCol.title}</div>

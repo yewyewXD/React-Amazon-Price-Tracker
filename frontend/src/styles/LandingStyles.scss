@@ -23,6 +23,20 @@
       width: 50em;
     }
   }
+
+  .feature {
+    .column {
+      .front-image {
+        z-index: 1;
+      }
+    }
+  }
+
+  .discover {
+    .title {
+      font-size: 2rem;
+    }
+  }
 }
 
 @media (max-width: 1199.98px) {
@@ -73,6 +87,11 @@
       h1.title {
         font-size: 1.9rem;
       }
+      .column {
+        .front-image {
+          width: 90px;
+        }
+      }
     }
   }
 }
@@ -85,6 +104,12 @@
         button {
           margin: 0.5em 0;
         }
+      }
+    }
+
+    .discover {
+      .title {
+        font-size: 1.8rem;
       }
     }
   }
