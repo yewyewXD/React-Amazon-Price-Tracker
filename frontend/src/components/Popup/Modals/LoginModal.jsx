@@ -43,7 +43,7 @@ export default function LoginModal({ handleClose }) {
         <div className="all-center-column">
           <Loader type="Puff" color="#5fb0e5" height={200} width={200} />
           <span className="mt-3 text-center">
-            Please wait while we're creating your account
+            Please wait while we're logging you in
           </span>
         </div>
       )}
