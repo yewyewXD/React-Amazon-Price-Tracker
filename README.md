@@ -43,7 +43,7 @@ Last modified on: 5 October 2020 <br>
 
 Follow from Part 1 (Create an Atlas Account) to Part 5 (Connect to Your Cluster) in [this documentation](https://docs.atlas.mongodb.com/getting-started/). <br>
 
-In [Part 5](https://docs.atlas.mogodb.com/tutorial/connect-to-your-cluster/), skip to [Connect to Your Atlas Cluster](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/#connect-to-your-atlas-cluster) and follow from Step 1 to Step 4 to get the connection string. <br>
+In [Part 5](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/), skip to [Connect to Your Atlas Cluster](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/#connect-to-your-atlas-cluster) and follow from Step 1 to Step 4 to get the connection string. <br>
 
 Now, clone the repository, then:
 
