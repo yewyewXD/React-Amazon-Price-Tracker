@@ -1,7 +1,7 @@
 {
   "name": "amazon-tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "an app to track amazon product price",
   "engines": {
     "node": "12.16.2"
   },
@@ -11,7 +11,7 @@
     "client-install": "cd frontend && npm install",
     "client-start": "cd frontend && npm start",
     "build": "cd frontend && npm run build",
-    "heroku-postbuild": "npm run client-install && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend &&&& npm run build --prefix frontend",
     "dev": "concurrently \"nodemon server\" \"npm start --prefix frontend\""
   },
   "keywords": [],
