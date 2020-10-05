@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../../../context/user/UserState";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Loader from "react-loader-spinner";
