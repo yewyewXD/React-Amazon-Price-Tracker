@@ -123,7 +123,7 @@ export const UserProvider = ({ children }) => {
       if (res.data.data.actualPrice === 0) {
         notification = {
           type: "warning",
-          message: `Failed to track price, please report to host`,
+          message: `Failed to track price, please report to us through the footer of homepage`,
         };
       } else {
         notification = {
@@ -204,7 +204,8 @@ export const UserProvider = ({ children }) => {
     } catch {
       const notification = {
         type: "warning",
-        message: "Error detected, please report to host",
+        message:
+          "Error detected, please report to us through the footer of homepage",
       };
 
       dispatch({
@@ -267,7 +268,8 @@ export const UserProvider = ({ children }) => {
     } catch {
       const notification = {
         type: "warning",
-        message: "Error detected, please report to host",
+        message:
+          "Error detected, please report to us through the footer of homepage",
       };
 
       dispatch({
