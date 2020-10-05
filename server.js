@@ -4,9 +4,9 @@ const connectDB = require("./config/db");
 const cors = require("cors");
 
 // middleware
-const app = express();
-dotenv.config({ path: "./config/config.env" });
+dotenv.config();
 connectDB();
+const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
