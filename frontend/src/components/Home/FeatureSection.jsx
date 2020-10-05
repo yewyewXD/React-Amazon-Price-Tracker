@@ -5,21 +5,21 @@ export default function FeatureSection() {
   const featureCols = [
     {
       image: featureItemBg,
-      title: "Step 1",
+      title: "Create an account",
       subtitle:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur cumque deserunt assumenda natus facere omnis voluptatum modi dolorum cum amet?",
+        "To access to your personal dashboard, you have to first login or create an account.",
     },
     {
       image: featureItemBg,
-      title: "Step 2",
+      title: "Track a new product",
       subtitle:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur cumque deserunt assumenda natus facere omnis voluptatum modi dolorum cum amet?",
+        "Go to any product detail page on Amazon, copy & paste the link into the Product URL field, label the record with a personalized name, enter your desired price, and run the trace.",
     },
     {
       image: featureItemBg,
-      title: "Step 3",
+      title: "Keep it updated",
       subtitle:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur cumque deserunt assumenda natus facere omnis voluptatum modi dolorum cum amet?",
+        "You can re-track all the recorded products in just one click. Do it once in a while to get the latest price and information of the products.",
     },
   ];
   return (

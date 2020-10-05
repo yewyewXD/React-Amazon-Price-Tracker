@@ -19,7 +19,7 @@ export default function HeroSection() {
               Welcome to <span className="dark">TrackerBase</span>
             </div>
             <div className="subtitle">
-              We help you track any Amazon product and maintain the records in
+              We help you track any Amazon product and maintain your records in
               one place.
             </div>
 
