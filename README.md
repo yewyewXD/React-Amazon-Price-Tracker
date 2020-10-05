@@ -6,7 +6,7 @@ A fullstack web app to track the price of any Amazon product and store user's tr
 
 ## Build status
 
-**Sucess:** [See Live](https://trackerbase.herokuapp.com/)
+**Success:** [See Live](https://trackerbase.herokuapp.com/)
 
 Started on: 13 Aug 2020 <br>
 Completed on: 16 Aug 2020 <br>
