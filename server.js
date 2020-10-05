@@ -18,6 +18,10 @@ app.use("/api/user", userRoute);
 const trackRoute = require("./routes/track.route");
 app.use("/api/dashboard", auth, trackRoute);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/build"));
+}
+
 // port
 const PORT = process.env.PORT || 5000;
 app.listen(
