@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 const trackSchema = new mongoose.Schema({
+  productUrl: {
+    type: String,
+  },
   image: {
     type: String,
     required: true,

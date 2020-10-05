@@ -116,6 +116,7 @@ exports.postTrack = async (req, res, next) => {
 
     // // create track
     const newTrack = {
+      productUrl: trackUrl,
       image: crawledProduct.image,
       name,
       expectedPrice,
