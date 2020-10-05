@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
   //Actions
   async function loginUser(email, password) {
     try {
-      const res = await axios.post("http://localhost:5000/api/user/login", {
+      const res = await axios.post("/api/user/login", {
         email,
         password,
       });
@@ -61,7 +61,7 @@ export const UserProvider = ({ children }) => {
 
   async function registerUser(displayName, email, password, confirmPassword) {
     try {
-      await axios.post("http://localhost:5000/api/user/register", {
+      await axios.post("/api/user/register", {
         displayName,
         email,
         password,
@@ -107,7 +107,7 @@ export const UserProvider = ({ children }) => {
   async function addTrack(userId, trackUrl, name, expectedPrice, token) {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/dashboard/track",
+        "/api/dashboard/track",
         {
           userId,
           trackUrl,
@@ -175,7 +175,7 @@ export const UserProvider = ({ children }) => {
       const newTracks = [...editedTrack, ...prevTracks];
 
       await axios.post(
-        `http://localhost:5000/api/dashboard/track/${id}`,
+        `/api/dashboard/track/${id}`,
         {
           name,
           expectedPrice,
@@ -227,7 +227,7 @@ export const UserProvider = ({ children }) => {
 
       // backend update
       await axios.post(
-        `http://localhost:5000/api/dashboard/delete/tracks`,
+        `/api/dashboard/delete/tracks`,
         { trackIds },
         { headers: { "user-auth-token": state.token } }
       );
@@ -295,15 +295,13 @@ export const UserProvider = ({ children }) => {
         token = "";
       }
 
-      const tokenRes = await axios.post(
-        "http://localhost:5000/api/user/tokenIsValid",
-        null,
-        { headers: { "user-auth-token": token } }
-      );
+      const tokenRes = await axios.post("/api/user/tokenIsValid", null, {
+        headers: { "user-auth-token": token },
+      });
 
       // get and login user data
       if (tokenRes.data) {
-        const userRes = await axios.get("http://localhost:5000/api/user/", {
+        const userRes = await axios.get("/api/user/", {
           headers: { "user-auth-token": token },
         });
 
