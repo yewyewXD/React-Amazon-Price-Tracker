@@ -47,6 +47,11 @@ export default function AddTrackModal({ handleClose, open }) {
     }
   }
 
+  function handleAddDemoLink() {
+    urlElRef.current.value =
+      "https://www.amazon.com/Betron-Earphones-Headphones-Definition-BlackBerry/dp/B00I3LTQ9O";
+  }
+
   if (!isTracking && open) {
     handleClose();
     if (isSubmitting) {
@@ -71,8 +76,17 @@ export default function AddTrackModal({ handleClose, open }) {
 
           <form className="form" onSubmit={handleAddTrack}>
             <div className="form-group">
-              <label htmlFor="productUrl" className="bold d-block">
-                Product URL
+              <label htmlFor="productUrl" className="d-block">
+                <span className="bold">Product URL</span>
+                <span
+                  className="text-decoration-none ml-3"
+                  role="button"
+                  onClick={handleAddDemoLink}
+                >
+                  <small>
+                    <u>use demo link</u>
+                  </small>
+                </span>
               </label>
               <input
                 type="text"
