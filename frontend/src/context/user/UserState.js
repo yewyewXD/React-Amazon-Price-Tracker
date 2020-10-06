@@ -106,7 +106,6 @@ export const UserProvider = ({ children }) => {
 
   async function addTrack(userId, trackUrl, name, expectedPrice, token) {
     try {
-      console.log(trackUrl);
       const res = await axios.post(
         "/api/dashboard/track",
         {
