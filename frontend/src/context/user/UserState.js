@@ -106,6 +106,7 @@ export const UserProvider = ({ children }) => {
 
   async function addTrack(userId, trackUrl, name, expectedPrice, token) {
     try {
+      console.log(trackUrl);
       const res = await axios.post(
         "/api/dashboard/track",
         {
@@ -147,7 +148,7 @@ export const UserProvider = ({ children }) => {
       const notification = {
         type: "error",
         message: "Traction Failed!",
-        title: "Please retry and contact host if it fails again.",
+        title: "Please retry and contact host if it fails more than once.",
       };
 
       dispatch({

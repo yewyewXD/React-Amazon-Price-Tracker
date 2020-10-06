@@ -20,22 +20,15 @@ exports.postTrack = async (req, res, next) => {
     console.log("crawling starts");
 
     // crawl Amazon product
-    let crawledProduct = {};
+    const crawledProduct = {};
 
     // image check
-    const imageExist = await nightmare
+    const image = await nightmare
       .goto(trackUrl)
-      .wait(3500)
-      .exists("img#landingImage");
-
-    if (imageExist) {
-      console.log("found image");
-      const image = await nightmare
-        .goto(trackUrl)
-        .wait("img#landingImage")
-        .evaluate(() => document.getElementById("landingImage").src);
-      crawledProduct.image = image;
-    }
+      .wait("img#landingImage")
+      .evaluate(() => document.getElementById("landingImage").src);
+    crawledProduct.image = image;
+    console.log("we found the image");
 
     // price check 1
     if (!crawledProduct.actualPrice) {
@@ -54,8 +47,7 @@ exports.postTrack = async (req, res, next) => {
               +document
                 .getElementById("priceblock_ourprice")
                 .innerText.substring(1)
-          )
-          .end();
+          );
         crawledProduct.actualPrice = ourPrice;
       }
     }
@@ -77,8 +69,7 @@ exports.postTrack = async (req, res, next) => {
               +document
                 .getElementById("priceblock_saleprice")
                 .innerText.substring(1)
-          )
-          .end();
+          );
 
         crawledProduct.actualPrice = salePrice;
       }
@@ -101,8 +92,7 @@ exports.postTrack = async (req, res, next) => {
               +document
                 .getElementById("priceblock_dealprice")
                 .innerText.substring(1)
-          )
-          .end();
+          );
         crawledProduct.actualPrice = dealPrice;
       }
     }
