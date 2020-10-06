@@ -58,6 +58,10 @@ body {
 // footer
 .footer {
   background: $themeColor;
+  .report-problem {
+    position: absolute;
+    right: 0;
+  }
 }
 
 //modal
@@ -107,6 +111,13 @@ body {
       .track-detail-image {
         width: 35%;
       }
+    }
+  }
+
+  .footer {
+    .report-problem {
+      position: initial;
+      right: initial;
     }
   }
 }
