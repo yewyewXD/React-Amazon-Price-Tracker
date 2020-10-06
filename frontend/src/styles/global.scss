@@ -66,6 +66,7 @@ body {
 
 //modal
 .popup-modal {
+  overflow-y: initial !important;
   background: $themeColor;
   .form-container-image {
     width: 40%;
@@ -102,12 +103,11 @@ body {
 
 @media (max-width: 767.98px) {
   .popup-modal {
-    height: 70vh;
     .form-container {
+      max-height: 70vh;
+      overflow-y: auto;
       padding: 24px 48px;
-      .edit-track-title {
-        color: white;
-      }
+
       .track-detail-image {
         width: 35%;
       }

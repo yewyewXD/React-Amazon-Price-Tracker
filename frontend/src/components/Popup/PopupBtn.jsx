@@ -55,10 +55,10 @@ export default function PopupBtn({
       >
         <Fade in={open}>
           <div
-            className={`${classes.paper} container bg-white p-0 all-center overflow-auto`}
+            className={`${classes.paper} popup-modal-dialog container bg-white p-0 all-center`}
           >
             <div
-              className={`popup-modal overflow-auto w-100 all-center ${
+              className={`popup-modal w-100 all-center ${
                 type === "deleteTrack" && "bg-white"
               }`}
             >

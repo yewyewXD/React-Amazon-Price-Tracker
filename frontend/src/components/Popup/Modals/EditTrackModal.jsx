@@ -61,11 +61,11 @@ export default function EditTrackModal({ handleClose, track }) {
 
   return (
     <>
-      <h2 className="edit-track-title bold mb-md-4 mb-0">
+      <h2 className="edit-track-title text-md-left text-center bold mb-4 ">
         Edit your tracked product
       </h2>
       <form className="form" onSubmit={handleEditTrack}>
-        <div className="product-image all-center d-md-none">
+        <div className="product-image all-center d-md-none mb-3">
           <img
             src={track.image}
             alt={track.name}
