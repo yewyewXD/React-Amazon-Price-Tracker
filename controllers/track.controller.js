@@ -134,7 +134,8 @@ exports.deleteTracks = async (req, res, next) => {
 // @access private
 exports.multiTrack = async (req, res, next) => {
   try {
-    const { userId, trackUrl, name, expectedPrice } = req.body;
+    const { userId, createdTracks } = req.body;
+    const trackIds = createdTracks.map((createdTrack) => createdTrack._id);
 
     const user = await User.findById(userId);
     if (!user) {
@@ -144,55 +145,66 @@ exports.multiTrack = async (req, res, next) => {
       });
     }
 
-    // crawl Amazon product
-    console.log("crawling starts");
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    await page.goto(trackUrl, { waitUntil: "networkidle2" });
-
-    const crawledProduct = await page.evaluate(() => {
-      let actualPrice = 0;
-
-      const image = document.querySelector("#landingImage").src;
-      const ourPrice = document.querySelector("#priceblock_ourprice");
-      const salePrice = document.querySelector("#priceblock_saleprice");
-      const dealPrice = document.querySelector("#priceblock_dealprice");
-
-      if (ourPrice) {
-        actualPrice = +ourPrice.innerText.substring(1);
-      } else if (salePrice) {
-        actualPrice = +salePrice.innerText.substring(1);
-      } else if (dealPrice) {
-        actualPrice = +dealPrice.innerText.substring(1);
+    // loop through each track START
+    createdTracks.forEach(async (createdTrack) => {
+      const existingTrack = await Track.findById(createdTrack._id);
+      if (!existingTrack) {
+        return res.status(401).json({
+          success: false,
+          error: "No track found",
+        });
       }
 
-      return {
-        image,
-        actualPrice,
-      };
+      // crawl Amazon product
+      console.log(`${createdTrack.name} crawling starts`);
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+
+      await page.goto(createdTrack.productUrl, { waitUntil: "networkidle2" });
+
+      const crawledProduct = await page.evaluate(() => {
+        let actualPrice = 0;
+
+        const image = document.querySelector("#landingImage").src;
+        const ourPrice = document.querySelector("#priceblock_ourprice");
+        const salePrice = document.querySelector("#priceblock_saleprice");
+        const dealPrice = document.querySelector("#priceblock_dealprice");
+
+        if (ourPrice) {
+          actualPrice = +ourPrice.innerText.substring(1);
+        } else if (salePrice) {
+          actualPrice = +salePrice.innerText.substring(1);
+        } else if (dealPrice) {
+          actualPrice = +dealPrice.innerText.substring(1);
+        }
+
+        return {
+          image,
+          actualPrice,
+        };
+      });
+      console.log(`${createdTrack.name} crawling ends`);
+      await browser.close();
+
+      const { image, actualPrice } = crawledProduct;
+
+      if (existingTrack.image !== image) {
+        existingTrack.image = image;
+        await existingTrack.save();
+      }
+
+      if (existingTrack.actualPrice !== actualPrice) {
+        existingTrack.actualPrice = actualPrice;
+        await existingTrack.save();
+      }
     });
+    // loop through each track END
 
-    console.log("crawling ends");
-    await browser.close();
-
-    // // create track
-    const newTrack = {
-      productUrl: trackUrl,
-      image: crawledProduct.image,
-      name,
-      expectedPrice,
-      actualPrice: crawledProduct.actualPrice,
-      creator: user._id,
-    };
-
-    const track = await Track.create(newTrack);
-    user.createdTracks.unshift(track._id);
-    user.save();
+    const tracks = await Track.find({ _id: { $in: trackIds } });
 
     return res.status(201).json({
       success: true,
-      data: track,
+      data: tracks,
     });
   } catch (err) {
     console.log("crawling failed");
