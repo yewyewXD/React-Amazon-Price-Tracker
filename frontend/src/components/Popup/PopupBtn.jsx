@@ -88,6 +88,7 @@ export default function PopupBtn({
                 {(type === "deleteTrack" || type === "multiTrack") && token && (
                   <ConfirmModal
                     type={type}
+                    open={open}
                     handleClose={handleClose}
                     selectedTracks={selectedTracks}
                     setSelectedTracks={setSelectedTracks}
