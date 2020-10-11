@@ -79,7 +79,7 @@ export default function UserPanel() {
         <div className="actions my-4 all-center justify-content-start">
           <PopupBtn type="multiTrack">
             <button className="btn btn-primary btn-info btn-sm mr-2">
-              MultiTrack
+              Update all
             </button>
           </PopupBtn>
 

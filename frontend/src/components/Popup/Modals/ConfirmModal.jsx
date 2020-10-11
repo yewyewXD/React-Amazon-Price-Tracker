@@ -68,7 +68,7 @@ export default function ConfirmModal({
                 className="btn btn-info btn-md mx-2"
                 onClick={handleMultiTrack}
               >
-                Multi-track
+                Update All
               </button>
             )}
           </div>
