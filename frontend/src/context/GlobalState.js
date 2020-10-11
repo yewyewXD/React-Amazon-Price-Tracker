@@ -296,7 +296,7 @@ export const GlobalProvider = ({ children }) => {
         },
         { headers: { "user-auth-token": state.token } }
       );
-      console.log(res.data.data);
+      // console.log(res.data.data);
 
       const notification = {
         type: "success",
