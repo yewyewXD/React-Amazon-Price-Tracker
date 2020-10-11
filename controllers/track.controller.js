@@ -181,7 +181,7 @@ exports.multiTrack = async (req, res, next) => {
       }
 
       // crawl Amazon product
-      console.log(`${createdTrack.name} crawling starts`);
+      console.log(`${createdTrack.name} re-crawling starts`);
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
 
@@ -208,7 +208,7 @@ exports.multiTrack = async (req, res, next) => {
           actualPrice,
         };
       });
-      console.log(`${createdTrack.name} crawling ends`);
+      console.log(`${createdTrack.name} re-crawling ends`);
       await browser.close();
 
       const { image, actualPrice } = crawledProduct;
