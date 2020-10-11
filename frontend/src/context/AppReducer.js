@@ -47,6 +47,7 @@ export default (state, action) => {
           createdTracks: action.payload.data,
         },
         notification: action.payload.notification,
+        isTracking: false,
       };
 
     case "LOG_ERROR_MESSAGE":
