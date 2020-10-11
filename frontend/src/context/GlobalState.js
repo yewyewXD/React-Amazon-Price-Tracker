@@ -174,16 +174,16 @@ export const GlobalProvider = ({ children }) => {
       const prevTracks = tracks.filter((track) => track._id !== id);
       const newTracks = [...editedTrack, ...prevTracks];
 
-      await axios.post(
-        `/api/dashboard/track/${id}`,
-        {
-          name,
-          expectedPrice,
-        },
-        { headers: { "user-auth-token": state.token } }
-      );
-
-      // console.log(res.data);
+      if (state.user.email !== "tester@mail.com") {
+        await axios.post(
+          `/api/dashboard/track/${id}`,
+          {
+            name,
+            expectedPrice,
+          },
+          { headers: { "user-auth-token": state.token } }
+        );
+      }
 
       const notification = {
         type: "info",
