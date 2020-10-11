@@ -37,7 +37,7 @@ export default function ConfirmModal({
         <div className="all-center-column">
           <Loader type="Puff" color="#5fb0e5" height={200} width={200} />
           <span className="mt-3 text-center">
-            Please wait while we are tracking the product
+            Please wait while we are tracking the products
           </span>
         </div>
       )}
