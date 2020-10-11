@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { heroBg, heroVector } from "../../images/homeImages";
 import PopupBtn from "../Popup/PopupBtn";
-import { UserContext } from "../../context/user/UserState";
+import { GlobalContext } from "../../context/user/GlobalState";
 import { Link } from "react-router-dom";
 
 export default function HeroSection() {
-  const { token } = useContext(UserContext);
+  const { token } = useContext(GlobalContext);
 
   return (
     <section className="hero text-center">

@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../../context/user/UserState";
+import { GlobalContext } from "../../../context/user/GlobalState";
 import FlashMessage from "react-flash-message";
 
 export default function EditTrackModal({ handleClose, track }) {
-  const { user, editTrack } = useContext(UserContext);
+  const { user, editTrack } = useContext(GlobalContext);
   const [trackName, setTrackName] = useState(track.name);
   const [trackExpectedPrice, setTrackExpectedPrice] = useState(
     track.expectedPrice

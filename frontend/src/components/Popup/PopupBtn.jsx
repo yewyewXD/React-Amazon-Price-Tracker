@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { UserContext } from "../../context/user/UserState";
+import { GlobalContext } from "../../context/user/GlobalState";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -28,7 +28,7 @@ export default function PopupBtn({
   setSelectedTracks,
 }) {
   const classes = useStyles();
-  const { token } = useContext(UserContext);
+  const { token } = useContext(GlobalContext);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {

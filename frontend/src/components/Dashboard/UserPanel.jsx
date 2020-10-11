@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import PopupBtn from "../Popup/PopupBtn";
-import { UserContext } from "../../context/user/UserState";
+import { GlobalContext } from "../../context/user/GlobalState";
 
 export default function UserPanel() {
-  const { user } = useContext(UserContext);
+  const { user } = useContext(GlobalContext);
   const [selectedTracks, setSelectedTracks] = useState([]);
   const createdTracks = user.createdTracks;
 

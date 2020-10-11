@@ -3,11 +3,11 @@ import AppHeader from "../components/AppHeader";
 import ControlPanel from "../components/Dashboard/ControlPanel";
 import UserPanel from "../components/Dashboard/UserPanel";
 import PopupBtn from "../components/Popup/PopupBtn";
-import { UserContext } from "../context/user/UserState";
+import { GlobalContext } from "../context/user/GlobalState";
 import { heroBg } from "../images/homeImages";
 
 export default function DashboardPage() {
-  const { token } = useContext(UserContext);
+  const { token } = useContext(GlobalContext);
 
   if (token) {
     return (

@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import UserReducer from "./UserReducer";
+import AppReducer from "./AppReducer";
 import axios from "axios";
 
 // Initial state
@@ -11,10 +11,10 @@ const initialState = {
   isTracking: true,
 };
 
-export const UserContext = createContext(initialState);
+export const GlobalContext = createContext(initialState);
 
-export const UserProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(UserReducer, initialState);
+export const GlobalProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //Actions
   async function loginUser(email, password) {
@@ -328,7 +328,7 @@ export const UserProvider = ({ children }) => {
   // auto login END--------------------------------------------------------------
 
   return (
-    <UserContext.Provider
+    <GlobalContext.Provider
       value={{
         token: state.token,
         user: state.user,
@@ -344,6 +344,6 @@ export const UserProvider = ({ children }) => {
       }}
     >
       {children}
-    </UserContext.Provider>
+    </GlobalContext.Provider>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useContext, useRef, useState } from "react";
-import { UserContext } from "../../../context/user/UserState";
+import { GlobalContext } from "../../../context/user/GlobalState";
 import Loader from "react-loader-spinner";
 import FlashMessage from "react-flash-message";
 
 export default function AddTrackModal({ handleClose, open }) {
-  const { user, token, addTrack, isTracking } = useContext(UserContext);
+  const { user, token, addTrack, isTracking } = useContext(GlobalContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasError, setHasError] = useState(false);
 

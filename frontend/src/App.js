@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { UserProvider } from "./context/user/UserState";
+import { GlobalProvider } from "./context/user/GlobalState";
 
 // styles
 import "bootstrap/dist/css/bootstrap.css";
@@ -16,13 +16,13 @@ import DashboardPage from "./pages/DashboardPage";
 function App() {
   return (
     <BrowserRouter>
-      <UserProvider>
+      <GlobalProvider>
         <Switch>
           <Redirect from="/home" to="/" exact />
           <Route path="/" exact component={HomePage} />
           <Route path="/dashboard" component={DashboardPage} />
         </Switch>
-      </UserProvider>
+      </GlobalProvider>
     </BrowserRouter>
   );
 }

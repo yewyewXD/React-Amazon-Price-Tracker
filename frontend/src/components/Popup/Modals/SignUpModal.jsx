@@ -1,10 +1,10 @@
 import React, { useContext, useRef, useState } from "react";
-import { UserContext } from "../../../context/user/UserState";
+import { GlobalContext } from "../../../context/user/GlobalState";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Loader from "react-loader-spinner";
 
 export default function SignUpModal({ handleClose }) {
-  const { registerUser, token, errMsg } = useContext(UserContext);
+  const { registerUser, token, errMsg } = useContext(GlobalContext);
   const [isShowingPw, setIsShowingPw] = useState(false);
   const [isShowingConfirmPw, setIsShowingConfirmPw] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

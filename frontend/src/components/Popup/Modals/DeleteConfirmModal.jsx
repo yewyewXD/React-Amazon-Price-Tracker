@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../../context/user/UserState";
+import { GlobalContext } from "../../../context/user/GlobalState";
 
 export default function DeleteConfirmModal({
   handleClose,
   selectedTracks,
   setSelectedTracks,
 }) {
-  const { deleteTracks } = useContext(UserContext);
+  const { deleteTracks } = useContext(GlobalContext);
   function handleDeleteTrack(e) {
     e.preventDefault();
     deleteTracks(selectedTracks);

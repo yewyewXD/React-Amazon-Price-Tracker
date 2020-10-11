@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import PopupBtn from "./Popup/PopupBtn";
-import { UserContext } from "../context/user/UserState";
+import { GlobalContext } from "../context/user/GlobalState";
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
 
 export default function AppHeader({ isDashboard }) {
-  const { token, logoutUser, notification } = useContext(UserContext);
+  const { token, logoutUser, notification } = useContext(GlobalContext);
 
   if (notification) {
     const type = notification.type;
