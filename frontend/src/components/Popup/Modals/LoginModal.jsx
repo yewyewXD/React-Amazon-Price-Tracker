@@ -37,6 +37,22 @@ export default function LoginModal({ handleClose }) {
     setIsShowingPw(!isShowingPw);
   }
 
+  function handleGuestLogin() {
+    const email = "tester@mail.com";
+    const pw = "tester";
+
+    loginUser(email, pw);
+
+    if (!token) {
+      setIsSubmitting(true);
+    }
+
+    if (token) {
+      handleClose();
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <>
       {!token && isSubmitting && (
@@ -92,7 +108,12 @@ export default function LoginModal({ handleClose }) {
               <small className="text-danger d-block mt-1">{errMsg}</small>
             )}
 
-            <button className="btn btn-primary btn-md mt-3">Login</button>
+            <div className="login-buttons mt-3">
+              <button className="btn btn-primary btn-md mr-3">Login</button>
+              <small role="button" onClick={handleGuestLogin}>
+                <u>Use guest account</u>
+              </small>
+            </div>
           </form>
         </>
       )}

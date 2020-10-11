@@ -27,9 +27,17 @@ export default function HeroSection() {
               {!token && (
                 <>
                   <PopupBtn type="login">
-                    <button className="btn btn-outline-secondary btn-md mx-2">
-                      Login
-                    </button>
+                    <div className="call-to-action all-center-column">
+                      <button className="btn btn-outline-secondary btn-md mx-2">
+                        Login
+                      </button>
+                      <small
+                        className="position-absolute text-muted"
+                        style={{ marginTop: "4rem" }}
+                      >
+                        Guest mode available
+                      </small>
+                    </div>
                   </PopupBtn>
 
                   <PopupBtn type="signUp">
