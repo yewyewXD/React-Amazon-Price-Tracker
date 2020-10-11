@@ -63,7 +63,7 @@ exports.postTrack = async (req, res, next) => {
     if (user.email !== "tester@mail.com") {
       const track = await Track.create(newTrack);
       user.createdTracks.unshift(track._id);
-      user.save();
+      await user.save();
       return res.status(201).json({
         success: true,
         data: track,
@@ -114,9 +114,18 @@ exports.editTrack = async (req, res, next) => {
 // @access private
 exports.deleteTracks = async (req, res, next) => {
   try {
-    const { trackIds } = req.body;
-    const tracks = await Track.find({ _id: { $in: trackIds } });
+    const { userId, selectedTracks } = req.body;
+    const trackIds = selectedTracks.map((track) => track._id);
 
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: "User does not exist",
+      });
+    }
+
+    const tracks = await Track.find({ _id: { $in: trackIds } });
     if (!tracks) {
       return res.status(401).json({
         success: false,
@@ -126,6 +135,14 @@ exports.deleteTracks = async (req, res, next) => {
 
     await Track.deleteMany({
       _id: { $in: trackIds },
+    });
+
+    trackIds.forEach(async (trackId) => {
+      const index = user.createdTracks.indexOf(trackId);
+      if (index > -1) {
+        user.createdTracks.splice(index, 1);
+        await user.save();
+      }
     });
 
     return res.status(201).json({

@@ -224,13 +224,11 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTracks(selectedTracks) {
     try {
-      const trackIds = selectedTracks.map((track) => track._id);
-
       if (state.user.email !== "tester@mail.com") {
         // backend update
         await axios.post(
           `/api/dashboard/delete/tracks`,
-          { trackIds },
+          { userId: state.user.userId, selectedTracks },
           { headers: { "user-auth-token": state.token } }
         );
       }
@@ -248,8 +246,8 @@ export const GlobalProvider = ({ children }) => {
         });
       } else {
         const newTracks = state.user.createdTracks;
-        selectedTracks.forEach((track) => {
-          const index = newTracks.indexOf(track);
+        selectedTracks.forEach((selectedTrack) => {
+          const index = newTracks.indexOf(selectedTrack);
           if (index > -1) {
             newTracks.splice(index, 1);
           }
