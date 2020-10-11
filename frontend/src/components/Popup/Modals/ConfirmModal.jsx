@@ -7,7 +7,8 @@ export default function ConfirmModal({
   selectedTracks,
   setSelectedTracks,
 }) {
-  const { deleteTracks } = useContext(GlobalContext);
+  const { deleteTracks, multiTrack } = useContext(GlobalContext);
+
   function handleDeleteTrack(e) {
     e.preventDefault();
     deleteTracks(selectedTracks);
@@ -15,19 +16,19 @@ export default function ConfirmModal({
     handleClose();
   }
 
-  function handleCloseModal() {
+  function handleMultiTrack() {
+    multiTrack();
     handleClose();
   }
 
   return (
     <>
       <h2 className="bold mb-4 text-center">Please confirm your action</h2>
-      {/* <form className="form" onSubmit={handleDeleteTrack}> */}
       <div className="buttons all-center mt-3">
         <button
           type="button"
           className="btn btn-outline-secondary btn-md mx-2"
-          onClick={handleCloseModal}
+          onClick={handleClose}
         >
           Cancel
         </button>
@@ -41,12 +42,15 @@ export default function ConfirmModal({
         )}
 
         {type === "multiTrack" && (
-          <button type="submit" className="btn btn-info btn-md mx-2">
+          <button
+            type="submit"
+            className="btn btn-info btn-md mx-2"
+            onClick={handleMultiTrack}
+          >
             Multi-track
           </button>
         )}
       </div>
-      {/* </form> */}
     </>
   );
 }

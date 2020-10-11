@@ -70,24 +70,6 @@ export default function UserPanel() {
     }
   }
 
-  // if (document.getElementsByClassName("check-btn")) {
-  //   let isCheckedCount = 0;
-  //   const checkButtons = document.getElementsByClassName("check-btn");
-  //   for (let button of checkButtons) {
-  //     if (button.checked) {
-  //       isCheckedCount++;
-  //     }
-  //   }
-  //   if (document.getElementById("deleteBtn")) {
-  //     const deleteBtn = document.getElementById("deleteBtn");
-  //     if (isCheckedCount > 0) {
-  //       deleteBtn.style.display = "inline-block";
-  //     } else {
-  //       deleteBtn.style.display = "none";
-  //     }
-  //   }
-  // }
-
   return (
     <div className="user-panel">
       <div className="title my-3 mx-md-5 mx-4 bold">My Tracks</div>

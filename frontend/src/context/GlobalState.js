@@ -286,6 +286,8 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function multiTrack() {}
+
   // auto login START--------------------------------------------------------------
   async function checkLoggedIn() {
     try {
@@ -341,6 +343,7 @@ export const GlobalProvider = ({ children }) => {
         addTrack,
         editTrack,
         deleteTracks,
+        multiTrack,
       }}
     >
       {children}

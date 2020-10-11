@@ -93,15 +93,6 @@ export default function PopupBtn({
                     setSelectedTracks={setSelectedTracks}
                   />
                 )}
-
-                {/* {type === "multiTrack" && token && (
-                  <ConfirmModal
-                    type={type}
-                    handleClose={handleClose}
-                    selectedTracks={selectedTracks}
-                    selectedTracks={selectedTracks}
-                  />
-                )} */}
               </div>
             </div>
           </div>
