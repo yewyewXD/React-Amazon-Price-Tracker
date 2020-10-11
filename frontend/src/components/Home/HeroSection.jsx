@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { heroBg, heroVector } from "../../images/homeImages";
 import PopupBtn from "../Popup/PopupBtn";
-import { GlobalContext } from "../../context/user/GlobalState";
+import { GlobalContext } from "../../context/GlobalState";
 import { Link } from "react-router-dom";
 
 export default function HeroSection() {

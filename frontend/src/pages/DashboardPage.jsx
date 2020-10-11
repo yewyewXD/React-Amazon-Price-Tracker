@@ -3,7 +3,7 @@ import AppHeader from "../components/AppHeader";
 import ControlPanel from "../components/Dashboard/ControlPanel";
 import UserPanel from "../components/Dashboard/UserPanel";
 import PopupBtn from "../components/Popup/PopupBtn";
-import { GlobalContext } from "../context/user/GlobalState";
+import { GlobalContext } from "../context/GlobalState";
 import { heroBg } from "../images/homeImages";
 
 export default function DashboardPage() {

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { GlobalContext } from "../../../context/user/GlobalState";
+import { GlobalContext } from "../../../context/GlobalState";
 import FlashMessage from "react-flash-message";
 
 export default function EditTrackModal({ handleClose, track }) {

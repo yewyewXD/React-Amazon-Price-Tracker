@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GlobalContext } from "../../../context/user/GlobalState";
+import { GlobalContext } from "../../../context/GlobalState";
 
 export default function DeleteConfirmModal({
   handleClose,

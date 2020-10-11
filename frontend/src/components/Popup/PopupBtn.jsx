@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { GlobalContext } from "../../context/user/GlobalState";
+import { GlobalContext } from "../../context/GlobalState";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";

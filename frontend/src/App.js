@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { GlobalProvider } from "./context/user/GlobalState";
+import { GlobalProvider } from "./context/GlobalState";
 
 // styles
 import "bootstrap/dist/css/bootstrap.css";

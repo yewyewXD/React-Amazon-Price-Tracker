@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { GlobalContext } from "../../../context/user/GlobalState";
+import { GlobalContext } from "../../../context/GlobalState";
 import Loader from "react-loader-spinner";
 import FlashMessage from "react-flash-message";
 

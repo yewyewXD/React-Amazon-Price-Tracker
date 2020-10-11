@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import PopupBtn from "../Popup/PopupBtn";
-import { GlobalContext } from "../../context/user/GlobalState";
+import { GlobalContext } from "../../context/GlobalState";
 
 export default function UserPanel() {
   const { user } = useContext(GlobalContext);
