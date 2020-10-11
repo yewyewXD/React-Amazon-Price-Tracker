@@ -1,6 +1,7 @@
 const Track = require("../models/Track");
 const User = require("../models/User");
 const puppeteer = require("puppeteer");
+const { v4: uuidv4 } = require("uuid");
 
 // @desc Add track
 // @route POST /api/dashboard/track
@@ -8,7 +9,6 @@ const puppeteer = require("puppeteer");
 exports.postTrack = async (req, res, next) => {
   try {
     const { userId, trackUrl, name, expectedPrice } = req.body;
-
     const user = await User.findById(userId);
     if (!user) {
       return res.status(401).json({
@@ -59,14 +59,22 @@ exports.postTrack = async (req, res, next) => {
       creator: user._id,
     };
 
-    const track = await Track.create(newTrack);
-    user.createdTracks.unshift(track._id);
-    user.save();
-
-    return res.status(201).json({
-      success: true,
-      data: track,
-    });
+    // If it's not a guest account
+    if (user.email !== "tester@mail.com") {
+      const track = await Track.create(newTrack);
+      user.createdTracks.unshift(track._id);
+      user.save();
+      return res.status(201).json({
+        success: true,
+        data: track,
+      });
+    } else {
+      newTrack._id = uuidv4();
+      return res.status(201).json({
+        success: true,
+        data: newTrack,
+      });
+    }
   } catch (err) {
     console.log("crawling failed");
     return res.status(500).json({ error: err.message });

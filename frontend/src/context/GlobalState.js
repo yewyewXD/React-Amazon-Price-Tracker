@@ -314,21 +314,21 @@ export const GlobalProvider = ({ children }) => {
       }, 100);
     } catch {
       console.log("crawling failed");
-      // const notification = {
-      //   type: "error",
-      //   message: "Track Failed!",
-      //   title: "Please retry and contact host if it fails more than once.",
-      // };
-      // dispatch({
-      //   type: "LOG_ERROR_MESSAGE",
-      //   payload: { message: null, notification },
-      // });
-      // setTimeout(() => {
-      //   dispatch({
-      //     type: "CLEAR_LOGS",
-      //     payload: null,
-      //   });
-      // }, 100);
+      const notification = {
+        type: "error",
+        message: "Track Failed!",
+        title: "Please retry and contact host if it fails more than once.",
+      };
+      dispatch({
+        type: "LOG_ERROR_MESSAGE",
+        payload: { message: null, notification },
+      });
+      setTimeout(() => {
+        dispatch({
+          type: "CLEAR_LOGS",
+          payload: null,
+        });
+      }, 100);
     }
   }
 
