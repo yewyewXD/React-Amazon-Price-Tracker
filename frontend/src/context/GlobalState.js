@@ -147,7 +147,7 @@ export const GlobalProvider = ({ children }) => {
       const notification = {
         type: "error",
         message: "Track Failed!",
-        title: "Please retry and contact host if it fails more than once.",
+        title: "Please contact host through the footer of the homepage",
       };
 
       dispatch({
@@ -288,24 +288,44 @@ export const GlobalProvider = ({ children }) => {
 
   async function multiTrack() {
     try {
-      const res = await axios.post(
-        "/api/dashboard/multiTrack",
-        {
-          userId: state.user.userId,
-          createdTracks: state.user.createdTracks,
-        },
-        { headers: { "user-auth-token": state.token } }
-      );
-      // console.log(res.data.data);
+      if (state.user.email === "tester@mail.com") {
+        const notification = {
+          type: "warning",
+          message: `Track update is not available in guest mode!`,
+        };
+        dispatch({
+          type: "LOG_ERROR_MESSAGE",
+          payload: { message: null, notification },
+        });
+      } else if (state.user.createdTracks > 0) {
+        const res = await axios.post(
+          "/api/dashboard/multiTrack",
+          {
+            userId: state.user.userId,
+            createdTracks: state.user.createdTracks,
+          },
+          { headers: { "user-auth-token": state.token } }
+        );
+        // console.log(res.data.data);
 
-      const notification = {
-        type: "success",
-        message: `All product has been updated!`,
-      };
-      dispatch({
-        type: "MULTI_TRACK",
-        payload: { data: res.data.data, notification },
-      });
+        const notification = {
+          type: "success",
+          message: `All product has been updated!`,
+        };
+        dispatch({
+          type: "MULTI_TRACK",
+          payload: { data: res.data.data, notification },
+        });
+      } else {
+        const notification = {
+          type: "warning",
+          message: `No product is detected!`,
+        };
+        dispatch({
+          type: "LOG_ERROR_MESSAGE",
+          payload: { message: null, notification },
+        });
+      }
       setTimeout(() => {
         dispatch({
           type: "CLEAR_LOGS",
@@ -317,7 +337,7 @@ export const GlobalProvider = ({ children }) => {
       const notification = {
         type: "error",
         message: "Track Failed!",
-        title: "Please retry and contact host if it fails more than once.",
+        title: "Please contact host through the footer of the homepage",
       };
       dispatch({
         type: "LOG_ERROR_MESSAGE",
