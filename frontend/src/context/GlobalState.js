@@ -226,12 +226,14 @@ export const GlobalProvider = ({ children }) => {
     try {
       const trackIds = selectedTracks.map((track) => track._id);
 
-      // backend update
-      await axios.post(
-        `/api/dashboard/delete/tracks`,
-        { trackIds },
-        { headers: { "user-auth-token": state.token } }
-      );
+      if (state.user.email !== "tester@mail.com") {
+        // backend update
+        await axios.post(
+          `/api/dashboard/delete/tracks`,
+          { trackIds },
+          { headers: { "user-auth-token": state.token } }
+        );
+      }
 
       const notification = {
         type: "success",
