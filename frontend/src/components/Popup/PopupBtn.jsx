@@ -10,7 +10,7 @@ import SignUpModal from "./Modals/SignUpModal";
 import LoginModal from "./Modals/LoginModal";
 import AddTrackModal from "./Modals/AddTrackModal";
 import EditTrackModal from "./Modals/EditTrackModal";
-import DeleteConfirmModal from "./Modals/DeleteConfirmModal";
+import ConfirmModal from "./Modals/ConfirmModal";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -59,10 +59,10 @@ export default function PopupBtn({
           >
             <div
               className={`popup-modal w-100 all-center ${
-                type === "deleteTrack" && "bg-white"
+                (type === "deleteTrack" || type === "multiTrack") && "bg-white"
               }`}
             >
-              {type !== "deleteTrack" && (
+              {type !== "deleteTrack" && type !== "multiTrack" && (
                 <div className="form-container-image all-center">
                   <img src={heroVector} alt="" className="w-100" />
                 </div>
@@ -85,13 +85,23 @@ export default function PopupBtn({
                   <EditTrackModal handleClose={handleClose} track={track} />
                 )}
 
-                {type === "deleteTrack" && token && (
-                  <DeleteConfirmModal
+                {(type === "deleteTrack" || type === "multiTrack") && token && (
+                  <ConfirmModal
+                    type={type}
                     handleClose={handleClose}
                     selectedTracks={selectedTracks}
                     setSelectedTracks={setSelectedTracks}
                   />
                 )}
+
+                {/* {type === "multiTrack" && token && (
+                  <ConfirmModal
+                    type={type}
+                    handleClose={handleClose}
+                    selectedTracks={selectedTracks}
+                    selectedTracks={selectedTracks}
+                  />
+                )} */}
               </div>
             </div>
           </div>

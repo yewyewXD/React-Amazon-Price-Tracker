@@ -95,6 +95,12 @@ export default function UserPanel() {
       <div className="tracks">
         {/* actions */}
         <div className="actions my-4 all-center justify-content-start">
+          <PopupBtn type="multiTrack">
+            <button className="btn btn-primary btn-info btn-sm mr-2">
+              MultiTrack
+            </button>
+          </PopupBtn>
+
           <PopupBtn type="addTrack">
             <button className="btn btn-primary btn-sm">+</button>
           </PopupBtn>
