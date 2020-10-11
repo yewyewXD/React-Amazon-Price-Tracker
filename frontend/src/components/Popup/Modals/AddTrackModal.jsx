@@ -4,7 +4,7 @@ import Loader from "react-loader-spinner";
 import FlashMessage from "react-flash-message";
 
 export default function AddTrackModal({ handleClose, open }) {
-  const { user, token, addTrack, isTracking } = useContext(GlobalContext);
+  const { user, addTrack, isTracking } = useContext(GlobalContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -32,7 +32,7 @@ export default function AddTrackModal({ handleClose, open }) {
       setHasError(false);
       // Check and submit
       if (url.indexOf("/ref=") === -1) {
-        addTrack(user.userId, url, name, +expectedPrice, token);
+        addTrack(url, name, +expectedPrice);
       } else {
         const trimmedUrl = url.substr(0, url.indexOf("/ref="));
         const finalUrl =
@@ -40,7 +40,7 @@ export default function AddTrackModal({ handleClose, open }) {
             ? `https://"${trimmedUrl}`
             : trimmedUrl;
 
-        addTrack(user.userId, finalUrl, name, +expectedPrice, token);
+        addTrack(finalUrl, name, +expectedPrice);
       }
 
       setIsSubmitting(true);
