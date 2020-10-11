@@ -10,11 +10,13 @@ A fullstack web app to track the price of any Amazon product and store user's tr
 
 Started on: 13 Aug 2020 <br>
 Completed on: 16 Aug 2020 <br>
-Last modified on: 6 October 2020 <br>
+Last modified on: 11 October 2020 <br>
 
 ## Screenshots (V2)
 
 ![Landing Page](https://github.com/yewyewXD/React-Amazon-Price-Tracker/blob/master/readme-images/landingPage.JPG?raw=true "Landing Page")
+
+![Instruction](https://github.com/yewyewXD/React-Amazon-Price-Tracker/blob/master/readme-images/instruction.JPG?raw=true "Instruction")
 
 ![Dashboard](https://github.com/yewyewXD/React-Amazon-Price-Tracker/blob/master/readme-images/dashboard.JPG?raw=true "Dashboard")
 
