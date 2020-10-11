@@ -287,52 +287,53 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function multiTrack() {
-    // try {
-    //   const userId = state.user.userId;
-    //   const trackUrls = state.user.createdTracks.map(
-    //     (createdTrack) => createdTrack._id
-    //   );
-    //   const res = await axios.post(
-    //     "/api/dashboard/multiTrack",
-    //     {
-    //       userId,
-    //       trackUrls,
-    //     },
-    //     { headers: { "user-auth-token": state.token } }
-    //   );
-    //   // console.log(res.data.data);
-    //   const notification = {
-    //     type: "success",
-    //     message: `All product has been updated!`,
-    //   };
-    //   dispatch({
-    //     type: "ADD_TRACK",
-    //     payload: { data: res.data.data, notification },
-    //   });
-    //   setTimeout(() => {
-    //     dispatch({
-    //       type: "CLEAR_LOGS",
-    //       payload: null,
-    //     });
-    //   }, 100);
-    // } catch {
-    //   console.log("crawling failed");
-    //   const notification = {
-    //     type: "error",
-    //     message: "Track Failed!",
-    //     title: "Please retry and contact host if it fails more than once.",
-    //   };
-    //   dispatch({
-    //     type: "LOG_ERROR_MESSAGE",
-    //     payload: { message: null, notification },
-    //   });
-    //   setTimeout(() => {
-    //     dispatch({
-    //       type: "CLEAR_LOGS",
-    //       payload: null,
-    //     });
-    //   }, 100);
-    // }
+    try {
+      const userId = state.user.userId;
+      const trackUrls = state.user.createdTracks.map(
+        (createdTrack) => createdTrack._id
+      );
+      console.log(trackUrls);
+      // const res = await axios.post(
+      //   "/api/dashboard/multiTrack",
+      //   {
+      //     userId,
+      //     trackUrls,
+      //   },
+      //   { headers: { "user-auth-token": state.token } }
+      // );
+      // console.log(res.data.data);
+      // const notification = {
+      //   type: "success",
+      //   message: `All product has been updated!`,
+      // };
+      // dispatch({
+      //   type: "ADD_TRACK",
+      //   payload: { data: res.data.data, notification },
+      // });
+      // setTimeout(() => {
+      //   dispatch({
+      //     type: "CLEAR_LOGS",
+      //     payload: null,
+      //   });
+      // }, 100);
+    } catch {
+      console.log("crawling failed");
+      // const notification = {
+      //   type: "error",
+      //   message: "Track Failed!",
+      //   title: "Please retry and contact host if it fails more than once.",
+      // };
+      // dispatch({
+      //   type: "LOG_ERROR_MESSAGE",
+      //   payload: { message: null, notification },
+      // });
+      // setTimeout(() => {
+      //   dispatch({
+      //     type: "CLEAR_LOGS",
+      //     payload: null,
+      //   });
+      // }, 100);
+    }
   }
 
   // auto login START--------------------------------------------------------------

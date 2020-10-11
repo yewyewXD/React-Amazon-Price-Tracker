@@ -39,6 +39,16 @@ export default (state, action) => {
         notification: action.payload.notification,
       };
 
+    case "MULTI_TRACK":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          createdTracks: action.payload.data,
+        },
+        notification: action.payload.notification,
+      };
+
     case "LOG_ERROR_MESSAGE":
       return {
         ...state,
