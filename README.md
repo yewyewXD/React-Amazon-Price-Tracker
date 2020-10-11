@@ -89,7 +89,6 @@ npm run dev
 
 ## Future Update
 
-- Button to re-track all products
 - Email user when the product price is lower than the ideal price
 - Secure token with httpOnly cookie
 - Make user profile customizable
