@@ -128,3 +128,74 @@ exports.deleteTracks = async (req, res, next) => {
     return res.status(500).json({ error: err.message });
   }
 };
+
+// @desc Run multiple tracks
+// @route POST /api/dashboard/multiTrack
+// @access private
+exports.multiTrack = async (req, res, next) => {
+  try {
+    const { userId, trackUrl, name, expectedPrice } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: "User does not exist",
+      });
+    }
+
+    // crawl Amazon product
+    console.log("crawling starts");
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.goto(trackUrl, { waitUntil: "networkidle2" });
+
+    const crawledProduct = await page.evaluate(() => {
+      let actualPrice = 0;
+
+      const image = document.querySelector("#landingImage").src;
+      const ourPrice = document.querySelector("#priceblock_ourprice");
+      const salePrice = document.querySelector("#priceblock_saleprice");
+      const dealPrice = document.querySelector("#priceblock_dealprice");
+
+      if (ourPrice) {
+        actualPrice = +ourPrice.innerText.substring(1);
+      } else if (salePrice) {
+        actualPrice = +salePrice.innerText.substring(1);
+      } else if (dealPrice) {
+        actualPrice = +dealPrice.innerText.substring(1);
+      }
+
+      return {
+        image,
+        actualPrice,
+      };
+    });
+
+    console.log("crawling ends");
+    await browser.close();
+
+    // // create track
+    const newTrack = {
+      productUrl: trackUrl,
+      image: crawledProduct.image,
+      name,
+      expectedPrice,
+      actualPrice: crawledProduct.actualPrice,
+      creator: user._id,
+    };
+
+    const track = await Track.create(newTrack);
+    user.createdTracks.unshift(track._id);
+    user.save();
+
+    return res.status(201).json({
+      success: true,
+      data: track,
+    });
+  } catch (err) {
+    console.log("crawling failed");
+    return res.status(500).json({ error: err.message });
+  }
+};
