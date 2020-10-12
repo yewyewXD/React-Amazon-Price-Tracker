@@ -9,6 +9,7 @@ const initialState = {
   errMsg: null,
   notification: null,
   isTracking: true,
+  userLoading: false,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -19,12 +20,22 @@ export const GlobalProvider = ({ children }) => {
   //Actions
   async function loginUser(email, password) {
     try {
+      dispatch({
+        type: "UPDATE_USER_LOADING",
+        payload: true,
+      });
+
       const res = await axios.post("/api/user/login", {
         email,
         password,
       });
 
       const { token, user } = res.data.data;
+
+      dispatch({
+        type: "UPDATE_USER_LOADING",
+        payload: false,
+      });
 
       // console.log(res);
       localStorage.setItem("auth-token", token);
@@ -47,6 +58,11 @@ export const GlobalProvider = ({ children }) => {
       }, 100);
     } catch (err) {
       dispatch({
+        type: "UPDATE_USER_LOADING",
+        payload: false,
+      });
+
+      dispatch({
         type: "LOG_ERROR_MESSAGE",
         payload: { message: err.response.data.error, notification: null },
       });
@@ -55,12 +71,17 @@ export const GlobalProvider = ({ children }) => {
           type: "CLEAR_LOGS",
           payload: null,
         });
-      }, 3000);
+      }, 5000);
     }
   }
 
   async function registerUser(displayName, email, password, confirmPassword) {
     try {
+      dispatch({
+        type: "UPDATE_USER_LOADING",
+        payload: true,
+      });
+
       await axios.post("/api/user/register", {
         displayName,
         email,
@@ -71,6 +92,11 @@ export const GlobalProvider = ({ children }) => {
       loginUser(email, password);
     } catch (err) {
       dispatch({
+        type: "UPDATE_USER_LOADING",
+        payload: false,
+      });
+
+      dispatch({
         type: "LOG_ERROR_MESSAGE",
         payload: { message: err.response.data.error, notification: null },
       });
@@ -79,7 +105,7 @@ export const GlobalProvider = ({ children }) => {
           type: "CLEAR_LOGS",
           payload: null,
         });
-      }, 3000);
+      }, 5000);
     }
   }
 
@@ -401,6 +427,7 @@ export const GlobalProvider = ({ children }) => {
         errMsg: state.errMsg,
         notification: state.notification,
         isTracking: state.isTracking,
+        userLoading: state.userLoading,
         loginUser,
         registerUser,
         logoutUser,

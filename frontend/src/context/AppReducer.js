@@ -18,6 +18,12 @@ export default (state, action) => {
         notification: action.payload.notification,
       };
 
+    case "UPDATE_USER_LOADING":
+      return {
+        ...state,
+        userLoading: action.payload,
+      };
+
     case "ADD_TRACK":
       return {
         ...state,
