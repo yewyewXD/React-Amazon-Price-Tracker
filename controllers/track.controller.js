@@ -170,60 +170,70 @@ exports.multiTrack = async (req, res, next) => {
       });
     }
 
-    // loop through each track START
-    createdTracks.forEach(async (createdTrack) => {
-      const existingTrack = await Track.findById(createdTrack._id);
-      if (!existingTrack) {
-        return res.status(401).json({
-          success: false,
-          error: "No track found",
+    try {
+      // loop through each track START
+      await new Promise((resolve, reject) => {
+        createdTracks.forEach(async (createdTrack) => {
+          const existingTrack = await Track.findById(createdTrack._id);
+          if (!existingTrack) {
+            reject();
+          }
+
+          // crawl Amazon product
+          console.log(`${createdTrack.name} re-crawling starts`);
+          const browser = await puppeteer.launch();
+          const page = await browser.newPage();
+
+          await page.goto(createdTrack.productUrl, {
+            waitUntil: "networkidle2",
+          });
+
+          const crawledProduct = await page.evaluate(() => {
+            let actualPrice = 0;
+
+            const image = document.querySelector("#landingImage").src;
+            const ourPrice = document.querySelector("#priceblock_ourprice");
+            const salePrice = document.querySelector("#priceblock_saleprice");
+            const dealPrice = document.querySelector("#priceblock_dealprice");
+
+            if (ourPrice) {
+              actualPrice = +ourPrice.innerText.substring(1);
+            } else if (salePrice) {
+              actualPrice = +salePrice.innerText.substring(1);
+            } else if (dealPrice) {
+              actualPrice = +dealPrice.innerText.substring(1);
+            }
+
+            return {
+              image,
+              actualPrice,
+            };
+          });
+          console.log(`${createdTrack.name} re-crawling ends`);
+          await browser.close();
+
+          const { image, actualPrice } = crawledProduct;
+
+          if (existingTrack.image !== image) {
+            existingTrack.image = image;
+            await existingTrack.save();
+          }
+
+          if (existingTrack.actualPrice !== actualPrice) {
+            existingTrack.actualPrice = actualPrice;
+            await existingTrack.save();
+          }
+
+          resolve();
         });
-      }
-
-      // crawl Amazon product
-      console.log(`${createdTrack.name} re-crawling starts`);
-      const browser = await puppeteer.launch();
-      const page = await browser.newPage();
-
-      await page.goto(createdTrack.productUrl, { waitUntil: "networkidle2" });
-
-      const crawledProduct = await page.evaluate(() => {
-        let actualPrice = 0;
-
-        const image = document.querySelector("#landingImage").src;
-        const ourPrice = document.querySelector("#priceblock_ourprice");
-        const salePrice = document.querySelector("#priceblock_saleprice");
-        const dealPrice = document.querySelector("#priceblock_dealprice");
-
-        if (ourPrice) {
-          actualPrice = +ourPrice.innerText.substring(1);
-        } else if (salePrice) {
-          actualPrice = +salePrice.innerText.substring(1);
-        } else if (dealPrice) {
-          actualPrice = +dealPrice.innerText.substring(1);
-        }
-
-        return {
-          image,
-          actualPrice,
-        };
       });
-      console.log(`${createdTrack.name} re-crawling ends`);
-      await browser.close();
-
-      const { image, actualPrice } = crawledProduct;
-
-      if (existingTrack.image !== image) {
-        existingTrack.image = image;
-        await existingTrack.save();
-      }
-
-      if (existingTrack.actualPrice !== actualPrice) {
-        existingTrack.actualPrice = actualPrice;
-        await existingTrack.save();
-      }
-    });
-    // loop through each track END
+      // loop through each track END
+    } catch {
+      return res.status(401).json({
+        success: false,
+        error: "Found invalid track id",
+      });
+    }
 
     const tracks = await Track.find({ _id: { $in: trackIds } });
 
