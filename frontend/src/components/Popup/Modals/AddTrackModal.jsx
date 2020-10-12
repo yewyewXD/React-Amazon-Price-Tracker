@@ -13,11 +13,11 @@ export default function AddTrackModal({ handleClose, open }) {
   const expectedPriceElRef = useRef();
 
   function handleAddTrack(e) {
+    e.preventDefault();
     if (hasError) {
       setHasError(false);
     }
 
-    e.preventDefault();
     const url = urlElRef.current.value;
     const name = nameElRef.current.value;
     const expectedPrice = expectedPriceElRef.current.value;
