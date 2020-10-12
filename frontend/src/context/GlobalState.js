@@ -323,7 +323,7 @@ export const GlobalProvider = ({ children }) => {
           type: "LOG_ERROR_MESSAGE",
           payload: { message: null, notification },
         });
-      } else if (state.user.createdTracks > 0) {
+      } else if (state.user.createdTracks.length > 0) {
         const res = await axios.post(
           "/api/dashboard/multiTrack",
           {
