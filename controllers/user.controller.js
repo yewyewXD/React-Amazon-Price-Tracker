@@ -64,11 +64,15 @@ exports.loginUser = async (req, res, next) => {
     // Validation
     const user = await User.findOne({ email }).populate("createdTracks");
     if (!user) {
+      console.log("we do not have user");
       return res.status(401).json({
         success: false,
         error: "User does not exist",
       });
+    } else {
+      console.log("we have user");
     }
+
     const verified = await bcrypt.compare(password, user.password);
     if (!verified) {
       return res.status(401).json({
