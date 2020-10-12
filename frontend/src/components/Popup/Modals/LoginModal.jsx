@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../../context/GlobalState";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Loader from "react-loader-spinner";
@@ -7,14 +7,11 @@ export default function LoginModal({ handleClose }) {
   const { loginUser, token, errMsg, userLoading } = useContext(GlobalContext);
   const [isShowingPw, setIsShowingPw] = useState(false);
 
-  const emailElRef = useRef();
-  const pwElRef = useRef();
+  const [email, setEmail] = useState("");
+  const [pw, setPw] = useState("");
 
   function handleLoginUser(e) {
     e.preventDefault();
-
-    const email = emailElRef.current.value ? emailElRef.current.value : "";
-    const pw = pwElRef.current.value ? pwElRef.current.value : "";
 
     loginUser(email, pw);
 
@@ -61,7 +58,8 @@ export default function LoginModal({ handleClose }) {
                 type="email"
                 className="form-control"
                 required
-                ref={emailElRef}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -74,7 +72,8 @@ export default function LoginModal({ handleClose }) {
                 className="form-control"
                 minLength="5"
                 required
-                ref={pwElRef}
+                value={pw}
+                onChange={(e) => setPw(e.target.value)}
               />
 
               {/* Password Revealer */}
