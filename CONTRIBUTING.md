@@ -3,10 +3,10 @@
 When contributing to this repository, please first discuss the change you wish to make via issue,
 email, or any other method with the owners of this repository before making a change. 
 
-##### Ways to contact
+## Ways to contact
 [Twitter](https://twitter.com/yewyewXD)
 [LinkedIn](https://www.linkedin.com/in/yewyewxd/)
-[Instagram] (https://www.instagram.com/yewyewxd/)
+[Instagram](https://www.instagram.com/yewyewxd/)
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
@@ -24,5 +24,5 @@ Please note we have a code of conduct, please follow it in all your interactions
 To become a moderator and help maintaining this project (code review, helpful comments, etc), please contact the creator via
 [Twitter](https://twitter.com/yewyewXD),
 [LinkedIn](https://www.linkedin.com/in/yewyewxd/),
-[Instagram] (https://www.instagram.com/yewyewxd/),
-or email (yewyew6933 <at> gmail <dot> com)
+[Instagram](https://www.instagram.com/yewyewxd/),
+or email (yewyew6933 at gmail dot com)
