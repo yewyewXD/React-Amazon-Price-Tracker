@@ -1,14 +1,15 @@
 # Contributing
 
 When contributing to this repository, it's optional, but encouraged to first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
+email, or any other method with the owners of this repository before making a change.  <br>
+
+Please note we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Ways to contact
 [Twitter](https://twitter.com/yewyewXD)
 [LinkedIn](https://www.linkedin.com/in/yewyewxd/)
 [Instagram](https://www.instagram.com/yewyewxd/)
 
-Please note we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Pull Request Process
 
