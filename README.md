@@ -40,7 +40,7 @@ Last modified on: 12 October 2020 <br>
 - Create an account
 - Track any product's price on Amazon
 
-## How to use it locally
+## How to use it locally like it's yours (Not for contribution)
 
 > Get your MongoDB connection string
 
