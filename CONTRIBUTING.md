@@ -1,6 +1,6 @@
 # Contributing
 
-When contributing to this repository, it's encouraged, but optional to first discuss the change you wish to make via issue,
+When contributing to this repository, it's optional, but encouraged to first discuss the change you wish to make via issue,
 email, or any other method with the owners of this repository before making a change. 
 
 ## Ways to contact
