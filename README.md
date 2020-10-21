@@ -4,6 +4,9 @@
 
 A fullstack web app to track the price of any Amazon product and store user's traces in one place<br>
 
+## To contribute
+[Learn more](https://github.com/yewyewXD/React-Amazon-Price-Tracker/blob/master/CONTRIBUTING.md)
+
 ## Build status
 
 **Success:** [See Live](https://trackerbase.herokuapp.com/)
