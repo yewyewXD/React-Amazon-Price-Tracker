@@ -10,7 +10,7 @@ A fullstack web app to track the price of any Amazon product and store user's tr
 
 Started on: 13 Aug 2020 <br>
 Completed on: 16 Aug 2020 <br>
-Last modified on: 12 October 2020 <br>
+Last modified on: 24 October 2020 <br>
 
 ## Screenshots (V2)
 
