@@ -19,6 +19,10 @@ const userRoute = require("./routes/user.route");
 app.use("/api/user", userRoute);
 const trackRoute = require("./routes/track.route");
 app.use("/api/dashboard", auth, trackRoute);
+routes(app);
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));
