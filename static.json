@@ -1,0 +1,11 @@
+{
+  "routes": {
+    "/**": "index.html"
+  },
+  "redirects": {
+    "/home": {
+      "url": "/",
+      "status": 302
+    }
+  }
+}
