@@ -1,12 +1,7 @@
 {
-  "root": "/frontend/build/",
+  "root": "frontend/build/",
   "routes": {
     "/**": "index.html"
   },
-  "redirects": {
-    "/home": {
-      "url": "/",
-      "status": 302
-    }
-  }
+  "clean_urls": false
 }
