@@ -25,7 +25,7 @@ exports.postTrack = async (req, res, next) => {
     });
     const page = await browser.newPage();
 
-    await page.goto(trackUrl, { waitUntil: "domcontentloaded" });
+    await page.goto(trackUrl, { waitUntil: "networkidle0" });
 
     const crawledProduct = await page.evaluate(() => {
       let actualPrice = 0;
