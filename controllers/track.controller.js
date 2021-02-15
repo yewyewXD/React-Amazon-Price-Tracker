@@ -21,11 +21,11 @@ exports.postTrack = async (req, res, next) => {
     console.log("crawling starts");
     // add fix for Heroku production
     const browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: ["--no-sandbox"],
     });
     const page = await browser.newPage();
 
-    await page.goto(trackUrl, { waitUntil: "networkidle2" });
+    await page.goto(trackUrl, { waitUntil: "domcontentloaded" });
 
     const crawledProduct = await page.evaluate(() => {
       let actualPrice = 0;
