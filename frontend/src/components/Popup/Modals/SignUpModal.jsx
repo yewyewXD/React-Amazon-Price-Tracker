@@ -2,9 +2,8 @@ import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../../context/GlobalState";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Loader from "react-loader-spinner";
-import PopupBtn from "../PopupBtn";
 
-export default function SignUpModal({ handleClose }) {
+export default function SignUpModal({ handleClose, handleSwitchType }) {
   const { registerUser, token, errMsg, userLoading } = useContext(
     GlobalContext
   );
@@ -139,9 +138,13 @@ export default function SignUpModal({ handleClose }) {
                 Sign Up
               </button>
 
-              <PopupBtn type="login">
-                <u className="text-muted">Login instead</u>
-              </PopupBtn>
+              <u
+                className="text-muted"
+                role="button"
+                onClick={handleSwitchType}
+              >
+                Login instead
+              </u>
             </div>
           </form>
         </>
