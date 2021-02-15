@@ -27,14 +27,16 @@ exports.postTrack = async (req, res, next) => {
 
     await page.goto(trackUrl, { waitUntil: "networkidle0" });
 
-    await page.waitForSelector("#landingImage", {
-      visible: true,
-    });
+    // await page.waitForSelector("#landingImage", {
+    //   visible: true,
+    // });
 
     const crawledProduct = await page.evaluate(() => {
       let actualPrice = 0;
 
-      const image = document.querySelector("#landingImage").src;
+      const image = document.querySelector("#landingImage")
+        ? document.querySelector("#landingImage").src
+        : null;
       const ourPrice = document.querySelector("#priceblock_ourprice");
       const salePrice = document.querySelector("#priceblock_saleprice");
       const dealPrice = document.querySelector("#priceblock_dealprice");
