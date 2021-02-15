@@ -19,6 +19,7 @@ exports.postTrack = async (req, res, next) => {
 
     // crawl Amazon product
     console.log("crawling starts");
+    // add fix for Heroku production
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
