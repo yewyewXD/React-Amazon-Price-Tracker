@@ -41,13 +41,13 @@ export default function DashboardPage() {
                   <div className="buttons mt-4 all-center">
                     <PopupBtn type="login">
                       <button className="btn bold btn-outline-secondary btn-md mx-2">
-                        Login
+                        Demo
                       </button>
                     </PopupBtn>
 
                     <PopupBtn type="signUp">
                       <button className="btn bold btn-primary btn-md mx-2">
-                        Sign up Free
+                        Get started
                       </button>
                     </PopupBtn>
                   </div>

@@ -29,20 +29,14 @@ export default function HeroSection() {
                   <PopupBtn type="login">
                     <div className="call-to-action all-center-column">
                       <button className="btn btn-outline-secondary btn-md mx-2">
-                        Login
+                        Demo
                       </button>
-                      <small
-                        className="position-absolute text-muted"
-                        style={{ marginTop: "4rem" }}
-                      >
-                        Guest mode available
-                      </small>
                     </div>
                   </PopupBtn>
 
                   <PopupBtn type="signUp">
                     <button className="btn bold btn-primary btn-md mx-2">
-                      Sign up Free
+                      Get started
                     </button>
                   </PopupBtn>
                 </>
