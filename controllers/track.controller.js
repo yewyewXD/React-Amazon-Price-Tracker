@@ -19,7 +19,9 @@ exports.postTrack = async (req, res, next) => {
 
     // crawl Amazon product
     console.log("crawling starts");
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
 
     await page.goto(trackUrl, { waitUntil: "networkidle2" });
