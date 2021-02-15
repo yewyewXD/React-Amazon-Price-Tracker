@@ -3,7 +3,7 @@ import { GlobalContext } from "../../../context/GlobalState";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Loader from "react-loader-spinner";
 
-export default function LoginModal({ handleClose }) {
+export default function LoginModal({ handleClose, handleSwitchType }) {
   const { loginUser, token, errMsg, userLoading } = useContext(GlobalContext);
   const [isShowingPw, setIsShowingPw] = useState(false);
 
@@ -22,17 +22,6 @@ export default function LoginModal({ handleClose }) {
 
   function togglePwRevealer() {
     setIsShowingPw(!isShowingPw);
-  }
-
-  function handleGuestLogin() {
-    const email = "tester@mail.com";
-    const pw = "tester";
-
-    loginUser(email, pw);
-
-    if (token) {
-      handleClose();
-    }
   }
 
   return (
@@ -94,9 +83,9 @@ export default function LoginModal({ handleClose }) {
 
             <div className="login-buttons mt-3">
               <button className="btn btn-primary btn-md mr-3">Login</button>
-              <small role="button" onClick={handleGuestLogin}>
-                <u>Use guest account</u>
-              </small>
+              <u role="button" onClick={handleSwitchType}>
+                Create an account instead
+              </u>
             </div>
           </form>
         </>
