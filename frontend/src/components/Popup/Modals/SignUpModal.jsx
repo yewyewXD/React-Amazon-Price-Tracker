@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../../context/GlobalState";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Loader from "react-loader-spinner";
+import PopupBtn from "../PopupBtn";
 
 export default function SignUpModal({ handleClose }) {
   const { registerUser, token, errMsg, userLoading } = useContext(
@@ -133,9 +134,15 @@ export default function SignUpModal({ handleClose }) {
               <small className="text-danger d-block mt-1">{errMsg}</small>
             )}
 
-            <button type="submit" className="btn btn-primary btn-md mt-3">
-              Sign Up
-            </button>
+            <div className="all-center justify-content-start mt-3">
+              <button type="submit" className="btn btn-primary btn-md mr-3">
+                Sign Up
+              </button>
+
+              <PopupBtn type="login">
+                <u className="text-muted">Login instead</u>
+              </PopupBtn>
+            </div>
           </form>
         </>
       )}
