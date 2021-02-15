@@ -21,7 +21,7 @@ exports.postTrack = async (req, res, next) => {
     console.log("crawling starts");
     // add fix for Heroku production
     const browser = await puppeteer.launch({
-      args: ["--no-sandbox"],
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
 
