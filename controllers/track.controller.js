@@ -27,6 +27,10 @@ exports.postTrack = async (req, res, next) => {
 
     await page.goto(trackUrl, { waitUntil: "networkidle0" });
 
+    await page.waitForSelector("#landingImage", {
+      visible: true,
+    });
+
     const crawledProduct = await page.evaluate(() => {
       let actualPrice = 0;
 
