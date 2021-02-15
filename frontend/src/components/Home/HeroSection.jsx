@@ -5,7 +5,14 @@ import { GlobalContext } from "../../context/GlobalState";
 import { Link } from "react-router-dom";
 
 export default function HeroSection() {
-  const { token } = useContext(GlobalContext);
+  const { token, loginUser } = useContext(GlobalContext);
+
+  function handleGuestLogin() {
+    const email = "tester@mail.com";
+    const pw = "tester";
+
+    loginUser(email, pw);
+  }
 
   return (
     <section className="hero text-center">
@@ -28,7 +35,10 @@ export default function HeroSection() {
                 <>
                   <PopupBtn type="login">
                     <div className="call-to-action all-center-column">
-                      <button className="btn btn-outline-secondary btn-md mx-2">
+                      <button
+                        className="btn btn-outline-secondary btn-md mx-2"
+                        onClick={handleGuestLogin}
+                      >
                         Demo
                       </button>
                     </div>
