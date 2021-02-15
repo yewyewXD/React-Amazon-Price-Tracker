@@ -7,7 +7,14 @@ import { GlobalContext } from "../context/GlobalState";
 import { heroBg } from "../images/homeImages";
 
 export default function DashboardPage() {
-  const { token } = useContext(GlobalContext);
+  const { token, loginUser } = useContext(GlobalContext);
+
+  function handleGuestLogin() {
+    const email = "tester@mail.com";
+    const pw = "tester";
+
+    loginUser(email, pw);
+  }
 
   if (token) {
     return (
@@ -40,14 +47,17 @@ export default function DashboardPage() {
 
                   <div className="buttons mt-4 all-center">
                     <PopupBtn type="login">
-                      <button className="btn bold btn-outline-secondary btn-md mx-2">
-                        Login
+                      <button
+                        className="btn bold btn-outline-secondary btn-md mx-2"
+                        onClick={handleGuestLogin}
+                      >
+                        Demo
                       </button>
                     </PopupBtn>
 
                     <PopupBtn type="signUp">
                       <button className="btn bold btn-primary btn-md mx-2">
-                        Sign up Free
+                        Get started
                       </button>
                     </PopupBtn>
                   </div>

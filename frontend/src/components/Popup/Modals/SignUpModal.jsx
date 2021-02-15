@@ -3,7 +3,7 @@ import { GlobalContext } from "../../../context/GlobalState";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Loader from "react-loader-spinner";
 
-export default function SignUpModal({ handleClose }) {
+export default function SignUpModal({ handleClose, handleSwitchType }) {
   const { registerUser, token, errMsg, userLoading } = useContext(
     GlobalContext
   );
@@ -133,9 +133,19 @@ export default function SignUpModal({ handleClose }) {
               <small className="text-danger d-block mt-1">{errMsg}</small>
             )}
 
-            <button type="submit" className="btn btn-primary btn-md mt-3">
-              Sign Up
-            </button>
+            <div className="all-center justify-content-start mt-3">
+              <button type="submit" className="btn btn-primary btn-md mr-3">
+                Sign Up
+              </button>
+
+              <u
+                className="text-muted"
+                role="button"
+                onClick={handleSwitchType}
+              >
+                Login instead
+              </u>
+            </div>
           </form>
         </>
       )}

@@ -31,12 +31,18 @@ export default function PopupBtn({
   const { token } = useContext(GlobalContext);
 
   const [open, setOpen] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(type === "signUp");
+
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+
+  function handleSwitchType() {
+    setIsSignUp((prevIsSignUp) => !prevIsSignUp);
+  }
 
   return (
     <div>
@@ -69,12 +75,18 @@ export default function PopupBtn({
               )}
 
               <div className="form-container bg-white">
-                {type === "signUp" && !token && (
-                  <SignUpModal handleClose={handleClose} />
+                {isSignUp && !token && (
+                  <SignUpModal
+                    handleSwitchType={handleSwitchType}
+                    handleClose={handleClose}
+                  />
                 )}
 
-                {type === "login" && !token && (
-                  <LoginModal handleClose={handleClose} />
+                {!isSignUp && !token && (
+                  <LoginModal
+                    handleSwitchType={handleSwitchType}
+                    handleClose={handleClose}
+                  />
                 )}
 
                 {type === "addTrack" && token && (
