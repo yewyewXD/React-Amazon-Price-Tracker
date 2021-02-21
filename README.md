@@ -4,6 +4,7 @@
 
 A fullstack web app to track the price of any Amazon product and store user's traces in one place
 <br>
+<br>
 V3 Update: Due to security, UX, and performance reasons, database will be deprecated. User will no longer need to register for an account to use the dashboard.
 <br>
 
