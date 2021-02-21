@@ -1,29 +1,5 @@
 export default (state, action) => {
   switch (action.type) {
-    case "LOGIN_USER":
-      return {
-        ...state,
-        token: action.payload.token,
-        user: action.payload.user,
-        errMsg: null,
-        notification: action.payload.notification,
-      };
-
-    case "LOGOUT_USER":
-      return {
-        ...state,
-        token: null,
-        user: null,
-        errMsg: null,
-        notification: action.payload.notification,
-      };
-
-    case "UPDATE_USER_LOADING":
-      return {
-        ...state,
-        userLoading: action.payload,
-      };
-
     case "ADD_TRACK":
       return {
         ...state,

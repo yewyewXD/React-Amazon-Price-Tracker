@@ -4,12 +4,10 @@ import axios from "axios";
 
 // Initial state
 const initialState = {
-  token: null,
   user: { createdTracks: [] },
   errMsg: null,
   notification: null,
   isTracking: true,
-  userLoading: false,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -19,16 +17,12 @@ export const GlobalProvider = ({ children }) => {
 
   async function addTrack(trackUrl, name, expectedPrice) {
     try {
-      const res = await axios.post(
-        "/api/dashboard/track",
-        {
-          userId: state.user.userId,
-          trackUrl,
-          name,
-          expectedPrice,
-        },
-        { headers: { "user-auth-token": state.token } }
-      );
+      const res = await axios.post("/.netlify/functions/testing", {
+        userId: state.user.userId,
+        trackUrl,
+        name,
+        expectedPrice,
+      });
 
       // console.log(res.data.data);
 
@@ -88,14 +82,10 @@ export const GlobalProvider = ({ children }) => {
       const newTracks = [...editedTrack, ...prevTracks];
 
       if (state.user.email !== "tester@mail.com") {
-        await axios.post(
-          `/api/dashboard/track/${id}`,
-          {
-            name,
-            expectedPrice,
-          },
-          { headers: { "user-auth-token": state.token } }
-        );
+        await axios.post(`/api/dashboard/track/${id}`, {
+          name,
+          expectedPrice,
+        });
       }
 
       const notification = {
@@ -139,11 +129,10 @@ export const GlobalProvider = ({ children }) => {
     try {
       if (state.user.email !== "tester@mail.com") {
         // backend update
-        await axios.post(
-          `/api/dashboard/delete/tracks`,
-          { userId: state.user.userId, selectedTracks },
-          { headers: { "user-auth-token": state.token } }
-        );
+        await axios.post(`/api/dashboard/delete/tracks`, {
+          userId: state.user.userId,
+          selectedTracks,
+        });
       }
 
       const notification = {
@@ -211,14 +200,10 @@ export const GlobalProvider = ({ children }) => {
           payload: { message: null, notification },
         });
       } else if (state.user.createdTracks.length > 0) {
-        const res = await axios.post(
-          "/api/dashboard/multiTrack",
-          {
-            userId: state.user.userId,
-            createdTracks: state.user.createdTracks,
-          },
-          { headers: { "user-auth-token": state.token } }
-        );
+        const res = await axios.post("/api/dashboard/multiTrack", {
+          userId: state.user.userId,
+          createdTracks: state.user.createdTracks,
+        });
         // console.log(res.data.data);
 
         const notification = {
@@ -268,12 +253,10 @@ export const GlobalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
-        token: state.token,
         user: state.user,
         errMsg: state.errMsg,
         notification: state.notification,
         isTracking: state.isTracking,
-        userLoading: state.userLoading,
         addTrack,
         editTrack,
         deleteTracks,
