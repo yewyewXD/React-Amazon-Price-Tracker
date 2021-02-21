@@ -9,7 +9,10 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
+    "concurrently": "^6.0.0",
+    "netlify-lambda": "^2.0.3",
     "node-sass": "^4.14.1",
+    "puppeteer": "^7.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-flash-message": "^1.0.4",
@@ -23,7 +26,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-lambda": "netlify-lambda serve src/serverless-lambda",
+    "dev": "concurrently \"npm run start-lambda \" \"npm start \""
+
   },
   "eslintConfig": {
     "extends": "react-app"
