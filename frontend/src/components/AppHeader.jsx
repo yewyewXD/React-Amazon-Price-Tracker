@@ -35,16 +35,27 @@ export default function AppHeader({ isDashboard }) {
             </Link>
 
             <div className="buttons all-center">
-              <>
-                {!isDashboard && (
-                  <Link
-                    className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0"
-                    to="/dashboard"
-                  >
-                    Dashboard
-                  </Link>
-                )}
-              </>
+              <a
+                href="https://github.com/yewyewXD/React-Amazon-Price-Tracker"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-sm-2 mx-md-3 "
+              >
+                Github
+              </a>
+
+              <Link to="/contact" className=" mx-sm-2 mx-md-3">
+                Contact
+              </Link>
+
+              {!isDashboard && (
+                <Link
+                  className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0"
+                  to="/dashboard"
+                >
+                  Dashboard
+                </Link>
+              )}
             </div>
           </div>
         </nav>
