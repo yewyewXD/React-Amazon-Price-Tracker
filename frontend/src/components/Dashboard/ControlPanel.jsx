@@ -1,5 +1,4 @@
 import React from "react";
-// import { FaRegUser } from "react-icons/fa";
 import { RiDashboardLine } from "react-icons/ri";
 
 export default function ControlPanel() {
