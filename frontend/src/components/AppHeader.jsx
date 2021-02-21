@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
+import { RiDashboardLine, RiGithubFill, RiMailFill } from "react-icons/ri";
 import {
   NotificationContainer,
   NotificationManager,
@@ -39,23 +40,44 @@ export default function AppHeader({ isDashboard }) {
                 href="https://github.com/yewyewXD/React-Amazon-Price-Tracker"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mx-sm-2 mx-md-3 "
               >
-                Github
+                <span className="d-sm-inline d-none">Github</span>
+
+                <RiGithubFill
+                  fontSize="26"
+                  className="d-sm-none dark"
+                  title="Github"
+                />
               </a>
 
-              <Link to="/contact" className=" mx-sm-2 mx-md-3">
-                Contact
+              <Link to="/contact" className="ml-3 ml-md-4">
+                <span className="d-sm-inline d-none">Contact</span>
+                <RiMailFill
+                  fontSize="26"
+                  className="d-sm-none dark"
+                  title="Contact Us"
+                />
               </Link>
 
               {!isDashboard && (
-                <Link
-                  className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0"
-                  to="/dashboard"
-                >
-                  Dashboard
-                </Link>
+                <>
+                  <Link
+                    className="btn btn-primary btn-sm p-0 ml-3 ml-md-4 d-sm-inline d-none"
+                    to="/dashboard"
+                  >
+                    Dashboard
+                  </Link>
+
+                  <Link
+                    className="ml-3 d-sm-none text-primary"
+                    title="Dashboard"
+                  >
+                    <RiDashboardLine fontSize="26" />
+                  </Link>
+                </>
               )}
+
+              {/* mobile view */}
             </div>
           </div>
         </nav>
