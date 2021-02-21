@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import axios from "axios";
 
@@ -264,47 +264,6 @@ export const GlobalProvider = ({ children }) => {
       }, 100);
     }
   }
-
-  // auto login START--------------------------------------------------------------
-  async function checkLoggedIn() {
-    try {
-      let token = localStorage.getItem("auth-token");
-
-      // if token hasn't been set
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-      }
-
-      const tokenRes = await axios.post("/api/user/tokenIsValid", null, {
-        headers: { "user-auth-token": token },
-      });
-
-      // get and login user data
-      if (tokenRes.data) {
-        const userRes = await axios.get("/api/user/", {
-          headers: { "user-auth-token": token },
-        });
-
-        dispatch({
-          type: "LOGIN_USER",
-          payload: { token, user: userRes.data, notification: null },
-        });
-      } else {
-        dispatch({
-          type: "LOGOUT_USER",
-          payload: { notification: null },
-        });
-      }
-    } catch (err) {
-      console.log(err.response.data);
-    }
-  }
-
-  useEffect(() => {
-    checkLoggedIn();
-  }, []);
-  // auto login END--------------------------------------------------------------
 
   return (
     <GlobalContext.Provider
