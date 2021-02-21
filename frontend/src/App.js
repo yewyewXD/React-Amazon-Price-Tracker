@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { GlobalProvider } from "./context/GlobalState";
 
 // styles
 import "bootstrap/dist/css/bootstrap.css";
@@ -16,13 +15,11 @@ import DashboardPage from "./pages/DashboardPage";
 function App() {
   return (
     <BrowserRouter>
-      <GlobalProvider>
-        <Switch>
-          <Redirect from="/home" to="/" exact />
-          <Route path="/" exact component={HomePage} />
-          <Route path="/dashboard" component={DashboardPage} />
-        </Switch>
-      </GlobalProvider>
+      <Switch>
+        <Redirect from="/home" to="/" exact />
+        <Route path="/" exact component={HomePage} />
+        <Route path="/dashboard" component={DashboardPage} />
+      </Switch>
     </BrowserRouter>
   );
 }
