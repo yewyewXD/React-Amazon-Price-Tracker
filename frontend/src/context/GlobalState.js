@@ -17,119 +17,6 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-  //Actions
-  async function loginUser(email, password) {
-    try {
-      dispatch({
-        type: "UPDATE_USER_LOADING",
-        payload: true,
-      });
-
-      const res = await axios.post("/api/user/login", {
-        email,
-        password,
-      });
-
-      const { token, user } = res.data.data;
-
-      dispatch({
-        type: "UPDATE_USER_LOADING",
-        payload: false,
-      });
-
-      // console.log(res);
-      localStorage.setItem("auth-token", token);
-
-      const notification = {
-        type: "success",
-        message: `Welcome back, ${user.displayName}!`,
-      };
-
-      dispatch({
-        type: "LOGIN_USER",
-        payload: { token, user, notification },
-      });
-
-      setTimeout(() => {
-        dispatch({
-          type: "CLEAR_LOGS",
-          payload: null,
-        });
-      }, 100);
-    } catch (err) {
-      dispatch({
-        type: "UPDATE_USER_LOADING",
-        payload: false,
-      });
-
-      dispatch({
-        type: "LOG_ERROR_MESSAGE",
-        payload: { message: err.response.data.error, notification: null },
-      });
-      setTimeout(() => {
-        dispatch({
-          type: "CLEAR_LOGS",
-          payload: null,
-        });
-      }, 5000);
-    }
-  }
-
-  async function registerUser(displayName, email, password, confirmPassword) {
-    try {
-      dispatch({
-        type: "UPDATE_USER_LOADING",
-        payload: true,
-      });
-
-      await axios.post("/api/user/register", {
-        displayName,
-        email,
-        password,
-        confirmPassword,
-      });
-      // console.log(res.data.data);
-      loginUser(email, password);
-    } catch (err) {
-      dispatch({
-        type: "UPDATE_USER_LOADING",
-        payload: false,
-      });
-
-      dispatch({
-        type: "LOG_ERROR_MESSAGE",
-        payload: { message: err.response.data.error, notification: null },
-      });
-      setTimeout(() => {
-        dispatch({
-          type: "CLEAR_LOGS",
-          payload: null,
-        });
-      }, 5000);
-    }
-  }
-
-  function logoutUser() {
-    localStorage.removeItem("auth-token");
-
-    const notification = {
-      type: "success",
-      message: `Successfully logged out!`,
-    };
-
-    dispatch({
-      type: "LOGOUT_USER",
-      payload: { notification },
-    });
-
-    setTimeout(() => {
-      dispatch({
-        type: "CLEAR_LOGS",
-        payload: null,
-      });
-    }, 100);
-  }
-
   async function addTrack(trackUrl, name, expectedPrice) {
     try {
       const res = await axios.post(
@@ -428,9 +315,6 @@ export const GlobalProvider = ({ children }) => {
         notification: state.notification,
         isTracking: state.isTracking,
         userLoading: state.userLoading,
-        loginUser,
-        registerUser,
-        logoutUser,
         addTrack,
         editTrack,
         deleteTracks,

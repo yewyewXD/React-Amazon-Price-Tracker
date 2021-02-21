@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import PopupBtn from "./Popup/PopupBtn";
 import { GlobalContext } from "../context/GlobalState";
 import {
   NotificationContainer,
@@ -8,7 +7,7 @@ import {
 } from "react-notifications";
 
 export default function AppHeader({ isDashboard }) {
-  const { token, logoutUser, notification } = useContext(GlobalContext);
+  const { notification } = useContext(GlobalContext);
 
   if (notification) {
     const type = notification.type;
@@ -36,39 +35,16 @@ export default function AppHeader({ isDashboard }) {
             </Link>
 
             <div className="buttons all-center">
-              {/* not logged in */}
-              {!token && (
-                <>
-                  <span className="text-secondary mx-sm-2 mx-md-3 p-0">
-                    <PopupBtn type="login">Login</PopupBtn>
-                  </span>
-                  <PopupBtn type="signUp">
-                    <button className="btn btn-sm btn-primary mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0">
-                      Sign Up
-                    </button>
-                  </PopupBtn>
-                </>
-              )}
-
-              {/* logged in */}
-              {token && (
-                <>
-                  <button
-                    className="btn btn-sm btn-outline-secondary mx-sm-2 mx-md-3 p-0"
-                    onClick={logoutUser}
+              <>
+                {!isDashboard && (
+                  <Link
+                    className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0"
+                    to="/dashboard"
                   >
-                    Logout
-                  </button>
-                  {!isDashboard && (
-                    <Link
-                      className="btn btn-primary btn-sm mx-sm-2 mx-md-3 ml-sm-0 ml-3 p-0"
-                      to="/dashboard"
-                    >
-                      Dashboard
-                    </Link>
-                  )}
-                </>
-              )}
+                    Dashboard
+                  </Link>
+                )}
+              </>
             </div>
           </div>
         </nav>
