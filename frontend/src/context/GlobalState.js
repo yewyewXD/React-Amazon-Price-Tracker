@@ -5,7 +5,7 @@ import axios from "axios";
 // Initial state
 const initialState = {
   token: null,
-  user: null,
+  user: { createdTracks: [] },
   errMsg: null,
   notification: null,
   isTracking: true,
