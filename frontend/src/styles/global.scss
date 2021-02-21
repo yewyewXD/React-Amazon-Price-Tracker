@@ -1,4 +1,5 @@
-@import "./variables.scss";
+@import "./01-variables";
+@import "./02-rewrites";
 
 // sizing, positioning, typography
 body {
@@ -6,40 +7,6 @@ body {
   padding: 0;
   font-family: "Nunito", sans-serif;
   overflow-x: hidden;
-}
-.bold {
-  font-weight: 700;
-}
-.all-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.all-center-column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.light {
-  color: $themeColor !important;
-}
-.dark {
-  color: $darkThemeColor !important;
-}
-
-// button
-.btn {
-  box-shadow: none !important;
-  transition: 0.15s;
-}
-.btn-sm {
-  border-radius: 15px !important;
-  padding: 3px 9px !important;
-}
-.btn-md {
-  border-radius: 20px;
-  padding: 8px 24px !important;
 }
 
 // header
@@ -159,3 +126,6 @@ body {
     }
   }
 }
+
+@import "./pages/LandingStyles";
+@import "./pages/DashboardStyles";

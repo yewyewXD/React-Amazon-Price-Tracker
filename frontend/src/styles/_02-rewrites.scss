@@ -1,0 +1,35 @@
+// button
+.btn {
+  box-shadow: none !important;
+  transition: 0.15s;
+}
+.btn-sm {
+  border-radius: 15px !important;
+  padding: 3px 9px !important;
+}
+.btn-md {
+  border-radius: 20px;
+  padding: 8px 24px !important;
+}
+
+// positioning, typography
+.bold {
+  font-weight: 700;
+}
+.all-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.all-center-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.light {
+  color: $themeColor !important;
+}
+.dark {
+  color: $darkThemeColor !important;
+}
