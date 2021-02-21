@@ -11,8 +11,8 @@ exports.handler = function (event, context, callback) {
   console.log(body);
 
   // success!
-  // callback(null, {
-  //   statusCode: 200,
-  //   body: "Successfully sent mail!",
-  // });
+  callback(null, {
+    statusCode: 200,
+    body: "Successfully sent mail!",
+  });
 };
