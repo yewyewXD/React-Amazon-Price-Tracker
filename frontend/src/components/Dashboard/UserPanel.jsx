@@ -72,11 +72,13 @@ export default function UserPanel() {
 
   return (
     <div className="user-panel">
-      <div className="title my-3 mx-md-5 mx-4 bold">My Tracks</div>
+      <div className="title my-3 mx-md-5 mx-4 bold d-flex justify-content-sm-start justify-content-center">
+        My Tracks
+      </div>
 
       <div className="tracks">
         {/* actions */}
-        <div className="actions my-4 all-center justify-content-start">
+        <div className="actions my-4 all-center justify-content-start mx-md-0 mx-1">
           <PopupBtn type="multiTrack">
             <button className="btn btn-primary btn-info btn-sm mr-2">
               Update all
