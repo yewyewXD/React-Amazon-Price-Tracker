@@ -1,19 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { heroBg, heroVector } from "../../images/homeImages";
-import PopupBtn from "../Popup/PopupBtn";
-import { GlobalContext } from "../../context/GlobalState";
 import { Link } from "react-router-dom";
 
 export default function HeroSection() {
-  const { token, loginUser } = useContext(GlobalContext);
-
-  function handleGuestLogin() {
-    const email = "tester@mail.com";
-    const pw = "tester";
-
-    loginUser(email, pw);
-  }
-
   return (
     <section className="hero text-center">
       <div
@@ -31,35 +20,12 @@ export default function HeroSection() {
             </div>
 
             <div className="buttons mt-4 all-center">
-              {!token && (
-                <>
-                  <PopupBtn type="login">
-                    <div className="call-to-action all-center-column">
-                      <button
-                        className="btn btn-outline-secondary btn-md mx-2"
-                        onClick={handleGuestLogin}
-                      >
-                        Demo
-                      </button>
-                    </div>
-                  </PopupBtn>
-
-                  <PopupBtn type="signUp">
-                    <button className="btn bold btn-primary btn-md mx-2">
-                      Get started
-                    </button>
-                  </PopupBtn>
-                </>
-              )}
-
-              {token && (
-                <Link
-                  className="btn bold btn-primary btn-md mx-2"
-                  to="/dashboard"
-                >
-                  View Dashboard
-                </Link>
-              )}
+              <Link
+                className="btn bold btn-primary btn-md mx-2"
+                to="/dashboard"
+              >
+                Get Started
+              </Link>
             </div>
           </div>
 
