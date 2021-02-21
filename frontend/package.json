@@ -29,7 +29,6 @@
     "eject": "react-scripts eject",
     "start-lambda": "netlify-lambda serve src/serverless-lambda",
     "dev": "concurrently \"npm run start-lambda \" \"npm start \""
-
   },
   "eslintConfig": {
     "extends": "react-app"
