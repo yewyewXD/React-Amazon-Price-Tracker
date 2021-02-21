@@ -21,7 +21,7 @@ export default function HeroSection() {
 
             <div className="buttons mt-4 all-center">
               <Link
-                className="btn bold btn-primary btn-md mx-2"
+                className="btn bold btn-primary-sharp btn-lg mx-2"
                 to="/dashboard"
               >
                 Get Started
