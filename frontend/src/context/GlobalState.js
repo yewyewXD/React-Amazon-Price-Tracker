@@ -18,31 +18,32 @@ export const GlobalProvider = ({ children }) => {
   async function addTrack(trackUrl, name, expectedPrice) {
     try {
       const res = await axios.post("/.netlify/functions/testing", {
-        userId: state.user.userId,
         trackUrl,
         name,
         expectedPrice,
       });
 
+      console.log(res.data);
+
       // console.log(res.data.data);
 
-      let notification;
-      if (res.data.data.actualPrice === 0) {
-        notification = {
-          type: "warning",
-          message: `Failed to track price, please report to us through the footer of homepage`,
-        };
-      } else {
-        notification = {
-          type: "success",
-          message: `New product added!`,
-        };
-      }
+      // let notification;
+      // if (res.data.data.actualPrice === 0) {
+      //   notification = {
+      //     type: "warning",
+      //     message: `Failed to track price, please report to us through the footer of homepage`,
+      //   };
+      // } else {
+      //   notification = {
+      //     type: "success",
+      //     message: `New product added!`,
+      //   };
+      // }
 
-      dispatch({
-        type: "ADD_TRACK",
-        payload: { data: res.data.data, notification },
-      });
+      // dispatch({
+      //   type: "ADD_TRACK",
+      //   payload: { data: res.data.data, notification },
+      // });
       setTimeout(() => {
         dispatch({
           type: "CLEAR_LOGS",
@@ -81,12 +82,10 @@ export const GlobalProvider = ({ children }) => {
       const prevTracks = tracks.filter((track) => track._id !== id);
       const newTracks = [...editedTrack, ...prevTracks];
 
-      if (state.user.email !== "tester@mail.com") {
-        await axios.post(`/api/dashboard/track/${id}`, {
-          name,
-          expectedPrice,
-        });
-      }
+      await axios.post(`/api/dashboard/track/${id}`, {
+        name,
+        expectedPrice,
+      });
 
       const notification = {
         type: "info",
@@ -190,16 +189,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function multiTrack() {
     try {
-      if (state.user.email === "tester@mail.com") {
-        const notification = {
-          type: "warning",
-          message: `Track update is not available in guest mode!`,
-        };
-        dispatch({
-          type: "LOG_ERROR_MESSAGE",
-          payload: { message: null, notification },
-        });
-      } else if (state.user.createdTracks.length > 0) {
+      if (state.user.createdTracks.length > 0) {
         const res = await axios.post("/api/dashboard/multiTrack", {
           userId: state.user.userId,
           createdTracks: state.user.createdTracks,
