@@ -49,7 +49,7 @@ export default function AddTrackModal({ handleClose, open }) {
 
   function handleAddDemoLink() {
     urlElRef.current.value =
-      "https://www.amazon.com/Betron-Earphones-Headphones-Definition-BlackBerry/dp/B00I3LTQ9O";
+      "https://www.amazon.com/Mario-Kart-Deluxe-Nintendo-Digital/dp/B06Y5VQMKK/";
   }
 
   if (!isTracking && open) {
