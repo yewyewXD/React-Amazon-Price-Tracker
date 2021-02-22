@@ -1,4 +1,4 @@
-// const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
 const chromium = require("chrome-aws-lambda");
 
 exports.handler = async function (event, context, callback) {
@@ -16,20 +16,20 @@ exports.handler = async function (event, context, callback) {
     console.log("crawling starts");
 
     // // production
-    // const browser = await puppeteer.launch({
-    //   executablePath: await chromium.executablePath,
-    //     args: chromium.args,
-    //     defaultViewport: chromium.defaultViewport,
-    //     headless: chromium.headless
-    // });
-
-    // development
-    const browser = await chromium.puppeteer.launch({
+    const browser = await puppeteer.launch({
       executablePath: await chromium.executablePath,
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       headless: chromium.headless,
     });
+
+    // development
+    // const browser = await chromium.puppeteer.launch({
+    //   executablePath: await chromium.executablePath,
+    //   args: chromium.args,
+    //   defaultViewport: chromium.defaultViewport,
+    //   headless: chromium.headless,
+    // });
 
     const page = await browser.newPage();
     await page.goto(trackUrl, { waitUntil: "networkidle0" });
@@ -60,6 +60,7 @@ exports.handler = async function (event, context, callback) {
 
     // Crawling ends here
     await browser.close();
+    console.log("crawling ends");
 
     // Return crawled data
     callback(null, {
