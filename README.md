@@ -4,9 +4,6 @@
 
 A fullstack web app to track the price of any Amazon product and store user's traces in one place
 <br>
-<br>
-V3 Update: Due to security, UX, and performance reasons, database will be deprecated. User will no longer need to register for an account to use the dashboard.
-<br>
 
 ## To contribute
 
@@ -18,7 +15,7 @@ V3 Update: Due to security, UX, and performance reasons, database will be deprec
 
 Started on: 13 Aug 2020 <br>
 Completed on: 16 Aug 2020 <br>
-Last modified on: 21 Feb 2021 <br>
+Last modified on: 22 Feb 2021 <br>
 
 ## Screenshots (V2)
 
@@ -53,7 +50,6 @@ Coming Soon...
 ## Future Update
 
 - Email user when the product price is lower than the ideal price
-- Add database
 - Secure token with httpOnly cookie
 - Make user profile customizable
 - Add more login  methods
