@@ -5,7 +5,7 @@
 A fullstack web app to track the price of any Amazon product and store user's traces in one place
 <br>
 <br>
-Note that this project has switched to V3, a link will be provided soon.
+<b>Note that this project has switched to V3, a link will be provided soon.</b>
 <br>
 
 Started on: 13 Aug 2020 <br>
