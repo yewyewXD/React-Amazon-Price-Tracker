@@ -2,11 +2,15 @@
 
 ## Description
 
-A fullstack web app to track the price of any Amazon product and store user's traces in one place
-<br>
-<br>
-<b>Note that this project has switched to V3, a link will be provided soon.</b>
-<br>
+A fullstack web app to track the price of any Amazon product and store user's traces in one place<br>
+
+## To contribute
+
+[Learn more](https://github.com/yewyewXD/React-Amazon-Price-Tracker/blob/master/CONTRIBUTING.md)
+
+## Build status
+
+**Success:** [See Live](https://trackerbase.herokuapp.com/)
 
 Started on: 13 Aug 2020 <br>
 Completed on: 16 Aug 2020 <br>
@@ -86,6 +90,14 @@ JWT_SECRET=yourJwtSecret
 npm i -D concurrently
 npm run dev
 ```
+
+## Future Update
+
+- Email user when the product price is lower than the ideal price
+- Secure token with httpOnly cookie
+- Make user profile customizable
+- Add more authentication methods
+- Add password reset and email confirmation
 
 ## Credits
 
