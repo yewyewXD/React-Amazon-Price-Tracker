@@ -17,7 +17,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function addTrack(trackUrl, name, expectedPrice) {
     try {
-      const res = await axios.post("/.netlify/functions/testing", {
+      const res = await axios.post("/.netlify/functions/crawl", {
         trackUrl,
         name,
         expectedPrice,

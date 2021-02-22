@@ -10,7 +10,7 @@
 
 # production
 /build
-
+/public/serverless-functions
 # misc
 .DS_Store
 .env.local
