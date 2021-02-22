@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && netlify-lambda build src/serverless-lambda",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-lambda": "netlify-lambda serve src/serverless-lambda",
