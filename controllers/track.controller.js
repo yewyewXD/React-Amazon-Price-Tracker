@@ -1,6 +1,7 @@
 const Track = require("../models/Track");
 const User = require("../models/User");
-const puppeteer = require("puppeteer");
+const axios = require("axios");
+const cheerio = require("cheerio");
 const { v4: uuidv4 } = require("uuid");
 
 // @desc Add track
@@ -17,46 +18,46 @@ exports.postTrack = async (req, res, next) => {
       });
     }
 
-    // crawl Amazon product
+    if (trackUrl.indexOf("amazon") < 0) {
+      return res.status(401).json({
+        success: false,
+        error: "Only Amazon url is accepted",
+      });
+    }
+
+    // -- Crawling starts here --
     console.log("crawling starts");
-    // add fix for Heroku production
-    const browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
-    const page = await browser.newPage();
+    const res = await axios.get(trackUrl);
+    const $ = cheerio.load(res.data);
 
-    await page.goto(trackUrl, { waitUntil: "networkidle0" });
+    let actualPrice = 0;
+    let image = "";
 
-    // await page.waitForSelector("#landingImage", {
-    //   visible: true,
-    // });
+    // const imageSrc = $("#imageBlock").find("img").attr("src");
+    const imageSrc = $("#landingImage").attr("data-old-hires");
+    const ourPrice = $("#priceblock_ourprice").text();
+    const salePrice = $("#priceblock_saleprice").text();
+    const dealPrice = $("#priceblock_dealprice").text();
 
-    const crawledProduct = await page.evaluate(() => {
-      let actualPrice = 0;
+    if (ourPrice) {
+      actualPrice = ourPrice;
+    } else if (salePrice) {
+      actualPrice = salePrice;
+    } else if (dealPrice) {
+      actualPrice = dealPrice;
+    }
 
-      const image = document.querySelector("#landingImage")
-        ? document.querySelector("#landingImage").src
-        : null;
-      const ourPrice = document.querySelector("#priceblock_ourprice");
-      const salePrice = document.querySelector("#priceblock_saleprice");
-      const dealPrice = document.querySelector("#priceblock_dealprice");
+    if (imageSrc) {
+      image = imageSrc;
+    }
 
-      if (ourPrice) {
-        actualPrice = +ourPrice.innerText.substring(1);
-      } else if (salePrice) {
-        actualPrice = +salePrice.innerText.substring(1);
-      } else if (dealPrice) {
-        actualPrice = +dealPrice.innerText.substring(1);
-      }
-
-      return {
-        image,
-        actualPrice,
-      };
-    });
+    const crawledProduct = {
+      image,
+      actualPrice: +actualPrice,
+    };
 
     console.log("crawling ends");
-    await browser.close();
+    // -- Crawling ends here --
 
     // // create track
     const newTrack = {
