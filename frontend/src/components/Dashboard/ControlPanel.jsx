@@ -9,21 +9,25 @@ export default function ControlPanel() {
       id: 1,
       text: "Profile",
       icon: <FaRegUser className="icon" />,
+      isLocked: true,
     },
     {
       id: 2,
       text: "My Tracks",
       icon: <RiDashboardLine className="icon" />,
+      isLocked: false,
     },
     {
       id: 3,
       text: "Price Analytics",
       icon: <RiDashboardLine className="icon" />,
+      isLocked: true,
     },
     {
       id: 4,
       text: "Email Management",
       icon: <RiDashboardLine className="icon" />,
+      isLocked: true,
     },
   ];
   return (
@@ -33,11 +37,15 @@ export default function ControlPanel() {
           <div
             className={`control-bar ${
               activeBarId === controlBar.id && "control-bar--selected"
+            } ${
+              controlBar.isLocked && "control-bar--locked"
             } text-white bold all-center justify-content-lg-start d-sm-flex d-none`}
             role="button"
             key={`controlBar-${controlBar.id}`}
             onClick={() => {
-              setActiveBarId(controlBar.id);
+              if (!controlBar.isLocked) {
+                setActiveBarId(controlBar.id);
+              }
             }}
           >
             {controlBar.icon}

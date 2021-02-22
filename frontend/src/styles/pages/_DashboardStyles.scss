@@ -7,7 +7,7 @@
 
     .control-bars {
       .control-bar {
-        opacity: 1; // temporary
+        opacity: 1;
         padding: 20px;
         transition: 0.2s;
 
@@ -18,8 +18,12 @@
           background: rgba($color: blue, $alpha: 0.1);
         }
 
+        &--locked {
+          cursor: not-allowed;
+          background: none !important;
+        }
+
         &:hover {
-          opacity: 1;
           background: rgba($color: blue, $alpha: 0.1);
         }
         .icon {
