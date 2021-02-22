@@ -70,6 +70,7 @@ export default function AppHeader({ isDashboard }) {
 
                   <Link
                     className="ml-3 d-sm-none text-primary"
+                    to="/dashboard"
                     title="Dashboard"
                   >
                     <RiDashboardLine fontSize="26" />
