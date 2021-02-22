@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.2",
     "chrome-aws-lambda": "^7.0.0",
+    "encoding": "^0.1.13",
     "netlify-lambda": "^2.0.3",
     "node-sass": "^4.14.1",
     "puppeteer-core": "^7.1.0",

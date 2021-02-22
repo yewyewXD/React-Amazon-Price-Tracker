@@ -1,7 +1,8 @@
-exports.handler = async function (event, context, callback) {
-  const puppeteer = require("puppeteer-core");
-  const chromium = require("chrome-aws-lambda");
+const puppeteer = require("puppeteer-core");
+const chromium = require("chrome-aws-lambda");
+require("encoding");
 
+exports.handler = async function (event, context, callback) {
   try {
     // Parse data sent from frontend and validate
     const { trackUrl } = JSON.parse(event.body);
