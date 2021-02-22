@@ -4,14 +4,9 @@
 
 A fullstack web app to track the price of any Amazon product and store user's traces in one place
 <br>
-
-## To contribute
-
-[Learn more](https://github.com/yewyewXD/React-Amazon-Price-Tracker/blob/master/CONTRIBUTING.md)
-
-## Build status
-
-**Success:** [See Live](https://trackerbase.herokuapp.com/)
+<br>
+Note that this project has switched to V3, a link will be provided soon.
+<br>
 
 Started on: 13 Aug 2020 <br>
 Completed on: 16 Aug 2020 <br>
@@ -33,28 +28,64 @@ Last modified on: 22 Feb 2021 <br>
 
 ## Tech/framework used
 
-- ReactJS
-- Netlify Lambda
-- NodeJS
+- MERN Stack (MongoDB, Express, React, Node)
 - Bootstrap
 - Sass
 
 ## Features
 
+- Create an account
 - Track any product's price on Amazon
 
 ## How to use it locally like it's yours (Not for contribution)
 
-Coming Soon...
+> Get your MongoDB connection string
 
-## Future Update
+Follow from Part 1 (Create an Atlas Account) to Part 5 (Connect to Your Cluster) in [this documentation](https://docs.atlas.mongodb.com/getting-started/). <br>
 
-- Email user when the product price is lower than the ideal price
-- Secure token with httpOnly cookie
-- Make user profile customizable
-- Add more login  methods
-- Add password reset and email confirmation
-- Add price analytics
+In [Part 5](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/), skip to [Connect to Your Atlas Cluster](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/#connect-to-your-atlas-cluster) and follow from Step 1 to Step 4 to get the connection string. <br>
+
+Now, clone the repository, then:
+
+> cd into the working directory and install dependencies in both server & client side:
+
+```bash
+cd React-Amazon-Price-Tracker
+npm i
+cd frontend
+npm i
+```
+
+> Back to the root folder and create a ".env" file:
+
+```bash
+cd ..
+cd ..
+touch .env
+```
+
+> In ".env", enter your mongoDB connection string and JWT secret key:
+
+- If you're using VS Code, you can use this command to start editing
+
+```bash
+code .
+```
+
+- Paste in the code, replace mongodb-connection-string with your MongoDB connection string, and edit yourJwtSecret (for better security, use a complex string).
+
+```bash
+NODE_ENV=development
+MONGO_URI=mongodb-connection-string
+JWT_SECRET=yourJwtSecret
+```
+
+> Install concurrently to run both server and client side in one terminal, and run the app:
+
+```bash
+npm i -D concurrently
+npm run dev
+```
 
 ## Credits
 
