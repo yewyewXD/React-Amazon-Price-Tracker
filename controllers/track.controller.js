@@ -58,6 +58,7 @@ exports.postTrack = async (req, res, next) => {
       actualPrice: parseFloat(actualPrice.replace(/[^0-9\.-]+/g, "")),
     };
 
+    console.log(crawledProduct);
     console.log("crawling ends");
     // -- Crawling ends here --
 
