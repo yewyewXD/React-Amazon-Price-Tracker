@@ -29,8 +29,8 @@ exports.postTrack = async (req, res, next) => {
 
     // -- Crawling starts here --
     console.log("crawling starts");
-    const res = await axios.get(trackUrl);
-    const $ = cheerio.load(res.data);
+    const page = await axios.get(trackUrl);
+    const $ = cheerio.load(page.data);
 
     let actualPrice = 0;
 
@@ -61,8 +61,6 @@ exports.postTrack = async (req, res, next) => {
       creator: user._id,
     };
 
-    console.log(newTrack);
-
     // If it's not a guest account
     if (user.email !== "tester@mail.com") {
       const track = await Track.create(newTrack);
@@ -81,6 +79,7 @@ exports.postTrack = async (req, res, next) => {
     }
   } catch (err) {
     console.log("crawling failed");
+    console.log(err.message);
     return res.status(500).json({ error: err.message });
   }
 };
