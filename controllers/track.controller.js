@@ -33,7 +33,6 @@ exports.postTrack = async (req, res, next) => {
     const $ = cheerio.load(res.data);
 
     let actualPrice = 0;
-    let image = "";
 
     // const imageSrc = $("#imageBlock").find("img").attr("src");
     const imageSrc = $("#landingImage").attr("data-old-hires");
@@ -49,28 +48,20 @@ exports.postTrack = async (req, res, next) => {
       actualPrice = dealPrice;
     }
 
-    if (imageSrc) {
-      image = imageSrc;
-    }
-
-    const crawledProduct = {
-      image,
-      actualPrice: parseFloat(actualPrice.replace(/[^0-9\.-]+/g, "")),
-    };
-
-    console.log(crawledProduct);
     console.log("crawling ends");
     // -- Crawling ends here --
 
     // // create track
     const newTrack = {
       productUrl: trackUrl,
-      image: crawledProduct.image,
+      image: imageSrc ? imageSrc : "",
       name,
       expectedPrice,
-      actualPrice: crawledProduct.actualPrice,
+      actualPrice: parseFloat(actualPrice.replace(/[^0-9\.-]+/g, "")),
       creator: user._id,
     };
+
+    console.log(newTrack);
 
     // If it's not a guest account
     if (user.email !== "tester@mail.com") {
