@@ -168,12 +168,14 @@ export const GlobalProvider = ({ children }) => {
           payload: null,
         });
       }, 100);
-    } catch {
+    } catch (err) {
       console.log("crawling failed");
+      console.log(err.data);
       const notification = {
         type: "error",
         message: "Track Failed!",
-        title: "Please contact host through the footer of the homepage",
+        title:
+          "Please try again or, contact host through the footer of the homepage",
       };
 
       dispatch({
@@ -358,12 +360,14 @@ export const GlobalProvider = ({ children }) => {
           payload: null,
         });
       }, 100);
-    } catch {
+    } catch (err) {
       console.log("crawling failed");
+      console.log(err.data);
       const notification = {
         type: "error",
         message: "Track Failed!",
-        title: "Please contact host through the footer of the homepage",
+        title:
+          "Please try again, or contact host through the footer of the homepage",
       };
       dispatch({
         type: "LOG_ERROR_MESSAGE",

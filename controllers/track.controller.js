@@ -1,6 +1,7 @@
 const Track = require("../models/Track");
 const User = require("../models/User");
-const puppeteer = require("puppeteer");
+const axios = require("axios");
+const cheerio = require("cheerio");
 const { v4: uuidv4 } = require("uuid");
 
 // @desc Add track
@@ -17,54 +18,46 @@ exports.postTrack = async (req, res, next) => {
       });
     }
 
-    // crawl Amazon product
+    if (trackUrl.indexOf("amazon") < 0) {
+      return res.status(401).json({
+        success: false,
+        error: "Only Amazon url is accepted",
+      });
+    } else {
+      console.log("tracking: ", trackUrl);
+    }
+
+    // -- Crawling starts here --
     console.log("crawling starts");
-    // add fix for Heroku production
-    const browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
-    const page = await browser.newPage();
+    const page = await axios.get(trackUrl);
+    const $ = cheerio.load(page.data);
 
-    await page.goto(trackUrl, { waitUntil: "networkidle0" });
+    let actualPrice = 0;
 
-    // await page.waitForSelector("#landingImage", {
-    //   visible: true,
-    // });
+    // const imageSrc = $("#imageBlock").find("img").attr("src");
+    const imageSrc = $("#landingImage").attr("data-old-hires");
+    const ourPrice = $("#priceblock_ourprice").text();
+    const salePrice = $("#priceblock_saleprice").text();
+    const dealPrice = $("#priceblock_dealprice").text();
 
-    const crawledProduct = await page.evaluate(() => {
-      let actualPrice = 0;
-
-      const image = document.querySelector("#landingImage")
-        ? document.querySelector("#landingImage").src
-        : null;
-      const ourPrice = document.querySelector("#priceblock_ourprice");
-      const salePrice = document.querySelector("#priceblock_saleprice");
-      const dealPrice = document.querySelector("#priceblock_dealprice");
-
-      if (ourPrice) {
-        actualPrice = +ourPrice.innerText.substring(1);
-      } else if (salePrice) {
-        actualPrice = +salePrice.innerText.substring(1);
-      } else if (dealPrice) {
-        actualPrice = +dealPrice.innerText.substring(1);
-      }
-
-      return {
-        image,
-        actualPrice,
-      };
-    });
+    if (ourPrice) {
+      actualPrice = ourPrice;
+    } else if (salePrice) {
+      actualPrice = salePrice;
+    } else if (dealPrice) {
+      actualPrice = dealPrice;
+    }
 
     console.log("crawling ends");
-    await browser.close();
+    // -- Crawling ends here --
 
     // // create track
     const newTrack = {
       productUrl: trackUrl,
-      image: crawledProduct.image,
+      image: imageSrc ? imageSrc : "",
       name,
       expectedPrice,
-      actualPrice: crawledProduct.actualPrice,
+      actualPrice: parseFloat(actualPrice.replace(/[^0-9\.-]+/g, "")),
       creator: user._id,
     };
 
@@ -86,6 +79,7 @@ exports.postTrack = async (req, res, next) => {
     }
   } catch (err) {
     console.log("crawling failed");
+    console.log(err.message);
     return res.status(500).json({ error: err.message });
   }
 };
