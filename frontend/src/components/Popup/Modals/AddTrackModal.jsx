@@ -49,7 +49,7 @@ export default function AddTrackModal({ handleClose, open }) {
 
   function handleAddDemoLink() {
     urlElRef.current.value =
-      "https://www.amazon.com/Mario-Kart-Deluxe-Nintendo-Digital/dp/B06Y5VQMKK/";
+      "https://www.amazon.de/Dymatize-ISO-100-Gourmet-Vanilla/dp/B01N9EYUZ8/";
   }
 
   if (!isTracking && open) {
