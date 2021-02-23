@@ -61,6 +61,8 @@ exports.postTrack = async (req, res, next) => {
       creator: user._id,
     };
 
+    console.log(newTrack);
+
     // If it's not a guest account
     if (user.email !== "tester@mail.com") {
       const track = await Track.create(newTrack);

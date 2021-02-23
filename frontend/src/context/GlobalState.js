@@ -170,7 +170,6 @@ export const GlobalProvider = ({ children }) => {
       }, 100);
     } catch (err) {
       console.log("crawling failed");
-      console.log(err.data);
       const notification = {
         type: "error",
         message: "Track Failed!",
@@ -362,7 +361,6 @@ export const GlobalProvider = ({ children }) => {
       }, 100);
     } catch (err) {
       console.log("crawling failed");
-      console.log(err.data);
       const notification = {
         type: "error",
         message: "Track Failed!",
