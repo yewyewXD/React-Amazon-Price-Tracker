@@ -23,6 +23,8 @@ exports.postTrack = async (req, res, next) => {
         success: false,
         error: "Only Amazon url is accepted",
       });
+    } else {
+      console.log("tracking: ", trackUrl);
     }
 
     // -- Crawling starts here --
@@ -53,7 +55,7 @@ exports.postTrack = async (req, res, next) => {
 
     const crawledProduct = {
       image,
-      actualPrice: +actualPrice,
+      actualPrice: parseFloat(actualPrice.replace(/[^0-9\.-]+/g, "")),
     };
 
     console.log("crawling ends");
