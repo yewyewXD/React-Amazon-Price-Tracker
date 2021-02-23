@@ -2,7 +2,9 @@
 
 ## Description
 
-A fullstack web app to track the price of any Amazon product and store user's traces in one place<br>
+A fullstack web app to track the price of any Amazon product and store user's traces in one place<br><br>
+<b>This repo will be achieved due to Amazon restrictions and Heroku limitations</b>
+<br>
 
 ## To contribute
 
