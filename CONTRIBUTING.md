@@ -6,9 +6,7 @@ email, or any other method with the owners of this repository before making a ch
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Ways to contact
-[Twitter](https://twitter.com/yewyewXD)
 [LinkedIn](https://www.linkedin.com/in/yewyewxd/)
-[Instagram](https://www.instagram.com/yewyewxd/)
 
 
 ## Pull Request Process
@@ -23,7 +21,5 @@ Please note we have a code of conduct, please follow it in all your interactions
 
 ## Become a moderator
 To become a moderator and help maintaining this project (code review, helpful comments, etc), please contact the creator via
-[Twitter](https://twitter.com/yewyewXD),
 [LinkedIn](https://www.linkedin.com/in/yewyewxd/),
-[Instagram](https://www.instagram.com/yewyewxd/),
 or email (yewyew6933 `at` gmail `dot` com)
